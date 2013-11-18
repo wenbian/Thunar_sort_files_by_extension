@@ -1,0 +1,285 @@
+<refentry id="ThunarVfsMimeHandler">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarVfsMimeHandler.top_of_page">ThunarVfsMimeHandler</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNAR-VFS Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarVfsMimeHandler</refname>
+<refpurpose>Abstract base class for <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link> and <link linkend="ThunarVfsMimeAction"><type>ThunarVfsMimeAction</type></link>.</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="ThunarVfsMimeHandler.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunar-vfs/thunar-vfs.h&gt;
+
+enum                <link linkend="ThunarVfsMimeHandlerFlags">ThunarVfsMimeHandlerFlags</link>;
+                    <link linkend="ThunarVfsMimeHandler-struct">ThunarVfsMimeHandler</link>;
+const <link linkend="gchar">gchar</link>*        <link linkend="thunar-vfs-mime-handler-get-command">thunar_vfs_mime_handler_get_command</link> (const <link linkend="ThunarVfsMimeHandler">ThunarVfsMimeHandler</link> *mime_handler);
+<link linkend="ThunarVfsMimeHandlerFlags">ThunarVfsMimeHandlerFlags</link> <link linkend="thunar-vfs-mime-handler-get-flags">thunar_vfs_mime_handler_get_flags</link>
+                                                        (const <link linkend="ThunarVfsMimeHandler">ThunarVfsMimeHandler</link> *mime_handler);
+const <link linkend="gchar">gchar</link>*        <link linkend="thunar-vfs-mime-handler-get-name">thunar_vfs_mime_handler_get_name</link>    (const <link linkend="ThunarVfsMimeHandler">ThunarVfsMimeHandler</link> *mime_handler);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-mime-handler-exec">thunar_vfs_mime_handler_exec</link>        (const <link linkend="ThunarVfsMimeHandler">ThunarVfsMimeHandler</link> *mime_handler,
+                                                         <link linkend="GdkScreen">GdkScreen</link> *screen,
+                                                         <link linkend="GList">GList</link> *path_list,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-mime-handler-exec-with-env">thunar_vfs_mime_handler_exec_with_env</link>
+                                                        (const <link linkend="ThunarVfsMimeHandler">ThunarVfsMimeHandler</link> *mime_handler,
+                                                         <link linkend="GdkScreen">GdkScreen</link> *screen,
+                                                         <link linkend="GList">GList</link> *path_list,
+                                                         <link linkend="gchar">gchar</link> **envp,
+                                                         <link linkend="GError">GError</link> **error);
+const <link linkend="gchar">gchar</link>*        <link linkend="thunar-vfs-mime-handler-lookup-icon-name">thunar_vfs_mime_handler_lookup_icon_name</link>
+                                                        (const <link linkend="ThunarVfsMimeHandler">ThunarVfsMimeHandler</link> *mime_handler,
+                                                         <link linkend="GtkIconTheme">GtkIconTheme</link> *icon_theme);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarVfsMimeHandler.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----ThunarVfsMimeHandler
+         +----<link linkend="ThunarVfsMimeAction">ThunarVfsMimeAction</link>
+         +----<link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link>
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+<refsect1 id="ThunarVfsMimeHandler.properties" role="properties">
+<title role="properties.title">Properties</title>
+<synopsis>
+  &quot;<link linkend="ThunarVfsMimeHandler--command">command</link>&quot;                  <link linkend="gchar">gchar</link>*                : Read / Write / Construct Only
+  &quot;<link linkend="ThunarVfsMimeHandler--flags">flags</link>&quot;                    <link linkend="ThunarVfsMimeHandlerFlags">ThunarVfsMimeHandlerFlags</link>  : Read / Write / Construct Only
+  &quot;<link linkend="ThunarVfsMimeHandler--icon">icon</link>&quot;                     <link linkend="gchar">gchar</link>*                : Read / Write / Construct Only
+  &quot;<link linkend="ThunarVfsMimeHandler--name">name</link>&quot;                     <link linkend="gchar">gchar</link>*                : Read / Write / Construct Only
+</synopsis>
+</refsect1>
+
+
+
+<refsect1 id="ThunarVfsMimeHandler.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="ThunarVfsMimeHandler.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarVfsMimeHandlerFlags" role="enum">
+<title>enum ThunarVfsMimeHandlerFlags</title>
+<indexterm zone="ThunarVfsMimeHandlerFlags"><primary>ThunarVfsMimeHandlerFlags</primary></indexterm><programlisting>typedef enum /*&lt; flags &gt;*/
+{
+  THUNAR_VFS_MIME_HANDLER_HIDDEN                  = (1 &lt;&lt; 0L),
+  THUNAR_VFS_MIME_HANDLER_REQUIRES_TERMINAL       = (1 &lt;&lt; 1L),
+  THUNAR_VFS_MIME_HANDLER_SUPPORTS_STARTUP_NOTIFY = (1 &lt;&lt; 2L),
+  THUNAR_VFS_MIME_HANDLER_SUPPORTS_MULTI          = (1 &lt;&lt; 3L),
+  THUNAR_VFS_MIME_HANDLER_SUPPORTS_URIS           = (1 &lt;&lt; 4L),
+} ThunarVfsMimeHandlerFlags;
+</programlisting>
+<para>
+Various flags associated with a <link linkend="ThunarVfsMimeHandler"><type>ThunarVfsMimeHandler</type></link>.</para>
+<para>
+
+</para><variablelist role="enum">
+</variablelist></refsect2>
+<refsect2 id="ThunarVfsMimeHandler-struct" role="struct">
+<title>ThunarVfsMimeHandler</title>
+<indexterm zone="ThunarVfsMimeHandler-struct"><primary>ThunarVfsMimeHandler</primary></indexterm><programlisting>typedef struct _ThunarVfsMimeHandler ThunarVfsMimeHandler;</programlisting>
+<para>
+  The <link linkend="ThunarVfsMimeHandler-struct"><type>ThunarVfsMimeHandler</type></link> contains private data only, and should
+  be accessed using the functions below.
+</para></refsect2>
+<refsect2 id="thunar-vfs-mime-handler-get-command" role="function">
+<title>thunar_vfs_mime_handler_get_command ()</title>
+<indexterm zone="thunar-vfs-mime-handler-get-command"><primary>thunar_vfs_mime_handler_get_command</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunar_vfs_mime_handler_get_command (const <link linkend="ThunarVfsMimeHandler">ThunarVfsMimeHandler</link> *mime_handler);</programlisting>
+<para>
+Returns the command associated with <parameter>mime_handler</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>mime_handler</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeHandler"><type>ThunarVfsMimeHandler</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the command associated with <parameter>mime_handler</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-handler-get-flags" role="function">
+<title>thunar_vfs_mime_handler_get_flags ()</title>
+<indexterm zone="thunar-vfs-mime-handler-get-flags"><primary>thunar_vfs_mime_handler_get_flags</primary></indexterm><programlisting><link linkend="ThunarVfsMimeHandlerFlags">ThunarVfsMimeHandlerFlags</link> thunar_vfs_mime_handler_get_flags
+                                                        (const <link linkend="ThunarVfsMimeHandler">ThunarVfsMimeHandler</link> *mime_handler);</programlisting>
+<para>
+Returns the <link linkend="ThunarVfsMimeHandlerFlags"><type>ThunarVfsMimeHandlerFlags</type></link> for <parameter>mime_handler</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>mime_handler</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeHandler"><type>ThunarVfsMimeHandler</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="ThunarVfsMimeHandlerFlags"><type>ThunarVfsMimeHandlerFlags</type></link> for <parameter>mime_handler</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-handler-get-name" role="function">
+<title>thunar_vfs_mime_handler_get_name ()</title>
+<indexterm zone="thunar-vfs-mime-handler-get-name"><primary>thunar_vfs_mime_handler_get_name</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunar_vfs_mime_handler_get_name    (const <link linkend="ThunarVfsMimeHandler">ThunarVfsMimeHandler</link> *mime_handler);</programlisting>
+<para>
+Returns the name of <parameter>mime_handler</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>mime_handler</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeHandler"><type>ThunarVfsMimeHandler</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the name of <parameter>mime_handler</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-handler-exec" role="function">
+<title>thunar_vfs_mime_handler_exec ()</title>
+<indexterm zone="thunar-vfs-mime-handler-exec"><primary>thunar_vfs_mime_handler_exec</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_mime_handler_exec        (const <link linkend="ThunarVfsMimeHandler">ThunarVfsMimeHandler</link> *mime_handler,
+                                                         <link linkend="GdkScreen">GdkScreen</link> *screen,
+                                                         <link linkend="GList">GList</link> *path_list,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Wrapper to <link linkend="thunar-vfs-mime-handler-exec-with-env"><function>thunar_vfs_mime_handler_exec_with_env()</function></link>, which
+simply passes a <link linkend="NULL:CAPS"><literal>NULL</literal></link> pointer for the environment variables.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>mime_handler</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeHandler"><type>ThunarVfsMimeHandler</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>screen</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GdkScreen"><type>GdkScreen</type></link> or <link linkend="NULL:CAPS"><literal>NULL</literal></link> to use the default screen.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>path_list</parameter>&nbsp;:</term>
+<listitem><simpara> a list of <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link><!---->s to open.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if the execution succeed, else <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-handler-exec-with-env" role="function">
+<title>thunar_vfs_mime_handler_exec_with_env ()</title>
+<indexterm zone="thunar-vfs-mime-handler-exec-with-env"><primary>thunar_vfs_mime_handler_exec_with_env</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_mime_handler_exec_with_env
+                                                        (const <link linkend="ThunarVfsMimeHandler">ThunarVfsMimeHandler</link> *mime_handler,
+                                                         <link linkend="GdkScreen">GdkScreen</link> *screen,
+                                                         <link linkend="GList">GList</link> *path_list,
+                                                         <link linkend="gchar">gchar</link> **envp,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Executes <parameter>mime_handler</parameter> on <parameter>screen</parameter> using the given <parameter>path_list</parameter>. If
+<parameter>path_list</parameter> contains more than one <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link> and <parameter>mime_handler</parameter>
+doesn't support opening multiple documents at once, one
+instance of <parameter>mime_handler</parameter> will be spawned for every <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>
+given in <parameter>path_list</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>mime_handler</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeHandler"><type>ThunarVfsMimeHandler</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>screen</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GdkScreen"><type>GdkScreen</type></link> or <link linkend="NULL:CAPS"><literal>NULL</literal></link> to use the default screen.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>path_list</parameter>&nbsp;:</term>
+<listitem><simpara> a list of <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link><!---->s to open.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>envp</parameter>&nbsp;:</term>
+<listitem><simpara> child's environment or <link linkend="NULL:CAPS"><literal>NULL</literal></link> to inherit parent's.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if the execution succeed, else <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-handler-lookup-icon-name" role="function">
+<title>thunar_vfs_mime_handler_lookup_icon_name ()</title>
+<indexterm zone="thunar-vfs-mime-handler-lookup-icon-name"><primary>thunar_vfs_mime_handler_lookup_icon_name</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunar_vfs_mime_handler_lookup_icon_name
+                                                        (const <link linkend="ThunarVfsMimeHandler">ThunarVfsMimeHandler</link> *mime_handler,
+                                                         <link linkend="GtkIconTheme">GtkIconTheme</link> *icon_theme);</programlisting>
+<para>
+Looks up the icon name for <parameter>mime_handler</parameter> in
+<parameter>icon_theme</parameter>. Returns <link linkend="NULL:CAPS"><literal>NULL</literal></link> if no suitable
+icon is present in <parameter>icon_theme</parameter>.
+</para>
+<para>
+The returned icon can be either a named icon in
+<parameter>icon_theme</parameter> or an absolute path to an icon file,
+or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>mime_handler</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeHandler"><type>ThunarVfsMimeHandler</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>icon_theme</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GtkIconTheme"><type>GtkIconTheme</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the icon name for <parameter>mime_handler</parameter> or
+              <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+<refsect1 id="ThunarVfsMimeHandler.property-details" role="property_details">
+<title role="property_details.title">Property Details</title>
+<refsect2 id="ThunarVfsMimeHandler--command"><title>The <literal>&quot;command&quot;</literal> property</title>
+<indexterm zone="ThunarVfsMimeHandler--command"><primary>ThunarVfsMimeHandler:command</primary></indexterm><programlisting>  &quot;command&quot;                  <link linkend="gchar">gchar</link>*                : Read / Write / Construct Only</programlisting>
+<para>
+The command line for this <link linkend="ThunarVfsMimeHandler"><type>ThunarVfsMimeHandler</type></link>.</para>
+<para>
+
+</para><para>Default value: NULL</para>
+</refsect2>
+<refsect2 id="ThunarVfsMimeHandler--flags"><title>The <literal>&quot;flags&quot;</literal> property</title>
+<indexterm zone="ThunarVfsMimeHandler--flags"><primary>ThunarVfsMimeHandler:flags</primary></indexterm><programlisting>  &quot;flags&quot;                    <link linkend="ThunarVfsMimeHandlerFlags">ThunarVfsMimeHandlerFlags</link>  : Read / Write / Construct Only</programlisting>
+<para>
+The <link linkend="ThunarVfsMimeHandlerFlags"><type>ThunarVfsMimeHandlerFlags</type></link> for this <link linkend="ThunarVfsMimeHandler"><type>ThunarVfsMimeHandler</type></link>.</para>
+<para>
+
+</para></refsect2>
+<refsect2 id="ThunarVfsMimeHandler--icon"><title>The <literal>&quot;icon&quot;</literal> property</title>
+<indexterm zone="ThunarVfsMimeHandler--icon"><primary>ThunarVfsMimeHandler:icon</primary></indexterm><programlisting>  &quot;icon&quot;                     <link linkend="gchar">gchar</link>*                : Read / Write / Construct Only</programlisting>
+<para>
+The icon of this <link linkend="ThunarVfsMimeHandler"><type>ThunarVfsMimeHandler</type></link>, which can be either
+<link linkend="NULL:CAPS"><literal>NULL</literal></link> in which case no icon is known, an absolute path to
+an icon file, or a named icon.</para>
+<para>
+
+</para><para>Default value: NULL</para>
+</refsect2>
+<refsect2 id="ThunarVfsMimeHandler--name"><title>The <literal>&quot;name&quot;</literal> property</title>
+<indexterm zone="ThunarVfsMimeHandler--name"><primary>ThunarVfsMimeHandler:name</primary></indexterm><programlisting>  &quot;name&quot;                     <link linkend="gchar">gchar</link>*                : Read / Write / Construct Only</programlisting>
+<para>
+The name of this <link linkend="ThunarVfsMimeHandler"><type>ThunarVfsMimeHandler</type></link>.</para>
+<para>
+
+</para><para>Default value: NULL</para>
+</refsect2>
+
+</refsect1>
+
+
+
+<refsect1 id="ThunarVfsMimeHandler.see-also">
+<title>See Also</title>
+<para>
+  <link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link>
+  and <link linked="ThunarVfsMimeAction">ThunarVfsMimeAction</link>
+</para>
+</refsect1>
+
+</refentry>

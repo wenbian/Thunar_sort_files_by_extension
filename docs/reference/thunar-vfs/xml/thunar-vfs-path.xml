@@ -1,0 +1,631 @@
+<refentry id="thunar-vfs-ThunarVfsPath">
+<refmeta>
+<refentrytitle role="top_of_page" id="thunar-vfs-ThunarVfsPath.top_of_page">ThunarVfsPath</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNAR-VFS Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarVfsPath</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="thunar-vfs-ThunarVfsPath.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunar-vfs/thunar-vfs.h&gt;
+
+enum                <link linkend="ThunarVfsPathScheme">ThunarVfsPathScheme</link>;
+                    <link linkend="ThunarVfsPath">ThunarVfsPath</link>;
+#define             <link linkend="THUNAR-VFS-TYPE-PATH:CAPS">THUNAR_VFS_TYPE_PATH</link>
+#define             <link linkend="THUNAR-VFS-TYPE-PATH-LIST:CAPS">THUNAR_VFS_TYPE_PATH_LIST</link>
+<link linkend="ThunarVfsPath">ThunarVfsPath</link>*      <link linkend="thunar-vfs-path-new">thunar_vfs_path_new</link>                 (const <link linkend="gchar">gchar</link> *identifier,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="ThunarVfsPath">ThunarVfsPath</link>*      <link linkend="thunar-vfs-path-get-for-home">thunar_vfs_path_get_for_home</link>        (void);
+<link linkend="ThunarVfsPath">ThunarVfsPath</link>*      <link linkend="thunar-vfs-path-get-for-root">thunar_vfs_path_get_for_root</link>        (void);
+<link linkend="ThunarVfsPath">ThunarVfsPath</link>*      <link linkend="thunar-vfs-path-ref">thunar_vfs_path_ref</link>                 (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);
+<link linkend="void">void</link>                <link linkend="thunar-vfs-path-unref">thunar_vfs_path_unref</link>               (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);
+<link linkend="guint">guint</link>               <link linkend="thunar-vfs-path-hash">thunar_vfs_path_hash</link>                (<link linkend="gconstpointer">gconstpointer</link> path_ptr);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-path-equal">thunar_vfs_path_equal</link>               (<link linkend="gconstpointer">gconstpointer</link> path_ptr_a,
+                                                         <link linkend="gconstpointer">gconstpointer</link> path_ptr_b);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-path-is-ancestor">thunar_vfs_path_is_ancestor</link>         (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *ancestor);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-path-is-home">thunar_vfs_path_is_home</link>             (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-path-is-root">thunar_vfs_path_is_root</link>             (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);
+<link linkend="ThunarVfsPath">ThunarVfsPath</link>*      <link linkend="thunar-vfs-path-relative">thunar_vfs_path_relative</link>            (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *parent,
+                                                         const <link linkend="gchar">gchar</link> *name);
+const <link linkend="gchar">gchar</link>*        <link linkend="thunar-vfs-path-get-name">thunar_vfs_path_get_name</link>            (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);
+<link linkend="ThunarVfsPath">ThunarVfsPath</link>*      <link linkend="thunar-vfs-path-get-parent">thunar_vfs_path_get_parent</link>          (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);
+<link linkend="ThunarVfsPathScheme">ThunarVfsPathScheme</link> <link linkend="thunar-vfs-path-get-scheme">thunar_vfs_path_get_scheme</link>          (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);
+<link linkend="gchar">gchar</link>*              <link linkend="thunar-vfs-path-dup-string">thunar_vfs_path_dup_string</link>          (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);
+<link linkend="gssize">gssize</link>              <link linkend="thunar-vfs-path-to-string">thunar_vfs_path_to_string</link>           (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="gchar">gchar</link> *buffer,
+                                                         <link linkend="gsize">gsize</link> bufsize,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="gchar">gchar</link>*              <link linkend="thunar-vfs-path-dup-uri">thunar_vfs_path_dup_uri</link>             (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);
+<link linkend="gssize">gssize</link>              <link linkend="thunar-vfs-path-to-uri">thunar_vfs_path_to_uri</link>              (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="gchar">gchar</link> *buffer,
+                                                         <link linkend="gsize">gsize</link> bufsize,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="GList">GList</link>*              <link linkend="thunar-vfs-path-list-from-string">thunar_vfs_path_list_from_string</link>    (const <link linkend="gchar">gchar</link> *uri_string,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="gchar">gchar</link>*              <link linkend="thunar-vfs-path-list-to-string">thunar_vfs_path_list_to_string</link>      (<link linkend="GList">GList</link> *path_list);
+<link linkend="GList">GList</link>*              <link linkend="thunar-vfs-path-list-append">thunar_vfs_path_list_append</link>         (<link linkend="GList">GList</link> *path_list,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);
+<link linkend="GList">GList</link>*              <link linkend="thunar-vfs-path-list-prepend">thunar_vfs_path_list_prepend</link>        (<link linkend="GList">GList</link> *path_list,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);
+<link linkend="GList">GList</link>*              <link linkend="thunar-vfs-path-list-copy">thunar_vfs_path_list_copy</link>           (<link linkend="GList">GList</link> *path_list);
+<link linkend="void">void</link>                <link linkend="thunar-vfs-path-list-free">thunar_vfs_path_list_free</link>           (<link linkend="GList">GList</link> *path_list);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="thunar-vfs-ThunarVfsPath.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="thunar-vfs-ThunarVfsPath.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarVfsPathScheme" role="enum" condition="since:0.3.3">
+<title>enum ThunarVfsPathScheme</title>
+<indexterm zone="ThunarVfsPathScheme" role="0.3.3"><primary>ThunarVfsPathScheme</primary></indexterm><programlisting>typedef enum /*&lt; skip &gt;*/
+{
+  THUNAR_VFS_PATH_SCHEME_FILE   = 0x00000000,
+  THUNAR_VFS_PATH_SCHEME_TRASH  = 0x40000000,
+  THUNAR_VFS_PATH_SCHEME_MASK   = 0x40000000,
+} ThunarVfsPathScheme;
+</programlisting>
+<para>
+The scheme, or the type, of resource a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link> refers to.
+This currently includes local files which are accessible via
+standard Unix paths, and trashed files, which are accessible
+via trash:-URIs.</para>
+<para>
+
+</para><variablelist role="enum">
+</variablelist><para role="since">Since  0.3.3
+</para></refsect2>
+<refsect2 id="ThunarVfsPath" role="struct">
+<title>ThunarVfsPath</title>
+<indexterm zone="ThunarVfsPath"><primary>ThunarVfsPath</primary></indexterm><programlisting>typedef struct {
+} ThunarVfsPath;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="THUNAR-VFS-TYPE-PATH:CAPS" role="macro">
+<title>THUNAR_VFS_TYPE_PATH</title>
+<indexterm zone="THUNAR-VFS-TYPE-PATH:CAPS"><primary>THUNAR_VFS_TYPE_PATH</primary></indexterm><programlisting>#define THUNAR_VFS_TYPE_PATH (thunar_vfs_path_get_type ())
+</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>the type id of the <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link> type, which is a boxed
+type.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="THUNAR-VFS-TYPE-PATH-LIST:CAPS" role="macro" condition="since:0.3.3">
+<title>THUNAR_VFS_TYPE_PATH_LIST</title>
+<indexterm zone="THUNAR-VFS-TYPE-PATH-LIST:CAPS" role="0.3.3"><primary>THUNAR_VFS_TYPE_PATH_LIST</primary></indexterm><programlisting>#define THUNAR_VFS_TYPE_PATH_LIST (thunar_vfs_path_list_get_type ())
+</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>the type id for <link linkend="GList"><type>GList</type></link><!---->s of <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link><!---->s,
+which is a boxed type.
+
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since  0.3.3
+</para></refsect2>
+<refsect2 id="thunar-vfs-path-new" role="function">
+<title>thunar_vfs_path_new ()</title>
+<indexterm zone="thunar-vfs-path-new"><primary>thunar_vfs_path_new</primary></indexterm><programlisting><link linkend="ThunarVfsPath">ThunarVfsPath</link>*      thunar_vfs_path_new                 (const <link linkend="gchar">gchar</link> *identifier,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Returns a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link> that represents the given
+<parameter>identifier</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link> on error. In the latter case
+<parameter>error</parameter> will be set to point to an <link linkend="GError"><type>GError</type></link> describing
+the problem.
+</para>
+<para>
+The caller is responsible to free the returned
+object using <link linkend="thunar-vfs-path-unref"><function>thunar_vfs_path_unref()</function></link> when no
+longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>identifier</parameter>&nbsp;:</term>
+<listitem><simpara> an URI identifier or an absolute path.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link> for <parameter>identifier</parameter>
+              or <link linkend="NULL:CAPS"><literal>NULL</literal></link> on error.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-get-for-home" role="function">
+<title>thunar_vfs_path_get_for_home ()</title>
+<indexterm zone="thunar-vfs-path-get-for-home"><primary>thunar_vfs_path_get_for_home</primary></indexterm><programlisting><link linkend="ThunarVfsPath">ThunarVfsPath</link>*      thunar_vfs_path_get_for_home        (void);</programlisting>
+<para>
+Returns the <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link> that represents
+the current users home directory.
+</para>
+<para>
+The caller is responsible to free the
+returned object using <link linkend="thunar-vfs-path-unref"><function>thunar_vfs_path_unref()</function></link>
+when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link> for the 
+              current users home directory.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-get-for-root" role="function">
+<title>thunar_vfs_path_get_for_root ()</title>
+<indexterm zone="thunar-vfs-path-get-for-root"><primary>thunar_vfs_path_get_for_root</primary></indexterm><programlisting><link linkend="ThunarVfsPath">ThunarVfsPath</link>*      thunar_vfs_path_get_for_root        (void);</programlisting>
+<para>
+Returns the <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link> that represents the
+file systems root folder.
+</para>
+<para>
+The caller is responsible to free the returned
+object using <link linkend="thunar-vfs-path-unref"><function>thunar_vfs_path_unref()</function></link> when no
+longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link> for the file
+              systems root directory.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-ref" role="function">
+<title>thunar_vfs_path_ref ()</title>
+<indexterm zone="thunar-vfs-path-ref"><primary>thunar_vfs_path_ref</primary></indexterm><programlisting><link linkend="ThunarVfsPath">ThunarVfsPath</link>*      thunar_vfs_path_ref                 (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);</programlisting>
+<para>
+Increments the reference count on <parameter>path</parameter>
+and returns a reference to <parameter>path</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a reference to <parameter>path</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-unref" role="function">
+<title>thunar_vfs_path_unref ()</title>
+<indexterm zone="thunar-vfs-path-unref"><primary>thunar_vfs_path_unref</primary></indexterm><programlisting><link linkend="void">void</link>                thunar_vfs_path_unref               (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);</programlisting>
+<para>
+Decreases the reference count on <parameter>path</parameter> and
+frees the resources allocated for <parameter>path</parameter>
+once the reference count drops to zero.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-hash" role="function">
+<title>thunar_vfs_path_hash ()</title>
+<indexterm zone="thunar-vfs-path-hash"><primary>thunar_vfs_path_hash</primary></indexterm><programlisting><link linkend="guint">guint</link>               thunar_vfs_path_hash                (<link linkend="gconstpointer">gconstpointer</link> path_ptr);</programlisting>
+<para>
+Generates a hash value for the given <parameter>path_ptr</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path_ptr</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the hash value for <parameter>path_ptr</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-equal" role="function">
+<title>thunar_vfs_path_equal ()</title>
+<indexterm zone="thunar-vfs-path-equal"><primary>thunar_vfs_path_equal</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_path_equal               (<link linkend="gconstpointer">gconstpointer</link> path_ptr_a,
+                                                         <link linkend="gconstpointer">gconstpointer</link> path_ptr_b);</programlisting>
+<para>
+Checks whether <parameter>path_ptr_a</parameter> and <parameter>path_ptr_b</parameter> refer
+to the same local path.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path_ptr_a</parameter>&nbsp;:</term>
+<listitem><simpara> first <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>path_ptr_b</parameter>&nbsp;:</term>
+<listitem><simpara> second <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>path_ptr_a</parameter> and <parameter>path_ptr_b</parameter>
+              are equal.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-is-ancestor" role="function">
+<title>thunar_vfs_path_is_ancestor ()</title>
+<indexterm zone="thunar-vfs-path-is-ancestor"><primary>thunar_vfs_path_is_ancestor</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_path_is_ancestor         (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *ancestor);</programlisting>
+<para>
+Determines whether <parameter>path</parameter> is somewhere below <parameter>ancestor</parameter>,
+possible with intermediate folders.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>ancestor</parameter>&nbsp;:</term>
+<listitem><simpara> another <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>ancestor</parameter> contains <parameter>path</parameter> as a
+              child, grandchild, great grandchild, etc.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-is-home" role="function">
+<title>thunar_vfs_path_is_home ()</title>
+<indexterm zone="thunar-vfs-path-is-home"><primary>thunar_vfs_path_is_home</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_path_is_home             (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);</programlisting>
+<para>
+Checks whether <parameter>path</parameter> refers to the users home
+directory.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>path</parameter> refers to the users
+              home directory.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-is-root" role="function">
+<title>thunar_vfs_path_is_root ()</title>
+<indexterm zone="thunar-vfs-path-is-root"><primary>thunar_vfs_path_is_root</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_path_is_root             (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);</programlisting>
+<para>
+Checks whether path refers to the root directory.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>path</parameter> refers to the root
+              directory.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-relative" role="function">
+<title>thunar_vfs_path_relative ()</title>
+<indexterm zone="thunar-vfs-path-relative"><primary>thunar_vfs_path_relative</primary></indexterm><programlisting><link linkend="ThunarVfsPath">ThunarVfsPath</link>*      thunar_vfs_path_relative            (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *parent,
+                                                         const <link linkend="gchar">gchar</link> *name);</programlisting>
+<para>
+Returns a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link> for the file <parameter>name</parameter> relative to
+<parameter>parent</parameter>. <parameter>name</parameter> must be a valid filename in the local file
+system encoding and it may not contain any slashes.
+</para>
+<para>
+The caller is responsible to free the returned object
+using <link linkend="thunar-vfs-path-unref"><function>thunar_vfs_path_unref()</function></link> when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>parent</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara> a valid filename in the local file system encoding.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the path to <parameter>name</parameter> relative to <parameter>parent</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-get-name" role="function">
+<title>thunar_vfs_path_get_name ()</title>
+<indexterm zone="thunar-vfs-path-get-name"><primary>thunar_vfs_path_get_name</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunar_vfs_path_get_name            (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);</programlisting>
+<para>
+Returns the base name of the <parameter>path</parameter> in the local
+file system encoding.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the base name of <parameter>path</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-get-parent" role="function">
+<title>thunar_vfs_path_get_parent ()</title>
+<indexterm zone="thunar-vfs-path-get-parent"><primary>thunar_vfs_path_get_parent</primary></indexterm><programlisting><link linkend="ThunarVfsPath">ThunarVfsPath</link>*      thunar_vfs_path_get_parent          (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);</programlisting>
+<para>
+Returns the <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link> that refers to the parent
+directory of <parameter>path</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link> if <parameter>path</parameter> refers to the
+root file system node.
+</para>
+<para>
+No additional reference is taken on the parent, so
+you'll need to call <link linkend="thunar-vfs-path-ref"><function>thunar_vfs_path_ref()</function></link> yourself
+if you need to keep a reference.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the parent of <parameter>path</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-get-scheme" role="function" condition="since:0.3.3">
+<title>thunar_vfs_path_get_scheme ()</title>
+<indexterm zone="thunar-vfs-path-get-scheme" role="0.3.3"><primary>thunar_vfs_path_get_scheme</primary></indexterm><programlisting><link linkend="ThunarVfsPathScheme">ThunarVfsPathScheme</link> thunar_vfs_path_get_scheme          (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);</programlisting>
+<para>
+Returns the <link linkend="ThunarVfsPathScheme"><type>ThunarVfsPathScheme</type></link> of the specified
+<parameter>path</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the scheme of the <parameter>path</parameter>.
+
+</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since  0.3.3
+</para></refsect2>
+<refsect2 id="thunar-vfs-path-dup-string" role="function">
+<title>thunar_vfs_path_dup_string ()</title>
+<indexterm zone="thunar-vfs-path-dup-string"><primary>thunar_vfs_path_dup_string</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              thunar_vfs_path_dup_string          (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);</programlisting>
+<para>
+Like <link linkend="thunar-vfs-path-to-string"><function>thunar_vfs_path_to_string()</function></link>, this function transform
+the <parameter>path</parameter> to its string representation, but unlike
+<link linkend="thunar-vfs-path-to-string"><function>thunar_vfs_path_to_string()</function></link>, this function automatically
+allocates the required amount of memory from the heap.
+The returned string must be freed by the caller when
+no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the string representation of <parameter>path</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-to-string" role="function">
+<title>thunar_vfs_path_to_string ()</title>
+<indexterm zone="thunar-vfs-path-to-string"><primary>thunar_vfs_path_to_string</primary></indexterm><programlisting><link linkend="gssize">gssize</link>              thunar_vfs_path_to_string           (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="gchar">gchar</link> *buffer,
+                                                         <link linkend="gsize">gsize</link> bufsize,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Stores the <parameter>path</parameter> into the string pointed to by <parameter>buffer</parameter>,
+so it can be used for system path operations. Returns
+the number of bytes stored to <parameter>buffer</parameter> or a negative
+value if <parameter>bufsize</parameter> is too small to store the whole <parameter>path</parameter>.
+In the latter case <parameter>error</parameter> will be set to point to an
+error describing the problem.
+</para>
+<para>
+If <parameter>buffer</parameter> is allocated on the stack, it is suggested
+to use <link linkend="THUNAR-VFS-PATH-MAXSTRLEN:CAPS"><type>THUNAR_VFS_PATH_MAXSTRLEN</type></link> for the buffer size
+in most cases. The stack should never be used in recursive
+functions; use <link linkend="thunar-vfs-path-dup-string"><function>thunar_vfs_path_dup_string()</function></link> instead there.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>buffer</parameter>&nbsp;:</term>
+<listitem><simpara> the buffer to store the path string to.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>bufsize</parameter>&nbsp;:</term>
+<listitem><simpara> the size of <parameter>buffer</parameter> in bytes.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the number of bytes (including the null
+              byte) stored to <parameter>buffer</parameter> or a negative
+              value if <parameter>buffer</parameter> cannot hold the whole
+              <parameter>path</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-dup-uri" role="function">
+<title>thunar_vfs_path_dup_uri ()</title>
+<indexterm zone="thunar-vfs-path-dup-uri"><primary>thunar_vfs_path_dup_uri</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              thunar_vfs_path_dup_uri             (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);</programlisting>
+<para>
+Similar to <link linkend="thunar-vfs-path-to-uri"><function>thunar_vfs_path_to_uri()</function></link>, but automatically
+allocates memory on the heap instead of using a user
+supplied buffer for the URI.
+</para>
+<para>
+The caller is responsible to free the returned string
+using <link linkend="g-free"><function>g_free()</function></link> when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the escaped URI for <parameter>path</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-to-uri" role="function">
+<title>thunar_vfs_path_to_uri ()</title>
+<indexterm zone="thunar-vfs-path-to-uri"><primary>thunar_vfs_path_to_uri</primary></indexterm><programlisting><link linkend="gssize">gssize</link>              thunar_vfs_path_to_uri              (const <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="gchar">gchar</link> *buffer,
+                                                         <link linkend="gsize">gsize</link> bufsize,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Escapes <parameter>path</parameter> according to the rules of the file URI
+specification and stores the escaped URI to <parameter>buffer</parameter>.
+Returns the number of bytes stored to <parameter>buffer</parameter> or a
+negative value if <parameter>bufsize</parameter> is too small to store the
+escaped URI. In the latter case <parameter>error</parameter> will be set to
+point to an <link linkend="GError"><type>GError</type></link> describing the problem.
+</para>
+<para>
+When using the stack for <parameter>buffer</parameter>, it is suggested to
+use <link linkend="THUNAR-VFS-PATH-MAXURILEN:CAPS"><type>THUNAR_VFS_PATH_MAXURILEN</type></link> for the buffer size in
+most cases. The stack should never be used in recursive
+functions; use <link linkend="thunar-vfs-path-dup-uri"><function>thunar_vfs_path_dup_uri()</function></link> instead there.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>buffer</parameter>&nbsp;:</term>
+<listitem><simpara> the buffer to store the URI string to.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>bufsize</parameter>&nbsp;:</term>
+<listitem><simpara> the size of <parameter>buffer</parameter> in bytes.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the number of bytes (including the null
+              byte) stored to <parameter>buffer</parameter> or a negative
+              value if <parameter>buffer</parameter> cannot hold the URI.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-list-from-string" role="function">
+<title>thunar_vfs_path_list_from_string ()</title>
+<indexterm zone="thunar-vfs-path-list-from-string"><primary>thunar_vfs_path_list_from_string</primary></indexterm><programlisting><link linkend="GList">GList</link>*              thunar_vfs_path_list_from_string    (const <link linkend="gchar">gchar</link> *uri_string,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Splits an URI list conforming to the text/uri-list
+mime type defined in RFC 2483 into individual URIs,
+discarding any comments and whitespace.
+</para>
+<para>
+If all URIs were successfully parsed into <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>
+objects, the list of parsed URIs will be returned, and
+you'll need to call <link linkend="thunar-vfs-path-list-free"><function>thunar_vfs_path_list_free()</function></link> to
+release the list resources. Else if the parsing fails
+at some point, <link linkend="NULL:CAPS"><literal>NULL</literal></link> will be returned and <parameter>error</parameter> will
+be set to describe the cause.
+</para>
+<para>
+Note, that if <parameter>string</parameter> contains no URIs, this function
+will also return <link linkend="NULL:CAPS"><literal>NULL</literal></link>, but <parameter>error</parameter> won't be set. So
+take care when checking for an error condition!</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>uri_string</parameter>&nbsp;:</term>
+<listitem><simpara> a string representation of an URI list.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the list of <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>'s or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-list-to-string" role="function">
+<title>thunar_vfs_path_list_to_string ()</title>
+<indexterm zone="thunar-vfs-path-list-to-string"><primary>thunar_vfs_path_list_to_string</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              thunar_vfs_path_list_to_string      (<link linkend="GList">GList</link> *path_list);</programlisting>
+<para>
+Free the returned value using <link linkend="g-free"><function>g_free()</function></link> when you
+are done with it.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path_list</parameter>&nbsp;:</term>
+<listitem><simpara> a list of <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link><!---->s.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the string representation of <parameter>path_list</parameter> conforming to the
+              text/uri-list mime type defined in RFC 2483.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-list-append" role="function">
+<title>thunar_vfs_path_list_append ()</title>
+<indexterm zone="thunar-vfs-path-list-append"><primary>thunar_vfs_path_list_append</primary></indexterm><programlisting><link linkend="GList">GList</link>*              thunar_vfs_path_list_append         (<link linkend="GList">GList</link> *path_list,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);</programlisting>
+<para>
+Appends <parameter>path</parameter> to the <parameter>path_list</parameter> while taking
+an additional reference for <parameter>path</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path_list</parameter>&nbsp;:</term>
+<listitem><simpara> a list of <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link><!---->s.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> pointer to the extended <parameter>path_list</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-list-prepend" role="function">
+<title>thunar_vfs_path_list_prepend ()</title>
+<indexterm zone="thunar-vfs-path-list-prepend"><primary>thunar_vfs_path_list_prepend</primary></indexterm><programlisting><link linkend="GList">GList</link>*              thunar_vfs_path_list_prepend        (<link linkend="GList">GList</link> *path_list,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);</programlisting>
+<para>
+Similar to <link linkend="thunar-vfs-path-list-append"><function>thunar_vfs_path_list_append()</function></link>, but
+prepends the <parameter>path</parameter> to the <parameter>path_list</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path_list</parameter>&nbsp;:</term>
+<listitem><simpara> a list of <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link><!---->s.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> pointer to the extended <parameter>path_list</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-list-copy" role="function">
+<title>thunar_vfs_path_list_copy ()</title>
+<indexterm zone="thunar-vfs-path-list-copy"><primary>thunar_vfs_path_list_copy</primary></indexterm><programlisting><link linkend="GList">GList</link>*              thunar_vfs_path_list_copy           (<link linkend="GList">GList</link> *path_list);</programlisting>
+<para>
+Takes a deep copy of <parameter>path_list</parameter> and returns the
+result. The caller is responsible to free the
+returned list using <link linkend="thunar-vfs-path-list-free"><function>thunar_vfs_path_list_free()</function></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path_list</parameter>&nbsp;:</term>
+<listitem><simpara> a list of <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link><!---->s.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a deep copy of <parameter>path_list</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-path-list-free" role="function">
+<title>thunar_vfs_path_list_free ()</title>
+<indexterm zone="thunar-vfs-path-list-free"><primary>thunar_vfs_path_list_free</primary></indexterm><programlisting><link linkend="void">void</link>                thunar_vfs_path_list_free           (<link linkend="GList">GList</link> *path_list);</programlisting>
+<para>
+Frees the <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link><!---->s in <parameter>path_list</parameter> and
+the <parameter>path_list</parameter> itself.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path_list</parameter>&nbsp;:</term>
+<listitem><simpara> a list of <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link><!---->s.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

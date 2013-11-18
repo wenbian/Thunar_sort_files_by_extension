@@ -1,0 +1,624 @@
+<!-- ##### SECTION ./tmpl/thunar-vfs-interactive-job.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-interactive-job.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-interactive-job.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-interactive-job.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-interactive-job.sgml:Title ##### -->
+ThunarVfsInteractiveJob
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-thumb-factory.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-thumb-factory.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-thumb-factory.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-thumb-factory.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-thumb-factory.sgml:Title ##### -->
+ThunarVfsThumbFactory
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-thumb.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-thumb.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-thumb.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-thumb.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-thumb.sgml:Title ##### -->
+Thumbnail Functions
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-trash-info.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-trash-info.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-trash-info.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-trash-info.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-trash-info.sgml:Title ##### -->
+ThunarVfsTrashInfo
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-trash-manager.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-trash-manager.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-trash-manager.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-trash-manager.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-trash-manager.sgml:Title ##### -->
+ThunarVfsTrashManager
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-trash.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-trash.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-trash.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-trash.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-trash.sgml:Title ##### -->
+ThunarVfsTrash
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-uri.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-uri.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-uri.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-uri.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/thunar-vfs-uri.sgml:Title ##### -->
+ThunarVfsURI
+
+
+<!-- ##### STRUCT ThunarVfsInteractiveJob ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ENUM ThunarVfsInteractiveJobResponse ##### -->
+<para>
+
+</para>
+
+@THUNAR_VFS_INTERACTIVE_JOB_RESPONSE_YES: 
+@THUNAR_VFS_INTERACTIVE_JOB_RESPONSE_YES_ALL: 
+@THUNAR_VFS_INTERACTIVE_JOB_RESPONSE_NO: 
+@THUNAR_VFS_INTERACTIVE_JOB_RESPONSE_CANCEL: 
+
+<!-- ##### STRUCT ThunarVfsThumbFactory ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG ThunarVfsThumbFactory:size ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ENUM ThunarVfsThumbSize ##### -->
+<para>
+
+</para>
+
+@THUNAR_VFS_THUMB_SIZE_NORMAL: 
+@THUNAR_VFS_THUMB_SIZE_LARGE: 
+
+<!-- ##### STRUCT ThunarVfsTrash ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG ThunarVfsTrash:files ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT ThunarVfsTrashInfo ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT ThunarVfsTrashManager ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG ThunarVfsTrashManager:empty ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT ThunarVfsURI ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ENUM ThunarVfsURIScheme ##### -->
+<para>
+
+</para>
+
+@THUNAR_VFS_URI_SCHEME_COMPUTER: 
+@THUNAR_VFS_URI_SCHEME_FILE: 
+@THUNAR_VFS_URI_SCHEME_TRASH: 
+
+<!-- ##### FUNCTION thunar_vfs_thumb_factory_can_thumbnail ##### -->
+<para>
+
+</para>
+
+@factory: 
+@uri: 
+@mime_info: 
+@mtime: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_thumb_factory_generate_thumbnail ##### -->
+<para>
+
+</para>
+
+@factory: 
+@uri: 
+@mime_info: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_thumb_factory_has_failed_thumbnail ##### -->
+<para>
+
+</para>
+
+@factory: 
+@uri: 
+@mtime: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_thumb_factory_lookup_thumbnail ##### -->
+<para>
+
+</para>
+
+@factory: 
+@uri: 
+@mtime: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_thumb_factory_new ##### -->
+<para>
+
+</para>
+
+@size: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_thumb_factory_store_thumbnail ##### -->
+<para>
+
+</para>
+
+@factory: 
+@pixbuf: 
+@uri: 
+@mtime: 
+@error: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_thumb_path_for_uri ##### -->
+<para>
+
+</para>
+
+@uri: 
+@size: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_thumb_path_is_valid ##### -->
+<para>
+
+</para>
+
+@thumb_path: 
+@uri: 
+@mtime: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_trash_get_files ##### -->
+<para>
+
+</para>
+
+@trash: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_trash_get_id ##### -->
+<para>
+
+</para>
+
+@trash: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_trash_get_info ##### -->
+<para>
+
+</para>
+
+@trash: 
+@file: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_trash_get_info_path ##### -->
+<para>
+
+</para>
+
+@trash: 
+@file: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_trash_get_path ##### -->
+<para>
+
+</para>
+
+@trash: 
+@file: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_trash_get_uri ##### -->
+<para>
+
+</para>
+
+@trash: 
+@file: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_trash_info_copy ##### -->
+<para>
+
+</para>
+
+@info: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_trash_info_free ##### -->
+<para>
+
+</para>
+
+@info: 
+
+<!-- ##### FUNCTION thunar_vfs_trash_info_get_deletion_date ##### -->
+<para>
+
+</para>
+
+@info: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_trash_info_get_path ##### -->
+<para>
+
+</para>
+
+@info: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_trash_manager_get_default ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_trash_manager_get_trashes ##### -->
+<para>
+
+</para>
+
+@manager: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_trash_manager_is_empty ##### -->
+<para>
+
+</para>
+
+@manager: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_trash_manager_resolve_uri ##### -->
+<para>
+
+</para>
+
+@manager: 
+@uri: 
+@path: 
+@error: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_equal ##### -->
+<para>
+
+</para>
+
+@a: 
+@b: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_get_display_name ##### -->
+<para>
+
+</para>
+
+@uri: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_get_md5sum ##### -->
+<para>
+
+</para>
+
+@uri: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_get_name ##### -->
+<para>
+
+</para>
+
+@uri: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_get_path ##### -->
+<para>
+
+</para>
+
+@uri: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_get_scheme ##### -->
+<para>
+
+</para>
+
+@uri: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_hash ##### -->
+<para>
+
+</para>
+
+@uri: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_is_home ##### -->
+<para>
+
+</para>
+
+@uri: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_is_root ##### -->
+<para>
+
+</para>
+
+@uri: 
+@Returns: 
+
+<!-- ##### MACRO thunar_vfs_uri_list_append ##### -->
+<para>
+
+</para>
+
+@uri_list: 
+@uri: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_list_copy ##### -->
+<para>
+
+</para>
+
+@uri_list: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_list_free ##### -->
+<para>
+
+</para>
+
+@uri_list: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_list_from_string ##### -->
+<para>
+
+</para>
+
+@string: 
+@error: 
+@Returns: 
+
+<!-- ##### MACRO thunar_vfs_uri_list_prepend ##### -->
+<para>
+
+</para>
+
+@uri_list: 
+@uri: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_list_to_string ##### -->
+<para>
+
+</para>
+
+@uri_list: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_new ##### -->
+<para>
+
+</para>
+
+@identifier: 
+@error: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_new_for_path ##### -->
+<para>
+
+</para>
+
+@path: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_parent ##### -->
+<para>
+
+</para>
+
+@uri: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_ref ##### -->
+<para>
+
+</para>
+
+@uri: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_relative ##### -->
+<para>
+
+</para>
+
+@uri: 
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_to_string ##### -->
+<para>
+
+</para>
+
+@uri: 
+@Returns: 
+
+<!-- ##### FUNCTION thunar_vfs_uri_unref ##### -->
+<para>
+
+</para>
+
+@uri: 
+

@@ -1,0 +1,542 @@
+<refentry id="ThunarxRenamer">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarxRenamer.top_of_page">ThunarxRenamer</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNARX Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarxRenamer</refname>
+<refpurpose>The abstract base class for bulk renamers</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="ThunarxRenamer.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunarx/thunarx.h&gt;
+
+                    <link linkend="ThunarxRenamer-struct">ThunarxRenamer</link>;
+                    <link linkend="ThunarxRenamerClass">ThunarxRenamerClass</link>;
+const <link linkend="gchar">gchar</link>*        <link linkend="thunarx-renamer-get-help-url">thunarx_renamer_get_help_url</link>        (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer);
+<link linkend="void">void</link>                <link linkend="thunarx-renamer-set-help-url">thunarx_renamer_set_help_url</link>        (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer,
+                                                         const <link linkend="gchar">gchar</link> *help_url);
+const <link linkend="gchar">gchar</link>*        <link linkend="thunarx-renamer-get-name">thunarx_renamer_get_name</link>            (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer);
+<link linkend="void">void</link>                <link linkend="thunarx-renamer-set-name">thunarx_renamer_set_name</link>            (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer,
+                                                         const <link linkend="gchar">gchar</link> *name);
+<link linkend="gchar">gchar</link>*              <link linkend="thunarx-renamer-process">thunarx_renamer_process</link>             (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer,
+                                                         <link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file,
+                                                         const <link linkend="gchar">gchar</link> *text,
+                                                         <link linkend="guint">guint</link> index);
+<link linkend="void">void</link>                <link linkend="thunarx-renamer-load">thunarx_renamer_load</link>                (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer,
+                                                         <link linkend="GHashTable">GHashTable</link> *settings);
+<link linkend="void">void</link>                <link linkend="thunarx-renamer-save">thunarx_renamer_save</link>                (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer,
+                                                         <link linkend="GHashTable">GHashTable</link> *settings);
+<link linkend="GList">GList</link>*              <link linkend="thunarx-renamer-get-actions">thunarx_renamer_get_actions</link>         (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer,
+                                                         <link linkend="GtkWindow">GtkWindow</link> *window,
+                                                         <link linkend="GList">GList</link> *files);
+<link linkend="void">void</link>                <link linkend="thunarx-renamer-changed">thunarx_renamer_changed</link>             (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarxRenamer.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="GInitiallyUnowned">GInitiallyUnowned</link>
+         +----<link linkend="GtkObject">GtkObject</link>
+               +----<link linkend="GtkWidget">GtkWidget</link>
+                     +----<link linkend="GtkContainer">GtkContainer</link>
+                           +----<link linkend="GtkBox">GtkBox</link>
+                                 +----<link linkend="GtkVBox">GtkVBox</link>
+                                       +----ThunarxRenamer
+</synopsis>
+
+</refsect1>
+
+
+
+<refsect1 id="ThunarxRenamer.implemented-interfaces" role="impl_interfaces">
+<title role="impl_interfaces.title">Implemented Interfaces</title>
+<para>
+ThunarxRenamer implements
+ <link linkend="AtkImplementorIface">AtkImplementorIface</link> and  <link linkend="GtkBuildable">GtkBuildable</link>.</para>
+
+</refsect1>
+
+
+<refsect1 id="ThunarxRenamer.properties" role="properties">
+<title role="properties.title">Properties</title>
+<synopsis>
+  &quot;<link linkend="ThunarxRenamer--help-url">help-url</link>&quot;                 <link linkend="gchar">gchar</link>*                : Read / Write
+  &quot;<link linkend="ThunarxRenamer--name">name</link>&quot;                     <link linkend="gchar">gchar</link>*                : Read / Write / Construct Only
+</synopsis>
+</refsect1>
+
+<refsect1 id="ThunarxRenamer.signals" role="signal_proto">
+<title role="signal_proto.title">Signals</title>
+<synopsis>
+  &quot;<link linkend="ThunarxRenamer-changed">changed</link>&quot;                                        : Run First
+</synopsis>
+</refsect1>
+
+
+<refsect1 id="ThunarxRenamer.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+  The abstract base class <type>ThunarxRenamer</type> is implemented by
+  extensions which provide additional bulk renamers that should be used in
+  the bulk rename dialog.
+</para>
+
+<para>
+  Derived classes must override the <link linkend="thunarx-renamer-process"><function>thunarx_renamer_process()</function></link> method, which
+  is called by the bulk rename dialog for every file to generate a new name. For
+  example, the <type>ThunarSbrReplaceRenamer</type> class included in the
+  <literal>thunar-sbr</literal> plugin (which is part of the Thunar distribution)
+  provides a bulk renamer, named <emphasis>Search &amp; Replace</emphasis>,
+  which allows the user to rename multiple files by searching for a pattern in
+  each file name and, if the pattern is found, replacing it with the specified
+  replacement text.
+</para>
+
+<para>
+  <inlinegraphic fileref="bulk-rename.png" format="PNG" />
+</para>
+
+<para>
+  The active <type>ThunarxRenamer</type>s user interface is displayed in a frame
+  below the file list, as shown in the screenshot above. Derived classes should try
+  to limit the number of widgets displayed in the main user interface. For example,
+  if you have more than six settings, you should consider adding an <guibutton>Advanced</guibutton>,
+  button which opens a dialog with the additional settings.
+</para>
+</refsect1>
+
+<refsect1 id="ThunarxRenamer.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarxRenamer-struct" role="struct">
+<title>ThunarxRenamer</title>
+<indexterm zone="ThunarxRenamer-struct"><primary>ThunarxRenamer</primary></indexterm><programlisting>typedef struct _ThunarxRenamer ThunarxRenamer;</programlisting>
+<para>
+  Abstract base instance type for bulk renamers.
+</para></refsect2>
+<refsect2 id="ThunarxRenamerClass" role="struct">
+<title>ThunarxRenamerClass</title>
+<indexterm zone="ThunarxRenamerClass"><primary>ThunarxRenamerClass</primary></indexterm><programlisting>typedef struct {
+  /* virtual methods */
+  gchar *(*process)     (ThunarxRenamer  *renamer,
+                         ThunarxFileInfo *file,
+                         const gchar     *text,
+                         guint            index);
+
+  void   (*load)        (ThunarxRenamer  *renamer,
+                         GHashTable      *settings);
+  void   (*save)        (ThunarxRenamer  *renamer,
+                         GHashTable      *settings);
+
+  GList *(*get_actions) (ThunarxRenamer  *renamer,
+                         GtkWindow       *window,
+                         GList           *files);
+
+
+  /* signals */
+  void (*changed) (ThunarxRenamer *renamer);
+} ThunarxRenamerClass;
+</programlisting>
+<para>
+  Abstract base class with virtual methods implemented by extensions
+  that provide additional bulk renamers for the integrated bulk
+  rename module in Thunar.
+</para><variablelist role="struct">
+<varlistentry>
+<term><structfield>process</structfield>&nbsp;()</term>
+<listitem><simpara>	see <link linkend="thunarx-renamer-process"><function>thunarx_renamer_process()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>load</structfield>&nbsp;()</term>
+<listitem><simpara>   	see <link linkend="thunarx-renamer-load"><function>thunarx_renamer_load()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>save</structfield>&nbsp;()</term>
+<listitem><simpara>   	see <link linkend="thunarx-renamer-save"><function>thunarx_renamer_save()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>get_actions</structfield>&nbsp;()</term>
+<listitem><simpara>	see <link linkend="thunarx-renamer-get-actions"><function>thunarx_renamer_get_actions()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>changed</structfield>&nbsp;()</term>
+<listitem><simpara>	see <link linkend="thunarx-renamer-changed"><function>thunarx_renamer_changed()</function></link>.
+
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-renamer-get-help-url" role="function">
+<title>thunarx_renamer_get_help_url ()</title>
+<indexterm zone="thunarx-renamer-get-help-url"><primary>thunarx_renamer_get_help_url</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunarx_renamer_get_help_url        (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer);</programlisting>
+<para>
+Returns the URL of the documentation for <parameter>renamer</parameter>
+or <link linkend="NULL:CAPS"><literal>NULL</literal></link> if no specific documentation is available
+for <parameter>renamer</parameter> and the general documentation of the
+Thunar renamers should be displayed instead.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>renamer</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the URL of the documentation for <parameter>renamer</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-renamer-set-help-url" role="function">
+<title>thunarx_renamer_set_help_url ()</title>
+<indexterm zone="thunarx-renamer-set-help-url"><primary>thunarx_renamer_set_help_url</primary></indexterm><programlisting><link linkend="void">void</link>                thunarx_renamer_set_help_url        (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer,
+                                                         const <link linkend="gchar">gchar</link> *help_url);</programlisting>
+<para>
+The URL to the documentation of this <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link>.
+Derived classes can set this property to point to the
+documentation for the specific renamer. The documentation
+of the specific renamer in turn should contain a link to
+the general Thunar renamer documentation.
+</para>
+<para>
+May also be unset, in which case the general Thunar renamer
+documentation will be shown when the user clicks the "Help"
+button.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>renamer</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>help_url</parameter>&nbsp;:</term>
+<listitem><simpara> the new URL to the documentation of <parameter>renamer</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-renamer-get-name" role="function">
+<title>thunarx_renamer_get_name ()</title>
+<indexterm zone="thunarx-renamer-get-name"><primary>thunarx_renamer_get_name</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunarx_renamer_get_name            (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer);</programlisting>
+<para>
+Returns the user visible name for <parameter>renamer</parameter>, previously
+set with <link linkend="thunarx-renamer-set-name"><function>thunarx_renamer_set_name()</function></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>renamer</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the user visible name for <parameter>renamer</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-renamer-set-name" role="function">
+<title>thunarx_renamer_set_name ()</title>
+<indexterm zone="thunarx-renamer-set-name"><primary>thunarx_renamer_set_name</primary></indexterm><programlisting><link linkend="void">void</link>                thunarx_renamer_set_name            (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer,
+                                                         const <link linkend="gchar">gchar</link> *name);</programlisting>
+<para>
+Sets the user visible name for <parameter>renamer</parameter> to <parameter>name</parameter>. This method should
+only be called by derived classes and prior to returning the <parameter>renamer</parameter>
+is returned from <link linkend="thunarx-renamer-provider-get-renamers"><function>thunarx_renamer_provider_get_renamers()</function></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>renamer</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara> the new user visible name for <parameter>renamer</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-renamer-process" role="function">
+<title>thunarx_renamer_process ()</title>
+<indexterm zone="thunarx-renamer-process"><primary>thunarx_renamer_process</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              thunarx_renamer_process             (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer,
+                                                         <link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file,
+                                                         const <link linkend="gchar">gchar</link> *text,
+                                                         <link linkend="guint">guint</link> index);</programlisting>
+<para>
+Determines the replacement for <parameter>text</parameter> (which is the relevant
+part of the full <parameter>file</parameter> name, i.e. either the suffix, the name
+or the name and the suffix).
+</para>
+<para>
+The caller is responsible to free the returned string using
+<link linkend="g-free"><function>g_free()</function></link> when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>renamer</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>file</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link> for the file whose new
+           name - according to <parameter>renamer</parameter> - should be
+           determined.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>text</parameter>&nbsp;:</term>
+<listitem><simpara> the part of the filename to which the
+           <parameter>renamer</parameter> should be applied.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>index</parameter>&nbsp;:</term>
+<listitem><simpara> the index of the file in the list, used
+           for renamers that work on numbering.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the string with which to replace <parameter>text</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-renamer-load" role="function">
+<title>thunarx_renamer_load ()</title>
+<indexterm zone="thunarx-renamer-load"><primary>thunarx_renamer_load</primary></indexterm><programlisting><link linkend="void">void</link>                thunarx_renamer_load                (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer,
+                                                         <link linkend="GHashTable">GHashTable</link> *settings);</programlisting>
+<para>
+Tells <parameter>renamer</parameter> to load its internal settings from the specified
+<parameter>settings</parameter>. The <parameter>settings</parameter> hash table contains previously saved
+settings, see <link linkend="thunarx-renamer-save"><function>thunarx_renamer_save()</function></link>, as key/value pairs of
+strings. That is, both the keys and the values are strings.
+</para>
+<para>
+Implementations of <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link> may decide to override this
+method to perform custom loading of settings. If you do not
+override this method, the default method of <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link>
+will be used, which simply loads all <link linkend="GObject"><type>GObject</type></link> properties
+provided by <parameter>renamer</parameter><!---->s class (excluding the ones
+provided by the parent classes) from the <parameter>settings</parameter>. The
+<link linkend="GObject"><type>GObject</type></link> properties must be transformable to strings and
+from strings.
+</para>
+<para>
+If you decide to override this method for your <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link>
+implementation, you should also override <link linkend="thunarx-renamer-save"><function>thunarx_renamer_save()</function></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>renamer</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>settings</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GHashTable"><type>GHashTable</type></link> which contains the previously saved
+            settings for <parameter>renamer</parameter> as key/value pairs of strings.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-renamer-save" role="function">
+<title>thunarx_renamer_save ()</title>
+<indexterm zone="thunarx-renamer-save"><primary>thunarx_renamer_save</primary></indexterm><programlisting><link linkend="void">void</link>                thunarx_renamer_save                (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer,
+                                                         <link linkend="GHashTable">GHashTable</link> *settings);</programlisting>
+<para>
+Tells <parameter>renamer</parameter> to save its internal settings to the specified
+<parameter>settings</parameter>, which can afterwards be loaded by <link linkend="thunarx-renamer-load"><function>thunarx_renamer_load()</function></link>.
+</para>
+<para>
+The strings saved to <parameter>settings</parameter> must be allocated by <link linkend="g-strdup"><function>g_strdup()</function></link>,
+both the keys and the values. For example to store the string
+<literal>Bar</literal> for the setting <literal>Foo</literal>,
+you'd use:
+<informalexample><programlisting>
+g_hash_table_replace (settings, g_strdup ("Foo"), g_strdup ("Bar"));
+</programlisting></informalexample>
+</para>
+<para>
+Implementations of <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link> may decide to override this
+method to perform custom saving of settings. If you do not overrride
+this method, the default method of <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link> will be used,
+which simply stores all <link linkend="GObject"><type>GObject</type></link> properties provided by the
+<parameter>renamer</parameter><!---->s class (excluding the ones provided by the parent
+classes) to the <parameter>settings</parameter>. The <link linkend="GObject"><type>GObject</type></link> properties must be transformable
+to strings.
+</para>
+<para>
+If you decide to override this method for your <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link>
+implementation, you should also override <link linkend="thunarx-renamer-load"><function>thunarx_renamer_load()</function></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>renamer</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>settings</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GHashTable"><type>GHashTable</type></link> to which the current settings of <parameter>renamer</parameter>
+            should be stored as key/value pairs of strings.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-renamer-get-actions" role="function">
+<title>thunarx_renamer_get_actions ()</title>
+<indexterm zone="thunarx-renamer-get-actions"><primary>thunarx_renamer_get_actions</primary></indexterm><programlisting><link linkend="GList">GList</link>*              thunarx_renamer_get_actions         (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer,
+                                                         <link linkend="GtkWindow">GtkWindow</link> *window,
+                                                         <link linkend="GList">GList</link> *files);</programlisting>
+<para>
+Returns the list of <link linkend="GtkAction"><type>GtkAction</type></link><!---->s provided by <parameter>renamer</parameter> for
+the given list of <parameter>files</parameter>. By default, this method returns <link linkend="NULL:CAPS"><literal>NULL</literal></link>
+(the empty list), but derived classes may override this method
+to provide additional actions for files in the bulk renamer
+dialog list.
+</para>
+<para>
+The returned <link linkend="GtkAction"><type>GtkAction</type></link><!---->s will be displayed in the file's
+context menu of the bulk renamer dialog, when this <parameter>renamer</parameter> is
+active. For example, an ID3-Tag based renamer may add an action
+"Edit Tags" to the context menus of supported media files and,
+when activated, display a dialog (which should be transient and
+modal for <parameter>window</parameter>, if not <link linkend="NULL:CAPS"><literal>NULL</literal></link>), which allows the users to edit
+media file tags on-the-fly.
+</para>
+<para>
+Derived classes that override this method should always check
+first if all the <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link><!---->s in the list of <parameter>files</parameter>
+are supported, and only return actions that can be performed on
+this specific list of <parameter>files</parameter>. For example, the ID3-Tag renamer
+mentioned above, should first check whether all items in <parameter>files</parameter>
+are actually audio files. The <link linkend="thunarx-file-info-has-mime-type"><function>thunarx_file_info_has_mime_type()</function></link>
+of the <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link> interface can be used to easily test
+whether a file in the <parameter>files</parameter> list is of a certain MIME type.
+</para>
+<para>
+Some actions may only work properly if only a single file ist
+selected (for example, the ID3-Tag renamer will probably only
+supporting editing one file at a time). In this case you have
+basicly two options: Either you can return <link linkend="NULL:CAPS"><literal>NULL</literal></link> here if <parameter>files</parameter>
+does not contain exactly one item, or you can return the actions
+as usual, but make them insensitive, using:
+<informalexample><programlisting>
+gtk_action_set_sensitive (action, FALSE);
+</programlisting></informalexample>
+The latter has the advantage that the user will still notice the
+existance of the action and probably realize that it can only be
+applied to a single item at once.
+</para>
+<para>
+The caller is responsible to free the returned list using something
+like the following:
+<informalexample><programlisting>
+g_list_foreach (list, (GFunc) g_object_unref, NULL);
+g_list_free (list);
+</programlisting></informalexample>
+</para>
+<para>
+As a special note, this method automatically takes a reference on the
+<parameter>renamer</parameter> for every <link linkend="GtkAction"><type>GtkAction</type></link> object returned from the real implementation
+of this method in <parameter>renamer</parameter>. This is to make sure that the extension stays
+in memory for atleast the time that the actions are used.
+</para>
+<para>
+The <link linkend="GtkAction"><type>GtkAction</type></link><!---->s returned from this method must be namespaced with
+the module to avoid collision with internal file manager actions and
+actions provided by other extensions. For example, the menu action
+provided by the ID3-Tag renamer mentioned above, should be named
+<literal>TagRenamer::edit-tags</literal> (if <literal>TagRenamer</literal>
+is the class name). For additional information about the way <link linkend="GtkAction"><type>GtkAction</type></link><!---->s
+should be returned from extensions and the way they are used, read the
+description of the <link linkend="ThunarxMenuProvider"><type>ThunarxMenuProvider</type></link> interface or read the introduction
+provided with this reference manual.
+</para>
+<para>
+A note of warning concerning the <parameter>window</parameter> parameter. Plugins should
+avoid taking a reference on <parameter>window</parameter>, as that might introduce a
+circular reference and can thereby cause a quite large memory leak.
+Instead, if <parameter>window</parameter> is not <link linkend="NULL:CAPS"><literal>NULL</literal></link>, add a weak reference using the
+<link linkend="g-object-weak-ref"><function>g_object_weak_ref()</function></link> or <link linkend="g-object-add-weak-pointer"><function>g_object_add_weak_pointer()</function></link> method. But don't
+forget to release the weak reference if <parameter>window</parameter> survived the lifetime
+of your action (which is likely to be the case in most situations).</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>renamer</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>window</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GtkWindow"><type>GtkWindow</type></link> or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>files</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GList"><type>GList</type></link> of <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link><!---->s.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the list of <link linkend="GtkAction"><type>GtkAction</type></link><!---->s provided by <parameter>renamer</parameter>
+              for the given list of <parameter>files</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-renamer-changed" role="function">
+<title>thunarx_renamer_changed ()</title>
+<indexterm zone="thunarx-renamer-changed"><primary>thunarx_renamer_changed</primary></indexterm><programlisting><link linkend="void">void</link>                thunarx_renamer_changed             (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer);</programlisting>
+<para>
+This method should be used by derived classes
+to emit the "changed" signal for <parameter>renamer</parameter>. See
+the documentation of the "changed" signal for
+details.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>renamer</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+<refsect1 id="ThunarxRenamer.property-details" role="property_details">
+<title role="property_details.title">Property Details</title>
+<refsect2 id="ThunarxRenamer--help-url"><title>The <literal>&quot;help-url&quot;</literal> property</title>
+<indexterm zone="ThunarxRenamer--help-url"><primary>ThunarxRenamer:help-url</primary></indexterm><programlisting>  &quot;help-url&quot;                 <link linkend="gchar">gchar</link>*                : Read / Write</programlisting>
+<para>
+The URL to the documentation of this <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link>.
+Derived classes can set this property to point to the
+documentation for the specific renamer. The documentation
+of the specific renamer in turn should contain a link to
+the general Thunar renamer documentation.
+</para>
+<para>
+May also be unset, in which case the general Thunar renamer
+documentation will be shown when the user clicks the "Help"
+button.</para>
+<para>
+
+</para><para>Default value: NULL</para>
+</refsect2>
+<refsect2 id="ThunarxRenamer--name"><title>The <literal>&quot;name&quot;</literal> property</title>
+<indexterm zone="ThunarxRenamer--name"><primary>ThunarxRenamer:name</primary></indexterm><programlisting>  &quot;name&quot;                     <link linkend="gchar">gchar</link>*                : Read / Write / Construct Only</programlisting>
+<para>
+The user visible name of the renamer, that is displayed
+in the bulk rename dialog of the file manager. Derived
+classes should set a useful name.</para>
+<para>
+
+</para><para>Default value: NULL</para>
+</refsect2>
+
+</refsect1>
+
+<refsect1 id="ThunarxRenamer.signal-details" role="signals">
+<title role="signals.title">Signal Details</title>
+<refsect2 id="ThunarxRenamer-changed"><title>The <literal>&quot;changed&quot;</literal> signal</title>
+<indexterm zone="ThunarxRenamer-changed"><primary>ThunarxRenamer::changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="ThunarxRenamer">ThunarxRenamer</link> *renamer,
+                                                        <link linkend="gpointer">gpointer</link>        user_data)      : Run First</programlisting>
+<para>
+Derived classes should emit this signal using the
+<link linkend="thunarx-renamer-changed"><function>thunarx_renamer_changed()</function></link> method whenever the user
+changed a setting in the <parameter>renamer</parameter> GUI.
+</para>
+<para>
+The file manager will then invoke <link linkend="thunarx-renamer-process"><function>thunarx_renamer_process()</function></link>
+for all files that should be renamed and update the preview.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>renamer</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxRenamer"><type>ThunarxRenamer</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+</refsect1>
+
+
+<refsect1 id="ThunarxRenamer.see-also">
+<title>See Also</title>
+<para>
+  The description of the <link linkend="ThunarxRenamerProvider"><type>ThunarxRenamerProvider</type></link>
+  interface.
+</para>
+</refsect1>
+
+</refentry>

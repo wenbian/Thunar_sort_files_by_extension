@@ -1,0 +1,94 @@
+<refentry id="ThunarVfsGroup">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarVfsGroup.top_of_page">ThunarVfsGroup</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNAR-VFS Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarVfsGroup</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="ThunarVfsGroup.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunar-vfs/thunar-vfs.h&gt;
+
+                    <link linkend="ThunarVfsGroup-struct">ThunarVfsGroup</link>;
+<link linkend="ThunarVfsGroupId">ThunarVfsGroupId</link>    <link linkend="thunar-vfs-group-get-id">thunar_vfs_group_get_id</link>             (<link linkend="ThunarVfsGroup">ThunarVfsGroup</link> *group);
+const <link linkend="gchar">gchar</link>*        <link linkend="thunar-vfs-group-get-name">thunar_vfs_group_get_name</link>           (<link linkend="ThunarVfsGroup">ThunarVfsGroup</link> *group);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarVfsGroup.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----ThunarVfsGroup
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+
+
+<refsect1 id="ThunarVfsGroup.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="ThunarVfsGroup.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarVfsGroup-struct" role="struct">
+<title>ThunarVfsGroup</title>
+<indexterm zone="ThunarVfsGroup-struct"><primary>ThunarVfsGroup</primary></indexterm><programlisting>typedef struct _ThunarVfsGroup ThunarVfsGroup;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="thunar-vfs-group-get-id" role="function">
+<title>thunar_vfs_group_get_id ()</title>
+<indexterm zone="thunar-vfs-group-get-id"><primary>thunar_vfs_group_get_id</primary></indexterm><programlisting><link linkend="ThunarVfsGroupId">ThunarVfsGroupId</link>    thunar_vfs_group_get_id             (<link linkend="ThunarVfsGroup">ThunarVfsGroup</link> *group);</programlisting>
+<para>
+Returns the unique id of the given <parameter>group</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>group</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsGroup"><type>ThunarVfsGroup</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the unique id of <parameter>group</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-group-get-name" role="function">
+<title>thunar_vfs_group_get_name ()</title>
+<indexterm zone="thunar-vfs-group-get-name"><primary>thunar_vfs_group_get_name</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunar_vfs_group_get_name           (<link linkend="ThunarVfsGroup">ThunarVfsGroup</link> *group);</programlisting>
+<para>
+Returns the name of the <parameter>group</parameter>. If the system is
+unable to determine the name of <parameter>group</parameter>, it'll
+return the group id as string.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>group</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsGroup"><type>ThunarVfsGroup</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the name of <parameter>group</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

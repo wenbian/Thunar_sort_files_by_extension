@@ -1,0 +1,63 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Advanced Topics</title><link rel="stylesheet" href="../thunar.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"><link rel="start" href="index.html" title="Thunar File Manager"><link rel="up" href="index.html" title="Thunar File Manager"><link rel="prev" href="customizing-thunar.html" title="Customizing Thunar"><link rel="next" href="faq.html" title="Frequently Asked Questions"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Advanced Topics</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="customizing-thunar.html">Terug</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="faq.html">Volgende</a></td></tr></table><hr></div><div class="sect1" lang="nl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="advanced-topics"></a>Advanced Topics</h2></div></div></div><div class="sect2" lang="nl"><div class="titlepage"><div><div><h3 class="title"><a name="to-bulk-rename-files"></a>To Bulk Rename Files</h3></div></div></div><p>
+        To <span class="emphasis"><em>bulk rename</em></span> files means to rename multiple files at once using some criterion, that applies to atleast
+        one of the files. <strong class="application"><code>Thunar</code></strong> includes a bulk renamer, which can be run separately using the command
+        <span class="command"><strong>Thunar -B</strong></span> or from within <strong class="application"><code>Thunar</code></strong> by selecting two or more files in the main area
+        and pressing <span class="keycap"><strong>F2</strong></span> or choosing
+        <span class="guimenu"><strong>Edit</strong></span> &#8594; <span class="guimenuitem"><strong>Rename...</strong></span> from the main menu.
+      </p><div class="screenshot"><div class="mediaobject"><img src="images/bulk-rename.png" alt="Bulk Rename Files"></div></div><p>
+        The <span class="emphasis"><em>Bulk Renamers</em></span> can be applied to the name of the files, the suffix of the files or both to the
+        name and the suffix of the files. <strong class="application"><code>Thunar</code></strong> currently supports the following <span class="emphasis"><em>Bulk
+        Renamers</em></span>:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>Remove characters.</p></li><li><p>Numbering files.</p></li><li><p>Insert Date or Time.</p></li><li><p>Insert or overwrite characters.</p></li><li><p>Search and replace characters.</p></li><li><p>Convert to uppercase, lowercase or camlcase.</p></li></ul></div><p>
+        Additional <span class="emphasis"><em>Bulk Renamers</em></span> may be installed as plugins for <strong class="application"><code>Thunar</code></strong>. Check
+        the <a class="ulink" href="http://thunar.xfce.org/plugins.html" target="_top">Thunar Plugins</a> website for currently available
+        extensions. The <a class="ulink" href="http://thunar.xfce.org/pwiki/documentation/bulk_renamer" target="_top">Thunar Project Wiki</a>
+        contains further details about this feature. Feel free to add more information to the Wiki.
+      </p></div><div class="sect2" lang="nl"><div class="titlepage"><div><div><h3 class="title"><a name="the-unix-file-system"></a>The UNIX File System</h3></div></div></div><p>
+        While the Thunar file manager does a good job at abstracting the details of the underlying file system, so the user
+        does not need to care about them, it is sometimes useful to understand the basic concepts to get the whole picture.
+        This section tries to give a brief introduction to the concepts of the UNIX file system, which is used today by all
+        incarnations of UNIX, including Linux.
+      </p><div class="sect3" lang="nl"><div class="titlepage"><div><div><h4 class="title"><a name="folders-and-paths"></a>Folders and Paths</h4></div></div></div><p>
+          In a UNIX file system all folders are arranged in a simple inverted tree structure descending and branching down
+          from a single top level folder, which is called the <span class="emphasis"><em>root directory</em></span> (the term
+          <span class="emphasis"><em>directory</em></span> is often used instead of <span class="emphasis"><em>folder</em></span>) and displayed as
+          <span class="guilabel"><strong>File System</strong></span> in Thunar. This means that you can get from any folder to any other by going
+          up the tree until you reach a common point, then down the tree through the appropriate subfolders until you reach
+          your target.
+        </p><p>
+          The position of any file or folder in the tree can be described by its <span class="emphasis"><em>path</em></span>. The path is the
+          list of folders you would have to descend through to get to the target folder or file, starting from the top level
+          folder. For example <code class="filename">/home/luke</code> is the subfolder <code class="filename">luke</code> of the subfolder <code class="filename">home</code> of the top level folder,
+          and <code class="filename">/home/luke/myfile.txt</code> is the file <code class="filename">myfile.txt</code> in that subfolder. The
+          leading <code class="filename">/</code> in these paths represents the top level folder.
+        </p><p>
+          Every user has their own folder to hold their personal files and settings. This folder is called the <span class="emphasis"><em>home
+          directory</em></span> and is displayed in Thunar as special icon with the users login name. The folder is similar to
+          the <span class="guilabel"><strong>My Files</strong></span> folder known from Windows. The <span class="emphasis"><em>home directories</em></span> of the various
+          users in a system are usually located below the <code class="filename">/home</code> folder. For example
+          <code class="filename">/home/luke</code> would be the home directory of the user with the login name
+          <code class="filename">luke</code>, while <code class="filename">/home/jane</code> would be
+          the home directory for the user with the login name <code class="filename">jane</code>.
+        </p></div><div class="sect3" lang="nl"><div class="titlepage"><div><div><h4 class="title"><a name="file-types"></a>File Types</h4></div></div></div><p>
+          You may have already heard that everything is a file in UNIX. This is true for most objects present in UNIX systems
+          today. In fact even devices are represented as a special files. While this may not make sense at first sight, it is
+          one of the strengths of UNIX and its derivates, and has helped it to maintain a simple core over the years where other
+          operating systems had to introduce new concepts for every new technology.
+        </p><p>
+          These are the four most important types of files in the UNIX file system.
+        </p><div class="sect4" lang="nl"><div class="titlepage"><div><div><h5 class="title"><a name="file-types-ordinary-files"></a>Ordinary Files</h5></div></div></div><p>
+            An ordinary file may contain text, a program or other data. This includes image files, audio files, office documents
+            and video files. The term <span class="emphasis"><em>file</em></span> is often used to refer to an ordinary file.
+          </p></div><div class="sect4" lang="nl"><div class="titlepage"><div><div><h5 class="title"><a name="file-types-folder-files"></a>Folder Files</h5></div></div></div><p>
+            Folders are also files in the UNIX file system. To be exact a folder is a special file, which contains a
+            mapping of file names to file references for every file contained within this folder.
+          </p></div><div class="sect4" lang="nl"><div class="titlepage"><div><div><h5 class="title"><a name="file-types-symbolic-link-files"></a>Symbolic Link Files</h5></div></div></div><p>
+            A Symbolic link (often called a <span class="emphasis"><em>symlink</em></span>) is a special file that contains a path to
+            another file in the file system. Symbolic link files therefore do not contain any useful information
+            themselves, but just refer to other files.
+          </p></div><div class="sect4" lang="nl"><div class="titlepage"><div><div><h5 class="title"><a name="file-types-device-files"></a>Device Files</h5></div></div></div><p>
+            As mentioned earlier (most) devices are also accessed through the file system. These special device files are
+            usually located in the <code class="filename">/dev</code> folder. For example the special file
+            <code class="filename">/dev/hda</code> represents the first IDE disk on Linux.
+          </p></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="customizing-thunar.html">Terug</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="faq.html">Volgende</a></td></tr><tr><td width="40%" align="left" valign="top">Customizing Thunar </td><td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td><td width="40%" align="right" valign="top"> Frequently Asked Questions</td></tr></table></div></body></html>

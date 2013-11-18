@@ -1,0 +1,71 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Frequently Asked Questions</title><link rel="stylesheet" href="../thunar.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"><link rel="start" href="index.html" title="Xestor de ficheiros Thunar"><link rel="up" href="index.html" title="Xestor de ficheiros Thunar"><link rel="prev" href="advanced-topics.html" title="Advanced Topics"><link rel="next" href="support.html" title="Soporte"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Frequently Asked Questions</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="advanced-topics.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="support.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="gl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="faq"></a>Frequently Asked Questions</h2></div></div></div><p>
+      The intent of this section is to collect the quite numerous frequently asked
+      questions that relate to working with Thunar. If you know of a question that
+      is missing from this page, please <a class="ulink" href="http://bugzilla.xfce.org/enter_bug.cgi?product=Thunar&amp;format=guided" target="_top">file
+      a request</a>.
+    </p><div class="sect3" lang="gl"><div class="titlepage"><div><div><h4 class="title"><a name="faq-executables"></a>Why doesn't Thunar execute files marked as executable?</h4></div></div></div><p>
+        For security reasons Thunar only executes files of type <code class="literal">application/x-desktop</code>,
+        <code class="literal">application/x-executable</code> and <code class="literal">application/x-shellscript</code>. For
+        desktop files the execution feature will only be enabled if the desktop file is of type
+        <code class="literal">Application</code> and a valid <code class="literal">Exec</code> line is given or of type
+        <code class="literal">Link</code> and a valid <code class="literal">URL</code> is given. For the other types the feature
+        is available if the file is marked executable for the current user.
+      </p><p>
+        Also note that for <code class="literal">application/x-executable</code> and <code class="literal">application/x-shellscript</code>,
+        the types of the file don't really need to match these types exactly, but it is suffice if the detected
+        type has a parent that matches one of the two types listed above, or if the MIME-type is an alias for
+        one of the above.
+      </p></div><div class="sect3" lang="gl"><div class="titlepage"><div><div><h4 class="title"><a name="faq-metadata"></a>Where does Thunar store the metadata associated with files?</h4></div></div></div><p>
+        Thunar associates various settings with files/folders, which we call metadata.
+        This metadata for all files is stored in tdb database file, which is called
+        the metafile. The database file is stored in
+        <code class="filename">$XDG_CACHE_HOME/Thunar/metafile.tdb</code> and can be examined
+        using the <span class="command"><strong>tdbtool</strong></span>, which is part of the Thunar distribution
+        (located in the <code class="filename">tdb/</code> subdirectory).
+      </p></div><div class="sect3" lang="gl"><div class="titlepage"><div><div><h4 class="title"><a name="faq-thunarrc"></a>Where does Thunar store its preferences?</h4></div></div></div><p>
+        Thunar stores the user configurable preferences (and hidden settings) in
+        an <code class="filename">.ini</code> file, which is located at
+        <code class="filename">$XDG_CONFIG_HOME/Thunar/thunarrc</code> and can be examined
+        using a text editor. See <code class="filename">docs/README.thunarrc</code> for an
+        overview of the various preferences.
+      </p></div><div class="sect3" lang="gl"><div class="titlepage"><div><div><h4 class="title"><a name="faq-mouse-gestures"></a>How to use mouse gestures in Thunar?</h4></div></div></div><p>
+        Thunar currently features basic support for so called <span class="emphasis"><em>mouse gestures</em></span>
+        in its icon view. You can use these <span class="emphasis"><em>mouse gestures</em></span> by holding down
+        the middle mouse button (usually the mouse wheel) while the mouse pointer is on the
+        background area of the icon view component (any area that is not covered by
+        an icon or a text). Now you can move the cursor into four directions to
+        perform certain actions, which are described below.
+      </p><table class="simplelist" border="0" summary="Simple list"><tr><td><span class="guilabel"><strong>Esquerda</strong></span> - opens the previous visited folder</td></tr><tr><td><span class="guilabel"><strong>Arriba</strong></span> - abre o cartafol pai</td></tr><tr><td><span class="guilabel"><strong>Dereita</strong></span> - opens the next visited folder</td></tr><tr><td><span class="guilabel"><strong>Abaixo</strong></span> - reloads the current folder</td></tr></table></div><div class="sect3" lang="gl"><div class="titlepage"><div><div><h4 class="title"><a name="faq-assign-keyboard-shortcuts"></a>How do I assign different keyboard shortcuts?</h4></div></div></div><p>
+        If you want to rebind a shortcut, Thunar supports the standard GTK+ way
+        of changing shortcuts: simply hover over the menu option with the mouse
+        pointer and press the keyboard shortcut you want to rebind it to.
+      </p><p>
+        To delete a keyboard assignment, press the <span class="keycap"><strong>Backspace</strong></span> key
+        while you are on the menu entry.
+      </p><p>
+        If the shortcut doesn't change, then you need to enable the feature in
+        GTK+. This can be achieved in 3 ways:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            If you are running Xfce 4.3 or above then you can enable <span class="guilabel"><strong>Editable
+            menu accelerators</strong></span> in the <span class="guilabel"><strong>User Interface Preferences</strong></span>
+            dialog.
+          </p></li><li><p>
+            If you are running GNOME then you can enable <span class="guilabel"><strong>Editable menu
+            accelerators</strong></span> in the <span class="guilabel"><strong>Menu and Toolbars</strong></span> control
+            center dialog.
+          </p></li><li><p>
+            Otherwise put the following in your <code class="filename">~/.gtkrc-2.0</code> file
+            (create the file if it doesn't exist):</p><pre class="screen">gtk-can-change-accels=1</pre><p>
+          </p></li></ul></div></div><div class="sect3" lang="gl"><div class="titlepage"><div><div><h4 class="title"><a name="faq-store-keyboard-shortcuts"></a>Where does Thunar store the keyboard shortcuts?</h4></div></div></div><p>
+        The custom keyboard shortcuts are stored in the standard GTK+ accel map format in a
+        file located at <code class="filename">$XDG_CONFIG_HOME/Thunar/accels.scm</code>. Lines starting
+        with <code class="literal">;</code> are comments. See the GTK+ documentation for details about the
+        file format.
+      </p><p>
+        If you are a packager or a system administrator and want to provide a system wide default
+        for the keyboard shortcuts, that is different from the default shortcuts in Thunar, you
+        can create a file <code class="filename">Thunar/accels.scm</code> in one of the <code class="envar">$XDG_CONFIG_DIRS</code>.
+        For example, if <code class="filename">/etc/xdg</code> is part of <code class="envar">$XDG_CONFIG_DIRS</code>
+        (the default for most Linux distributions), you can install system wide defaults to
+        <code class="filename">/etc/xdg/Thunar/accels.scm</code>. Thunar will then load shortcuts from this file on first startup.
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="advanced-topics.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="support.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Advanced Topics </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Soporte</td></tr></table></div></body></html>

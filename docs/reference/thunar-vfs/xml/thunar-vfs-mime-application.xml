@@ -1,0 +1,276 @@
+<refentry id="ThunarVfsMimeApplication">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarVfsMimeApplication.top_of_page">ThunarVfsMimeApplication</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNAR-VFS Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarVfsMimeApplication</refname>
+<refpurpose>Registered Applications for MIME types.</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="ThunarVfsMimeApplication.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunar-vfs/thunar-vfs.h&gt;
+
+                    <link linkend="ThunarVfsMimeApplication-struct">ThunarVfsMimeApplication</link>;
+<link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link>* <link linkend="thunar-vfs-mime-application-new-from-desktop-id">thunar_vfs_mime_application_new_from_desktop_id</link>
+                                                        (const <link linkend="gchar">gchar</link> *desktop_id);
+<link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link>* <link linkend="thunar-vfs-mime-application-new-from-file">thunar_vfs_mime_application_new_from_file</link>
+                                                        (const <link linkend="gchar">gchar</link> *path,
+                                                         const <link linkend="gchar">gchar</link> *desktop_id);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-mime-application-is-usercreated">thunar_vfs_mime_application_is_usercreated</link>
+                                                        (const <link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link> *mime_application);
+<link linkend="GList">GList</link>*              <link linkend="thunar-vfs-mime-application-get-actions">thunar_vfs_mime_application_get_actions</link>
+                                                        (<link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link> *mime_application);
+#define             <link linkend="thunar-vfs-mime-application-get-command">thunar_vfs_mime_application_get_command</link>(mime_application)
+const <link linkend="gchar">gchar</link>*        <link linkend="thunar-vfs-mime-application-get-desktop-id">thunar_vfs_mime_application_get_desktop_id</link>
+                                                        (const <link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link> *mime_application);
+#define             <link linkend="thunar-vfs-mime-application-get-flags">thunar_vfs_mime_application_get_flags</link>(mime_application)
+#define             <link linkend="thunar-vfs-mime-application-get-name">thunar_vfs_mime_application_get_name</link>(mime_application)
+<link linkend="guint">guint</link>               <link linkend="thunar-vfs-mime-application-hash">thunar_vfs_mime_application_hash</link>    (<link linkend="gconstpointer">gconstpointer</link> mime_application);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-mime-application-equal">thunar_vfs_mime_application_equal</link>   (<link linkend="gconstpointer">gconstpointer</link> a,
+                                                         <link linkend="gconstpointer">gconstpointer</link> b);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarVfsMimeApplication.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="ThunarVfsMimeHandler">ThunarVfsMimeHandler</link>
+         +----ThunarVfsMimeApplication
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+
+
+<refsect1 id="ThunarVfsMimeApplication.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="ThunarVfsMimeApplication.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarVfsMimeApplication-struct" role="struct">
+<title>ThunarVfsMimeApplication</title>
+<indexterm zone="ThunarVfsMimeApplication-struct"><primary>ThunarVfsMimeApplication</primary></indexterm><programlisting>typedef struct _ThunarVfsMimeApplication ThunarVfsMimeApplication;</programlisting>
+<para>
+  The <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link> struct contains private data only, and should
+  be accessed using the functions below.
+</para></refsect2>
+<refsect2 id="thunar-vfs-mime-application-new-from-desktop-id" role="function">
+<title>thunar_vfs_mime_application_new_from_desktop_id ()</title>
+<indexterm zone="thunar-vfs-mime-application-new-from-desktop-id"><primary>thunar_vfs_mime_application_new_from_desktop_id</primary></indexterm><programlisting><link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link>* thunar_vfs_mime_application_new_from_desktop_id
+                                                        (const <link linkend="gchar">gchar</link> *desktop_id);</programlisting>
+<para>
+Generates a <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link> instance for the application
+referenced by <parameter>desktop_id</parameter>. Returns <link linkend="NULL:CAPS"><literal>NULL</literal></link> if <parameter>desktop_id</parameter> is not valid.
+</para>
+<para>
+The caller is responsible to free the returned instance using
+<link linkend="g-object-unref"><function>g_object_unref()</function></link> when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>desktop_id</parameter>&nbsp;:</term>
+<listitem><simpara> the id of an application's .desktop file.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link> for <parameter>desktop_id</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-application-new-from-file" role="function">
+<title>thunar_vfs_mime_application_new_from_file ()</title>
+<indexterm zone="thunar-vfs-mime-application-new-from-file"><primary>thunar_vfs_mime_application_new_from_file</primary></indexterm><programlisting><link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link>* thunar_vfs_mime_application_new_from_file
+                                                        (const <link linkend="gchar">gchar</link> *path,
+                                                         const <link linkend="gchar">gchar</link> *desktop_id);</programlisting>
+<para>
+Generates a new <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link> for the application
+described by <parameter>path</parameter> and <parameter>desktop_id</parameter>.
+</para>
+<para>
+The caller is responsible to free the returned instance using
+<link linkend="g-object-unref"><function>g_object_unref()</function></link> when no longer needed.
+</para>
+<para>
+You should really seldomly use this function and always
+prefer <link linkend="thunar-vfs-mime-application-new-from-desktop-id"><function>thunar_vfs_mime_application_new_from_desktop_id()</function></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> the absolute path to the desktop file.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>desktop_id</parameter>&nbsp;:</term>
+<listitem><simpara> the desktop-id of the file.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link> for <parameter>desktop_id</parameter>
+              or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-application-is-usercreated" role="function">
+<title>thunar_vfs_mime_application_is_usercreated ()</title>
+<indexterm zone="thunar-vfs-mime-application-is-usercreated"><primary>thunar_vfs_mime_application_is_usercreated</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_mime_application_is_usercreated
+                                                        (const <link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link> *mime_application);</programlisting>
+<para>
+Returns <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if the <parameter>mime_application</parameter> was created by the user
+using a file manager, i.e. through the "Open With" dialog in
+Thunar.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>mime_application</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>mime_application</parameter> is usercreated.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-application-get-actions" role="function">
+<title>thunar_vfs_mime_application_get_actions ()</title>
+<indexterm zone="thunar-vfs-mime-application-get-actions"><primary>thunar_vfs_mime_application_get_actions</primary></indexterm><programlisting><link linkend="GList">GList</link>*              thunar_vfs_mime_application_get_actions
+                                                        (<link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link> *mime_application);</programlisting>
+<para>
+Returns the list of <link linkend="ThunarVfsMimeAction"><type>ThunarVfsMimeAction</type></link><!---->s available
+for the <parameter>mime_application</parameter>. The <link linkend="ThunarVfsMimeAction"><type>ThunarVfsMimeAction</type></link><!---->s
+are an implementation of the desktop actions mentioned in
+the desktop entry specification.
+</para>
+<para>
+The caller is responsible to free the returned list using
+<informalexample><programlisting>
+g_list_foreach (list, (GFunc) g_object_unref, NULL);
+g_list_free (list);
+</programlisting></informalexample>
+when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>mime_application</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the list of <link linkend="ThunarVfsMimeAction"><type>ThunarVfsMimeAction</type></link><!---->s
+              for the <parameter>mime_application</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-application-get-command" role="macro">
+<title>thunar_vfs_mime_application_get_command()</title>
+<indexterm zone="thunar-vfs-mime-application-get-command"><primary>thunar_vfs_mime_application_get_command</primary></indexterm><programlisting>#define thunar_vfs_mime_application_get_command(mime_application) (thunar_vfs_mime_handler_get_command (THUNAR_VFS_MIME_HANDLER ((mime_application))))
+</programlisting>
+<para>
+Returns the command for <parameter>mime_application</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>mime_application</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the command for <parameter>mime_application</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-application-get-desktop-id" role="function">
+<title>thunar_vfs_mime_application_get_desktop_id ()</title>
+<indexterm zone="thunar-vfs-mime-application-get-desktop-id"><primary>thunar_vfs_mime_application_get_desktop_id</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunar_vfs_mime_application_get_desktop_id
+                                                        (const <link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link> *mime_application);</programlisting>
+<para>
+Returns the desktop-id of <parameter>mime_application</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>mime_application</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the desktop-id of <parameter>mime_application</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-application-get-flags" role="macro">
+<title>thunar_vfs_mime_application_get_flags()</title>
+<indexterm zone="thunar-vfs-mime-application-get-flags"><primary>thunar_vfs_mime_application_get_flags</primary></indexterm><programlisting>#define thunar_vfs_mime_application_get_flags(mime_application) (thunar_vfs_mime_handler_get_flags (THUNAR_VFS_MIME_HANDLER ((mime_application))))
+</programlisting>
+<para>
+Returns the <link linkend="ThunarVfsMimeHandlerFlags"><type>ThunarVfsMimeHandlerFlags</type></link> for <parameter>mime_handler</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>mime_application</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the flags for <parameter>mime_application</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-application-get-name" role="macro">
+<title>thunar_vfs_mime_application_get_name()</title>
+<indexterm zone="thunar-vfs-mime-application-get-name"><primary>thunar_vfs_mime_application_get_name</primary></indexterm><programlisting>#define thunar_vfs_mime_application_get_name(mime_application) (thunar_vfs_mime_handler_get_name (THUNAR_VFS_MIME_HANDLER ((mime_application))))
+</programlisting>
+<para>
+Returns the name for <parameter>mime_application</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>mime_application</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the name for <parameter>mime_application</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-application-hash" role="function">
+<title>thunar_vfs_mime_application_hash ()</title>
+<indexterm zone="thunar-vfs-mime-application-hash"><primary>thunar_vfs_mime_application_hash</primary></indexterm><programlisting><link linkend="guint">guint</link>               thunar_vfs_mime_application_hash    (<link linkend="gconstpointer">gconstpointer</link> mime_application);</programlisting>
+<para>
+Converts <parameter>mime_application</parameter> to a hash value. It can be 
+passed to <link linkend="g-hash-table-new"><function>g_hash_table_new()</function></link> as the <parameter>hash_func</parameter> parameter,
+when using <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link><!---->s as keys
+in a <link linkend="GHashTable"><type>GHashTable</type></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>mime_application</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a hash value corresponding to the key.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-application-equal" role="function">
+<title>thunar_vfs_mime_application_equal ()</title>
+<indexterm zone="thunar-vfs-mime-application-equal"><primary>thunar_vfs_mime_application_equal</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_mime_application_equal   (<link linkend="gconstpointer">gconstpointer</link> a,
+                                                         <link linkend="gconstpointer">gconstpointer</link> b);</programlisting>
+<para>
+Checks whether <parameter>a</parameter> and <parameter>b</parameter> refer to the same application.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>a</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>b</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>a</parameter> and <parameter>b</parameter> are equal.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+<refsect1 id="ThunarVfsMimeApplication.see-also">
+<title>See Also</title>
+<para>
+  <link linkend="ThunarVfsMimeHandler">ThunarVfsMimeHandler</link>
+  and <link linkend="ThunarVfsMimeAction">ThunarVfsMimeAction</link>
+</para>
+</refsect1>
+
+</refentry>

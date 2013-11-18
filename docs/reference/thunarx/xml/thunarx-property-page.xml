@@ -1,0 +1,459 @@
+<refentry id="ThunarxPropertyPage">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarxPropertyPage.top_of_page">ThunarxPropertyPage</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNARX Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarxPropertyPage</refname>
+<refpurpose>The base class for pages added to the properties dialog</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+<refsect1 id="ThunarxPropertyPage.stability-level">
+<title>Stability Level</title>
+Stable, unless otherwise indicated
+</refsect1>
+
+<refsynopsisdiv id="ThunarxPropertyPage.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunarx/thunarx.h&gt;
+
+                    <link linkend="ThunarxPropertyPage-struct">ThunarxPropertyPage</link>;
+<link linkend="GtkWidget">GtkWidget</link>*          <link linkend="thunarx-property-page-new">thunarx_property_page_new</link>           (const <link linkend="gchar">gchar</link> *label);
+<link linkend="GtkWidget">GtkWidget</link>*          <link linkend="thunarx-property-page-new-with-label-widget">thunarx_property_page_new_with_label_widget</link>
+                                                        (<link linkend="GtkWidget">GtkWidget</link> *label_widget);
+const <link linkend="gchar">gchar</link>*        <link linkend="thunarx-property-page-get-label">thunarx_property_page_get_label</link>     (<link linkend="ThunarxPropertyPage">ThunarxPropertyPage</link> *property_page);
+<link linkend="void">void</link>                <link linkend="thunarx-property-page-set-label">thunarx_property_page_set_label</link>     (<link linkend="ThunarxPropertyPage">ThunarxPropertyPage</link> *property_page,
+                                                         const <link linkend="gchar">gchar</link> *label);
+<link linkend="GtkWidget">GtkWidget</link>*          <link linkend="thunarx-property-page-get-label-widget">thunarx_property_page_get_label_widget</link>
+                                                        (<link linkend="ThunarxPropertyPage">ThunarxPropertyPage</link> *property_page);
+<link linkend="void">void</link>                <link linkend="thunarx-property-page-set-label-widget">thunarx_property_page_set_label_widget</link>
+                                                        (<link linkend="ThunarxPropertyPage">ThunarxPropertyPage</link> *property_page,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *label_widget);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarxPropertyPage.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="GInitiallyUnowned">GInitiallyUnowned</link>
+         +----<link linkend="GtkObject">GtkObject</link>
+               +----<link linkend="GtkWidget">GtkWidget</link>
+                     +----<link linkend="GtkContainer">GtkContainer</link>
+                           +----<link linkend="GtkBin">GtkBin</link>
+                                 +----ThunarxPropertyPage
+</synopsis>
+
+</refsect1>
+
+
+
+<refsect1 id="ThunarxPropertyPage.implemented-interfaces" role="impl_interfaces">
+<title role="impl_interfaces.title">Implemented Interfaces</title>
+<para>
+ThunarxPropertyPage implements
+ <link linkend="AtkImplementorIface">AtkImplementorIface</link> and  <link linkend="GtkBuildable">GtkBuildable</link>.</para>
+
+</refsect1>
+
+
+<refsect1 id="ThunarxPropertyPage.properties" role="properties">
+<title role="properties.title">Properties</title>
+<synopsis>
+  &quot;<link linkend="ThunarxPropertyPage--label">label</link>&quot;                    <link linkend="gchar">gchar</link>*                : Read / Write
+  &quot;<link linkend="ThunarxPropertyPage--label-widget">label-widget</link>&quot;             <link linkend="GtkWidget">GtkWidget</link>*            : Read / Write
+</synopsis>
+</refsect1>
+
+
+
+<refsect1 id="ThunarxPropertyPage.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+  The class for pages that can be added to Thunar's file properties dialog
+  by extensions implementing the <link linkend="ThunarxPropertyPageProvider"><type>ThunarxPropertyPageProvider</type></link> interface. The
+  pages returned by extensions from <link linkend="thunarx-property-page-provider-get-pages"><function>thunarx_property_page_provider_get_pages()</function></link>
+  method are instances of this class or a derived class. Note that extensions
+  do not need to subclass <link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link>, but may also instantiate it
+  directly and add widgets to it, but I strongly suggest to create a subclass
+  as it usually leads to better modularization and thereby better maintainability
+  in the code.
+</para>
+
+<para>
+  To pick up the <link linkend="TagPage"><type>TagPage</type></link> example from the <link linkend="thunarx-property-page-provider-get-pages"><function>thunarx_property_page_provider_get_pages()</function></link>
+  description again, you'd create a new class <link linkend="TagPage"><type>TagPage</type></link>, that inherits <link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link>
+  (using the <link linkend="THUNARX-DEFINE-TYPE:CAPS"><type>THUNARX_DEFINE_TYPE</type></link> macro), which provides several user interface elements
+  in the property, and defines atleast one property named <literal>"file"</literal>, which
+  is the <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link> whose tags are displayed in the property page. For example, the
+  <filename>tag-page.h</filename> header file would look like this (this is really just
+  an example of the suggested way to implement property pages, you may of course choose
+  a different way):
+</para>
+
+<informalexample><programlisting>
+##ifndef __TAG_PAGE_H__
+##define __TAG_PAGE_H__
+
+##include &lt;thunarx/thunarx.h&gt;
+
+G_BEGIN_DECLS;
+
+typedef struct _TagPageClass TagPageClass;
+typedef struct _TagPage      TagPage;
+
+#define TAG_TYPE_PAGE            (tag_page_get_type ())
+#define TAG_PAGE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), TAG_TYPE_PAGE, TagPage))
+#define TAG_PAGE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), TAG_TYPE_PAGE, TagPageClass))
+#define TAG_IS_PAGE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), TAG_TYPE_PAGE))
+#define TAG_IS_PAGE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), TAG_TYPE_PAGE))
+#define TAG_PAGE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), TAG_TYPE_PAGE, TagPageClass))
+
+/* these two functions are implemented automatically by the THUNARX_DEFINE_TYPE macro */
+GType            tag_page_get_type      (void) G_GNUC_CONST G_GNUC_INTERNAL;
+void             tag_page_register_type (ThunarxProviderPlugin *plugin) G_GNUC_INTERNAL;
+
+GtkWidget       *tag_page_new           (ThunarxFileInfo       *file) G_GNUC_INTERNAL G_GNUC_MALLOC;
+
+ThunarxFileInfo *tag_page_get_file      (TagPage               *tag_page) G_GNUC_INTERNAL;
+void             tag_page_set_file      (TagPage               *tag_page,
+                                         ThunarxFileInfo       *file) G_GNUC_INTERNAL;
+
+G_END_DECLS;
+
+##endif /* !__TAG_PAGE_H__ */
+</programlisting></informalexample>
+
+<para>
+  And the <filename>tag-page.c</filename> source file could look like this:
+</para>
+
+<informalexample><programlisting>
+##include "tag-page.h"
+
+/* Property identifiers */
+enum
+{
+  PROP_0,
+  PROP_FILE,
+};
+
+static void tag_page_class_init   (TagPageClass *klass);
+static void tag_page_init         (TagPage          *tag_page);
+static void tag_page_finalize     (GObject          *object);
+static void tag_page_get_property (GObject          *object,
+                                   guint             prop_id,
+                                   GValue           *value,
+                                   GParamSpec       *pspec);
+static void tag_page_set_property (GObject          *object,
+                                   guint             prop_id,
+                                   const GValue     *value,
+                                   GParamSpec       *pspec);
+static void tag_page_file_changed (ThunarxFileInfo  *file,
+                                   TagPage          *tag_page);
+
+struct _TagPageClass
+{
+  ThunarxPropertyPageClass __parent__;
+};
+
+struct _TagPage
+{
+  ThunarxPropertyPage __parent__;
+  ThunarxFileInfo    *file;
+
+  /* your widgets... */
+};
+
+/* implements the tag_page_get_type() and tag_page_register_type() functions */
+THUNARX_DEFINE_TYPE (TagPage, tag_page, THUNARX_TYPE_PROPERTY_PAGE);
+
+static void
+tag_page_class_init (TagPageClass *klass)
+{
+  GObjectClass *gobject_class;
+
+  gobject_class = G_OBJECT_CLASS (klass);
+  gobject_class->finalize = tag_page_finalize;
+  gobject_class->get_property = tag_page_get_property;
+  gobject_class->set_property = tag_page_set_property;
+
+  /**
+   * TagPage:file:
+   *
+   * The <link linkend="ThunarxFileInfo">ThunarxFileInfo</link> displayed by this <link linkend="TagPage">TagPage</link>.
+   **/
+  g_object_class_install_property (gobject_class,
+                                   PROP_FILE,
+                                   g_param_spec_object ("file", "file", "file,
+                                                        THUNARX_TYPE_FILE_INFO,
+                                                        G_PARAM_READWRITE));
+}
+
+static void
+tag_page_init (TagPage *tag_page)
+{
+  GtkWidget *table;
+
+  /* you can of course also use a GtkVBox here, or whatever */
+  table = gtk_table_new (2, 2, FALSE);
+  gtk_container_add (GTK_CONTAINER (tag_page), table);
+  gtk_widget_show (table);
+
+  /* add your widgets to the table... */
+}
+
+static void
+tag_page_finalize (GObject *object)
+{
+  TagPage *tag_page = TAG_PAGE (object);
+
+  /* disconnect from the file */
+  tag_page_set_file (tag_page, NULL);
+
+  /* release any additional resources... */
+
+  (*G_OBJECT_CLASS (tag_page_parent_class)->finalize) (object);
+}
+
+static void
+tag_page_get_property (GObject    *object,
+                       guint       prop_id,
+                       GValue     *value,
+                       GParamSpec *pspec)
+{
+  TagPage *tag_page = TAG_PAGE (object);
+
+  switch (prop_id)
+    {
+    case PROP_FILE:
+      g_value_set_object (value, tag_page_get_file (tag_page));
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+    }
+}
+
+static void
+tag_page_set_property (GObject      *object,
+                       guint         prop_id,
+                       const GValue *value,
+                       GParamSpec   *pspec)
+{
+  TagPage *tag_page = TAG_PAGE (object);
+
+  switch (prop_id)
+    {
+    case PROP_FILE:
+      tag_page_set_file (tag_page, g_value_get_object (value));
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+    }
+}
+
+static void
+tag_page_file_changed (ThunarxFileInfo *file,
+                       TagPage         *tag_page)
+{
+  /* update your user interface elements in the tag_page
+   * to display the new state of the file...
+   */
+}
+
+GtkWidget*
+tag_page_new (ThunarxFileInfo *file)
+{
+  return g_object_new (TAG_TYPE_PAGE, "file", file, NULL);
+}
+
+ThunarxFileInfo*
+tag_page_get_file (TagPage *tag_page)
+{
+  g_return_val_if_fail (TAG_IS_PAGE (tag_page), NULL);
+  return tag_page->file;
+}
+
+void
+tag_page_set_file (TagPage         *tag_page,
+                   ThunarxFileInfo *file)
+{
+  g_return_if_fail (TAG_IS_PAGE (tag_page));
+  g_return_if_fail (file == NULL || THUNARX_IS_FILE_INFO (file));
+
+  if (tag_page->file != NULL)
+    {
+      g_signal_handlers_disconnect_by_func (tag_page->file, tag_page_file_changed, tag_page);
+      g_object_unref (G_OBJECT (tag_page->file));
+    }
+
+  tag_page->file = file;
+
+  if (file != NULL)
+    {
+      g_object_ref (file);
+      tag_page_file_changed (file, tag_page);
+      g_signal_connect (file, "changed", G_CALLBACK (tag_page_file_changed), tag_page);
+    }
+
+  g_object_notify (G_OBJECT (tag_page), "file");
+}
+</programlisting></informalexample>
+
+<para>
+  If this seems to be too complicated to you, just don't follow the suggestion. But keep in mind, that
+  while the above solution is a little longer than a less structured solution, it yields great flexbility
+  and maintainability. For example the <link linkend="TagPage"><type>TagPage</type></link> class described above, once filled with user interface
+  elements, may be used for a standalone MP3-Tag editor out of the box (i.e. as an action returned from
+  the <link linkend="thunarx-renamer-get-actions"><function>thunarx_renamer_get_actions()</function></link> method).
+</para>
+
+<para>
+  What is important to remember is that you should connect to the <literal>"changed"</literal> signal
+  of the <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link><!---->s you are displaying, and update the user interface whenever the file
+  changes.
+</para>
+</refsect1>
+
+<refsect1 id="ThunarxPropertyPage.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarxPropertyPage-struct" role="struct">
+<title>ThunarxPropertyPage</title>
+<indexterm zone="ThunarxPropertyPage-struct"><primary>ThunarxPropertyPage</primary></indexterm><programlisting>typedef struct _ThunarxPropertyPage ThunarxPropertyPage;</programlisting>
+<para>
+  Base instance type for property pages.
+</para></refsect2>
+<refsect2 id="thunarx-property-page-new" role="function">
+<title>thunarx_property_page_new ()</title>
+<indexterm zone="thunarx-property-page-new"><primary>thunarx_property_page_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          thunarx_property_page_new           (const <link linkend="gchar">gchar</link> *label);</programlisting>
+<para>
+Allocates a new <link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link> widget and sets its label to the
+specified <parameter>label</parameter>. If <parameter>label</parameter> is <link linkend="NULL:CAPS"><literal>NULL</literal></link>, the label is omitted.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>label</parameter>&nbsp;:</term>
+<listitem><simpara> the text to use as the label of the page.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the newly allocated <link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link>
+              widget.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-property-page-new-with-label-widget" role="function">
+<title>thunarx_property_page_new_with_label_widget ()</title>
+<indexterm zone="thunarx-property-page-new-with-label-widget"><primary>thunarx_property_page_new_with_label_widget</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          thunarx_property_page_new_with_label_widget
+                                                        (<link linkend="GtkWidget">GtkWidget</link> *label_widget);</programlisting>
+<para>
+Allocates a new <link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link> widget and sets its label to
+the specified <parameter>label_widget</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>label_widget</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link>, which should be used as label.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the newly allocated <link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link> widget.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-property-page-get-label" role="function">
+<title>thunarx_property_page_get_label ()</title>
+<indexterm zone="thunarx-property-page-get-label"><primary>thunarx_property_page_get_label</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunarx_property_page_get_label     (<link linkend="ThunarxPropertyPage">ThunarxPropertyPage</link> *property_page);</programlisting>
+<para>
+If the <parameter>property_page</parameter>'s label widget is a <link linkend="GtkLabel"><type>GtkLabel</type></link>, returns the text
+in the label widget (the <parameter>property_page</parameter> will have a <link linkend="GtkLabel"><type>GtkLabel</type></link> for the
+label widget if a non-<link linkend="NULL:CAPS"><literal>NULL</literal></link> argument was passed to <link linkend="thunarx-property-page-new"><function>thunarx_property_page_new()</function></link>).</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>property_page</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the text in the label or <link linkend="NULL:CAPS"><literal>NULL</literal></link> if there was no label widget or
+              the label widget was not a <link linkend="GtkLabel"><type>GtkLabel</type></link>. The returned string is
+              owned by the <parameter>property_page</parameter> and must not be modified or freed.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-property-page-set-label" role="function">
+<title>thunarx_property_page_set_label ()</title>
+<indexterm zone="thunarx-property-page-set-label"><primary>thunarx_property_page_set_label</primary></indexterm><programlisting><link linkend="void">void</link>                thunarx_property_page_set_label     (<link linkend="ThunarxPropertyPage">ThunarxPropertyPage</link> *property_page,
+                                                         const <link linkend="gchar">gchar</link> *label);</programlisting>
+<para>
+Sets the text of the label. If <parameter>label</parameter> is <link linkend="NULL:CAPS"><literal>NULL</literal></link>, the current label is
+removed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>property_page</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>label</parameter>&nbsp;:</term>
+<listitem><simpara> the text to use as the label of the page.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-property-page-get-label-widget" role="function">
+<title>thunarx_property_page_get_label_widget ()</title>
+<indexterm zone="thunarx-property-page-get-label-widget"><primary>thunarx_property_page_get_label_widget</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          thunarx_property_page_get_label_widget
+                                                        (<link linkend="ThunarxPropertyPage">ThunarxPropertyPage</link> *property_page);</programlisting>
+<para>
+Returns the label widget for the <parameter>property_page</parameter>. See
+<link linkend="thunarx-property-page-set-label-widget"><function>thunarx_property_page_set_label_widget()</function></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>property_page</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the label widget or <link linkend="NULL:CAPS"><literal>NULL</literal></link> if there is none.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-property-page-set-label-widget" role="function">
+<title>thunarx_property_page_set_label_widget ()</title>
+<indexterm zone="thunarx-property-page-set-label-widget"><primary>thunarx_property_page_set_label_widget</primary></indexterm><programlisting><link linkend="void">void</link>                thunarx_property_page_set_label_widget
+                                                        (<link linkend="ThunarxPropertyPage">ThunarxPropertyPage</link> *property_page,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *label_widget);</programlisting>
+<para>
+Sets the label widget for the <parameter>property_page</parameter>. This is the widget
+that will appear in the notebook header for the <parameter>property_page</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>property_page</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>label_widget</parameter>&nbsp;:</term>
+<listitem><simpara> the new label widget.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+<refsect1 id="ThunarxPropertyPage.property-details" role="property_details">
+<title role="property_details.title">Property Details</title>
+<refsect2 id="ThunarxPropertyPage--label"><title>The <literal>&quot;label&quot;</literal> property</title>
+<indexterm zone="ThunarxPropertyPage--label"><primary>ThunarxPropertyPage:label</primary></indexterm><programlisting>  &quot;label&quot;                    <link linkend="gchar">gchar</link>*                : Read / Write</programlisting>
+<para>Text of the page's label.</para><para>Default value: NULL</para>
+</refsect2>
+<refsect2 id="ThunarxPropertyPage--label-widget"><title>The <literal>&quot;label-widget&quot;</literal> property</title>
+<indexterm zone="ThunarxPropertyPage--label-widget"><primary>ThunarxPropertyPage:label-widget</primary></indexterm><programlisting>  &quot;label-widget&quot;             <link linkend="GtkWidget">GtkWidget</link>*            : Read / Write</programlisting>
+<para>A widget to display in place of the usual page label.</para></refsect2>
+
+</refsect1>
+
+
+
+<refsect1 id="ThunarxPropertyPage.see-also">
+<title>See Also</title>
+<para>
+  The description of the <link linkend="ThunarxPropertyPageProvider"><type>ThunarxPropertyPageProvider</type></link> interface.
+</para>
+</refsect1>
+
+</refentry>

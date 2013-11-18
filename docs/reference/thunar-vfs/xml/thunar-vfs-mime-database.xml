@@ -1,0 +1,411 @@
+<refentry id="ThunarVfsMimeDatabase">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarVfsMimeDatabase.top_of_page">ThunarVfsMimeDatabase</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNAR-VFS Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarVfsMimeDatabase</refname>
+<refpurpose>Provides access to the MIME database.</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="ThunarVfsMimeDatabase.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunar-vfs/thunar-vfs.h&gt;
+
+                    <link linkend="ThunarVfsMimeDatabase-struct">ThunarVfsMimeDatabase</link>;
+<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link>* <link linkend="thunar-vfs-mime-database-get-default">thunar_vfs_mime_database_get_default</link>
+                                                        (void);
+<link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link>*  <link linkend="thunar-vfs-mime-database-get-info">thunar_vfs_mime_database_get_info</link>   (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         const <link linkend="gchar">gchar</link> *mime_type);
+<link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link>*  <link linkend="thunar-vfs-mime-database-get-info-for-data">thunar_vfs_mime_database_get_info_for_data</link>
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         <link linkend="gconstpointer">gconstpointer</link> data,
+                                                         <link linkend="gsize">gsize</link> length);
+<link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link>*  <link linkend="thunar-vfs-mime-database-get-info-for-name">thunar_vfs_mime_database_get_info_for_name</link>
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         const <link linkend="gchar">gchar</link> *name);
+<link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link>*  <link linkend="thunar-vfs-mime-database-get-info-for-file">thunar_vfs_mime_database_get_info_for_file</link>
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         const <link linkend="gchar">gchar</link> *path,
+                                                         const <link linkend="gchar">gchar</link> *name);
+<link linkend="GList">GList</link>*              <link linkend="thunar-vfs-mime-database-get-infos-for-info">thunar_vfs_mime_database_get_infos_for_info</link>
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         <link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);
+<link linkend="GList">GList</link>*              <link linkend="thunar-vfs-mime-database-get-applications">thunar_vfs_mime_database_get_applications</link>
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         <link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);
+<link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link>* <link linkend="thunar-vfs-mime-database-get-default-application">thunar_vfs_mime_database_get_default_application</link>
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         <link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-mime-database-set-default-application">thunar_vfs_mime_database_set_default_application</link>
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         <link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info,
+                                                         <link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link> *application,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link>* <link linkend="thunar-vfs-mime-database-add-application">thunar_vfs_mime_database_add_application</link>
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         <link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info,
+                                                         const <link linkend="gchar">gchar</link> *name,
+                                                         const <link linkend="gchar">gchar</link> *exec,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-mime-database-remove-application">thunar_vfs_mime_database_remove_application</link>
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         <link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link> *application,
+                                                         <link linkend="GError">GError</link> **error);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarVfsMimeDatabase.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----ThunarVfsMimeDatabase
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+
+
+<refsect1 id="ThunarVfsMimeDatabase.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="ThunarVfsMimeDatabase.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarVfsMimeDatabase-struct" role="struct">
+<title>ThunarVfsMimeDatabase</title>
+<indexterm zone="ThunarVfsMimeDatabase-struct"><primary>ThunarVfsMimeDatabase</primary></indexterm><programlisting>typedef struct _ThunarVfsMimeDatabase ThunarVfsMimeDatabase;</programlisting>
+<para>
+  The <link linkend="ThunarVfsMimeDatabase-struct"><type>ThunarVfsMimeDatabase</type></link> contains private data only, and should
+  be accessed using the functions below.
+</para></refsect2>
+<refsect2 id="thunar-vfs-mime-database-get-default" role="function">
+<title>thunar_vfs_mime_database_get_default ()</title>
+<indexterm zone="thunar-vfs-mime-database-get-default"><primary>thunar_vfs_mime_database_get_default</primary></indexterm><programlisting><link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link>* thunar_vfs_mime_database_get_default
+                                                        (void);</programlisting>
+<para>
+Returns a reference on the shared <link linkend="ThunarVfsMimeDatabase"><type>ThunarVfsMimeDatabase</type></link>
+instance. The caller is responsible to call <link linkend="g-object-unref"><function>g_object_unref()</function></link>
+on the returned object when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the shared <link linkend="ThunarVfsMimeDatabase"><type>ThunarVfsMimeDatabase</type></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-database-get-info" role="function">
+<title>thunar_vfs_mime_database_get_info ()</title>
+<indexterm zone="thunar-vfs-mime-database-get-info"><primary>thunar_vfs_mime_database_get_info</primary></indexterm><programlisting><link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link>*  thunar_vfs_mime_database_get_info   (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         const <link linkend="gchar">gchar</link> *mime_type);</programlisting>
+<para>
+Determines the <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link> which corresponds to <parameter>mime_type</parameter>
+in database. The caller is responsible to call <link linkend="thunar-vfs-mime-info-unref"><function>thunar_vfs_mime_info_unref()</function></link>
+on the returned instance.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>database</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeDatabase"><type>ThunarVfsMimeDatabase</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>mime_type</parameter>&nbsp;:</term>
+<listitem><simpara> the string representation of the mime type.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link> corresponding to <parameter>mime_type</parameter> in <parameter>database</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-database-get-info-for-data" role="function">
+<title>thunar_vfs_mime_database_get_info_for_data ()</title>
+<indexterm zone="thunar-vfs-mime-database-get-info-for-data"><primary>thunar_vfs_mime_database_get_info_for_data</primary></indexterm><programlisting><link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link>*  thunar_vfs_mime_database_get_info_for_data
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         <link linkend="gconstpointer">gconstpointer</link> data,
+                                                         <link linkend="gsize">gsize</link> length);</programlisting>
+<para>
+Determines the <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link> for <parameter>data</parameter> in <parameter>database</parameter>. The
+caller is responsible to call <link linkend="thunar-vfs-mime-info-unref"><function>thunar_vfs_mime_info_unref()</function></link> on
+the returned instance.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>database</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeDatabase"><type>ThunarVfsMimeDatabase</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&nbsp;:</term>
+<listitem><simpara> the data to check.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>length</parameter>&nbsp;:</term>
+<listitem><simpara> the length of <parameter>data</parameter> in bytes.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link> determined for <parameter>data</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-database-get-info-for-name" role="function">
+<title>thunar_vfs_mime_database_get_info_for_name ()</title>
+<indexterm zone="thunar-vfs-mime-database-get-info-for-name"><primary>thunar_vfs_mime_database_get_info_for_name</primary></indexterm><programlisting><link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link>*  thunar_vfs_mime_database_get_info_for_name
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         const <link linkend="gchar">gchar</link> *name);</programlisting>
+<para>
+Determines the <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link> for the filename given
+in <parameter>name</parameter> from <parameter>database</parameter>. The caller is responsible to
+call <link linkend="thunar-vfs-mime-info-unref"><function>thunar_vfs_mime_info_unref()</function></link> on the returned instance.
+</para>
+<para>
+The <parameter>name</parameter> must be a valid filename in UTF-8 encoding
+and it may not contained any slashes!</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>database</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeDatabase"><type>ThunarVfsMimeDatabase</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara> a filename (must be valid UTF-8!).
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link> for <parameter>name</parameter> in <parameter>database</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-database-get-info-for-file" role="function">
+<title>thunar_vfs_mime_database_get_info_for_file ()</title>
+<indexterm zone="thunar-vfs-mime-database-get-info-for-file"><primary>thunar_vfs_mime_database_get_info_for_file</primary></indexterm><programlisting><link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link>*  thunar_vfs_mime_database_get_info_for_file
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         const <link linkend="gchar">gchar</link> *path,
+                                                         const <link linkend="gchar">gchar</link> *name);</programlisting>
+<para>
+Determines the <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link> for <parameter>path</parameter> in <parameter>database</parameter>. The
+caller is responsible to free the returned instance using
+<link linkend="thunar-vfs-mime-info-unref"><function>thunar_vfs_mime_info_unref()</function></link>.
+</para>
+<para>
+The <parameter>name</parameter> parameter is optional. If the caller already knows the
+basename of <parameter>path</parameter> in UTF-8 encoding, it should be specified here
+to speed up the lookup process.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>database</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeDatabase"><type>ThunarVfsMimeDatabase</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> the path to a file in the local filesystem (in the filesystem encoding).
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara> the basename of <parameter>path</parameter> in UTF-8 encoding or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link> for <parameter>path</parameter> in <parameter>database</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-database-get-infos-for-info" role="function">
+<title>thunar_vfs_mime_database_get_infos_for_info ()</title>
+<indexterm zone="thunar-vfs-mime-database-get-infos-for-info"><primary>thunar_vfs_mime_database_get_infos_for_info</primary></indexterm><programlisting><link linkend="GList">GList</link>*              thunar_vfs_mime_database_get_infos_for_info
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         <link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);</programlisting>
+<para>
+Returns a list of all <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link><!---->s,
+that are related to <parameter>info</parameter> in <parameter>database</parameter>. Currently
+this is the list of parent MIME-types for <parameter>info</parameter>,
+as defined in the Shared Mime Database.
+</para>
+<para>
+Note that the returned list will also include
+a reference <parameter>info</parameter> itself. In addition, this
+method also handles details specified by the
+Shared Mime Database Specification like the
+fact that every "text/xxxx" MIME-type is a
+subclass of "text/plain" and every MIME-type
+is a subclass of "application/octet-stream".
+</para>
+<para>
+The caller is responsible to free the returned
+list using #<link linkend="thunar-vfs-mime-info-list-free"><function>thunar_vfs_mime_info_list_free()</function></link>
+when done with it.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>database</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeDatabase"><type>ThunarVfsMimeDatabase</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the list of <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link><!---->s
+              related to <parameter>info</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-database-get-applications" role="function">
+<title>thunar_vfs_mime_database_get_applications ()</title>
+<indexterm zone="thunar-vfs-mime-database-get-applications"><primary>thunar_vfs_mime_database_get_applications</primary></indexterm><programlisting><link linkend="GList">GList</link>*              thunar_vfs_mime_database_get_applications
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         <link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);</programlisting>
+<para>
+Looks up all <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link><!---->s in <parameter>database</parameter>, which
+claim to be able to open files whose MIME-type is represented by
+<parameter>info</parameter>.
+</para>
+<para>
+The caller is responsible to free the returned list using
+something like:
+<informalexample><programlisting>
+g_list_foreach (list, (GFunc) g_object_unref, NULL);
+g_list_free (list);
+</programlisting></informalexample></para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>database</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeDatabase"><type>ThunarVfsMimeDatabase</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the list of <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link><!---->s, that
+              can handle <parameter>info</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-database-get-default-application" role="function">
+<title>thunar_vfs_mime_database_get_default_application ()</title>
+<indexterm zone="thunar-vfs-mime-database-get-default-application"><primary>thunar_vfs_mime_database_get_default_application</primary></indexterm><programlisting><link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link>* thunar_vfs_mime_database_get_default_application
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         <link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);</programlisting>
+<para>
+Returns the default <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link> to handle
+files of type <parameter>info</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link> if no default application
+is set for <parameter>info</parameter>.
+</para>
+<para>
+The caller is responsible to free the returned instance
+using <link linkend="g-object-unref"><function>g_object_unref()</function></link> when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>database</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeDatabase"><type>ThunarVfsMimeDatabase</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the default <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link> for
+              <parameter>info</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-database-set-default-application" role="function">
+<title>thunar_vfs_mime_database_set_default_application ()</title>
+<indexterm zone="thunar-vfs-mime-database-set-default-application"><primary>thunar_vfs_mime_database_set_default_application</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_mime_database_set_default_application
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         <link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info,
+                                                         <link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link> *application,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Sets <parameter>application</parameter> to be the default <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link> to open files
+of type <parameter>info</parameter> in <parameter>database</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>database</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeDatabase"><type>ThunarVfsMimeDatabase</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a valid <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link> for <parameter>database</parameter>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>application</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if the operation was successfull, else <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-database-add-application" role="function">
+<title>thunar_vfs_mime_database_add_application ()</title>
+<indexterm zone="thunar-vfs-mime-database-add-application"><primary>thunar_vfs_mime_database_add_application</primary></indexterm><programlisting><link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link>* thunar_vfs_mime_database_add_application
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         <link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info,
+                                                         const <link linkend="gchar">gchar</link> *name,
+                                                         const <link linkend="gchar">gchar</link> *exec,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Adds a new <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link> to the <parameter>database</parameter>, whose
+name is <parameter>name</parameter> and command is <parameter>exec</parameter>, and which can be used to
+open files of type <parameter>info</parameter>.
+</para>
+<para>
+The caller is responsible to free the returned object
+using <link linkend="g-object-unref"><function>g_object_unref()</function></link> when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>database</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeDatabase"><type>ThunarVfsMimeDatabase</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara> the name for the application.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>exec</parameter>&nbsp;:</term>
+<listitem><simpara> the command for the application.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the newly created <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link>
+              or <link linkend="NULL:CAPS"><literal>NULL</literal></link> on error.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-database-remove-application" role="function">
+<title>thunar_vfs_mime_database_remove_application ()</title>
+<indexterm zone="thunar-vfs-mime-database-remove-application"><primary>thunar_vfs_mime_database_remove_application</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_mime_database_remove_application
+                                                        (<link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link> *database,
+                                                         <link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link> *application,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Undoes the effect of <link linkend="thunar-vfs-mime-database-add-application"><function>thunar_vfs_mime_database_add_application()</function></link> by removing
+the user created <parameter>application</parameter> from the <parameter>database</parameter>. The <parameter>application</parameter> must be
+user created, and the removal will fail if its not (for example if its a
+system-wide installed application launcher). See the documentation for
+<link linkend="thunar-vfs-mime-application-is-usercreated"><function>thunar_vfs_mime_application_is_usercreated()</function></link> for details.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>database</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeDatabase"><type>ThunarVfsMimeDatabase</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>application</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if the removal was successfull, <link linkend="FALSE:CAPS"><literal>FALSE</literal></link> otherwise and
+              <parameter>error</parameter> will be set.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+<refsect1 id="ThunarVfsMimeDatabase.see-also">
+<title>See Also</title>
+<para>
+  <link
+  linkend="thunar-vfs-ThunarVfsMimeApplication">ThunarVfsMimeApplication</link>,
+  <link linkend="thunar-vfs-ThunarVfsMimeInfo">ThunarVfsMimeInfo</link>
+</para>
+</refsect1>
+
+</refentry>

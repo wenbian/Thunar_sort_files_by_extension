@@ -1,0 +1,122 @@
+<ui>
+
+  <!--
+    $Id: thunar-window-ui.xml 28500 2008-10-29 09:00:32Z kelnos $
+
+    Copyright (c) 2005-2006 Benedikt Meurer <benny@xfce.org>
+
+    Thunar main window user interface description file. Do NOT
+    simply edit this file if you don't know how the whole system
+    works, because it's too easy to break something.
+  -->
+
+  <menubar name="main-menu">
+    <menu action="file-menu">
+      <menuitem action="open-new-window" />
+      <placeholder name="placeholder-create-actions" />
+      <separator />
+      <placeholder name="placeholder-launcher" />
+      <separator />
+      <menu action="sendto-menu">
+        <placeholder name="placeholder-sendto-sidepane" />
+        <placeholder name="placeholder-sendto-actions" />
+      </menu>
+      <separator />
+      <placeholder name="placeholder-file-properties" />
+      <separator />
+      <menuitem action="empty-trash" />
+      <separator />
+      <menuitem action="close-all-windows" />
+      <menuitem action="close" />
+    </menu>
+
+    <menu action="edit-menu">
+      <placeholder name="placeholder-edit-clipboard-actions" />
+      <separator />
+      <placeholder name="placeholder-edit-select-actions" />
+      <separator />
+      <placeholder name="placeholder-edit-alter-actions" />
+      <separator />
+      <placeholder name="placeholder-custom-preferences" />
+      <menuitem action="preferences" />
+    </menu>
+
+    <menu action="view-menu">
+      <menuitem action="reload" />
+      <separator />
+      <menu action="view-location-selector-menu">
+        <menuitem action="view-location-selector-pathbar" />
+        <menuitem action="view-location-selector-toolbar" />
+      </menu>
+      <menu action="view-side-pane-menu">
+        <menuitem action="view-side-pane-shortcuts" />
+        <menuitem action="view-side-pane-tree" />
+      </menu>
+      <menuitem action="view-statusbar" />
+      <separator />
+      <menuitem action="show-hidden" />
+      <separator />
+      <placeholder name="placeholder-view-items-actions" />
+      <separator />
+      <menuitem action="zoom-in" />
+      <menuitem action="zoom-out" />
+      <menuitem action="zoom-reset" />
+      <separator />
+      <menuitem action="view-as-icons" />
+      <menuitem action="view-as-detailed-list" />
+      <menuitem action="view-as-compact-list" />
+    </menu>
+
+    <menu action="go-menu">
+      <menuitem action="open-parent" />
+      <menuitem action="back" />
+      <menuitem action="forward" />
+      <separator />
+      <menuitem action="open-home" />
+      <menuitem action="open-trash" />
+      <menuitem action="open-desktop" />
+      <menuitem action="open-documents" />
+      <menuitem action="open-downloads" />
+      <menuitem action="open-music" />
+      <menuitem action="open-pictures" />
+      <menuitem action="open-videos" />
+      <menuitem action="open-public" />
+      <menuitem action="open-templates" />
+      <separator />
+      <menuitem action="open-location" />
+    </menu>
+
+    <menu action="help-menu">
+      <menuitem action="contents" />
+      <menuitem action="about" />
+    </menu>
+  </menubar>
+
+  <popup action="file-context-menu">
+    <placeholder name="placeholder-launcher" />
+    <separator />
+    <menu action="sendto-menu">
+      <placeholder name="placeholder-sendto-sidepane" />
+      <placeholder name="placeholder-sendto-actions" />
+    </menu>
+    <separator />
+    <placeholder name="placeholder-clipboard-actions" />
+    <separator />
+    <placeholder name="placeholder-edit-actions" />
+    <separator />
+    <placeholder name="placeholder-custom-actions" />
+    <separator />
+    <placeholder name="placeholder-file-actions" />
+  </popup>
+
+  <toolbar name="location-toolbar">
+    <toolitem action="back" />
+    <toolitem action="forward" />
+    <toolitem action="open-parent" />
+    <toolitem action="reload" />
+    <separator />
+    <toolitem action="open-home" />
+  </toolbar>
+</ui>
+
+<!-- vi: set ts=2 sw=2 et ai nocindent syntax=xml: -->

@@ -1,0 +1,335 @@
+<refentry id="ThunarVfsJob">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarVfsJob.top_of_page">ThunarVfsJob</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNAR-VFS Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarVfsJob</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="ThunarVfsJob.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunar-vfs/thunar-vfs.h&gt;
+
+enum                <link linkend="ThunarVfsJobResponse">ThunarVfsJobResponse</link>;
+                    <link linkend="ThunarVfsJob-struct">ThunarVfsJob</link>;
+<link linkend="ThunarVfsJob">ThunarVfsJob</link>*       <link linkend="thunar-vfs-job-launch">thunar_vfs_job_launch</link>               (<link linkend="ThunarVfsJob">ThunarVfsJob</link> *job);
+<link linkend="void">void</link>                <link linkend="thunar-vfs-job-cancel">thunar_vfs_job_cancel</link>               (<link linkend="ThunarVfsJob">ThunarVfsJob</link> *job);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-job-cancelled">thunar_vfs_job_cancelled</link>            (const <link linkend="ThunarVfsJob">ThunarVfsJob</link> *job);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarVfsJob.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----ThunarVfsJob
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+<refsect1 id="ThunarVfsJob.signals" role="signal_proto">
+<title role="signal_proto.title">Signals</title>
+<synopsis>
+  &quot;<link linkend="ThunarVfsJob-ask">ask</link>&quot;                                            : Run Last / No Hooks
+  &quot;<link linkend="ThunarVfsJob-ask-replace">ask-replace</link>&quot;                                    : Run Last / No Hooks
+  &quot;<link linkend="ThunarVfsJob-error">error</link>&quot;                                          : No Hooks
+  &quot;<link linkend="ThunarVfsJob-finished">finished</link>&quot;                                       : No Hooks
+  &quot;<link linkend="ThunarVfsJob-info-message">info-message</link>&quot;                                   : No Hooks
+  &quot;<link linkend="ThunarVfsJob-infos-ready">infos-ready</link>&quot;                                    : No Hooks
+  &quot;<link linkend="ThunarVfsJob-new-files">new-files</link>&quot;                                      : No Hooks
+  &quot;<link linkend="ThunarVfsJob-percent">percent</link>&quot;                                        : No Hooks
+</synopsis>
+</refsect1>
+
+
+<refsect1 id="ThunarVfsJob.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="ThunarVfsJob.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarVfsJobResponse" role="enum">
+<title>enum ThunarVfsJobResponse</title>
+<indexterm zone="ThunarVfsJobResponse"><primary>ThunarVfsJobResponse</primary></indexterm><programlisting>typedef enum /*&lt; flags &gt;*/
+{
+  THUNAR_VFS_JOB_RESPONSE_YES     = 1 &lt;&lt; 0,
+  THUNAR_VFS_JOB_RESPONSE_YES_ALL = 1 &lt;&lt; 1,
+  THUNAR_VFS_JOB_RESPONSE_NO      = 1 &lt;&lt; 2,
+  THUNAR_VFS_JOB_RESPONSE_CANCEL  = 1 &lt;&lt; 3,
+  THUNAR_VFS_JOB_RESPONSE_NO_ALL  = 1 &lt;&lt; 4,
+  THUNAR_VFS_JOB_RESPONSE_RETRY   = 1 &lt;&lt; 5,
+} ThunarVfsJobResponse;
+</programlisting>
+<para>
+Possible responses for the ThunarVfsJob::ask signal.</para>
+<para>
+
+</para></refsect2>
+<refsect2 id="ThunarVfsJob-struct" role="struct">
+<title>ThunarVfsJob</title>
+<indexterm zone="ThunarVfsJob-struct"><primary>ThunarVfsJob</primary></indexterm><programlisting>typedef struct _ThunarVfsJob ThunarVfsJob;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="thunar-vfs-job-launch" role="function">
+<title>thunar_vfs_job_launch ()</title>
+<indexterm zone="thunar-vfs-job-launch"><primary>thunar_vfs_job_launch</primary></indexterm><programlisting><link linkend="ThunarVfsJob">ThunarVfsJob</link>*       thunar_vfs_job_launch               (<link linkend="ThunarVfsJob">ThunarVfsJob</link> *job);</programlisting>
+<para>
+This functions schedules <parameter>job</parameter> to be run as soon
+as possible, in a separate thread.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>job</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a pointer to <parameter>job</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-job-cancel" role="function">
+<title>thunar_vfs_job_cancel ()</title>
+<indexterm zone="thunar-vfs-job-cancel"><primary>thunar_vfs_job_cancel</primary></indexterm><programlisting><link linkend="void">void</link>                thunar_vfs_job_cancel               (<link linkend="ThunarVfsJob">ThunarVfsJob</link> *job);</programlisting>
+<para>
+Attempts to cancel the operation currently
+performed by <parameter>job</parameter>. Even after the cancellation
+of <parameter>job</parameter>, it may still emit signals, so you
+must take care of disconnecting all handlers
+appropriately if you cannot handle signals
+after cancellation.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>job</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-job-cancelled" role="function">
+<title>thunar_vfs_job_cancelled ()</title>
+<indexterm zone="thunar-vfs-job-cancelled"><primary>thunar_vfs_job_cancelled</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_job_cancelled            (const <link linkend="ThunarVfsJob">ThunarVfsJob</link> *job);</programlisting>
+<para>
+Checks whether <parameter>job</parameter> was previously cancelled
+by a call to <link linkend="thunar-vfs-job-cancel"><function>thunar_vfs_job_cancel()</function></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>job</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>job</parameter> is cancelled.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+<refsect1 id="ThunarVfsJob.signal-details" role="signals">
+<title role="signals.title">Signal Details</title>
+<refsect2 id="ThunarVfsJob-ask"><title>The <literal>&quot;ask&quot;</literal> signal</title>
+<indexterm zone="ThunarVfsJob-ask"><primary>ThunarVfsJob::ask</primary></indexterm><programlisting><link linkend="ThunarVfsJobResponse">ThunarVfsJobResponse</link>user_function                      (<link linkend="ThunarVfsJob">ThunarVfsJob</link>        *job,
+                                                        <link linkend="gchar">gchar</link>               *message,
+                                                        <link linkend="ThunarVfsJobResponse">ThunarVfsJobResponse</link> choices,
+                                                        <link linkend="gpointer">gpointer</link>             user_data)      : Run Last / No Hooks</programlisting>
+<para>
+The <parameter>message</parameter> is garantied to contain valid UTF-8.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>job</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>message</parameter>&nbsp;:</term>
+<listitem><simpara> question to display to the user.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>choices</parameter>&nbsp;:</term>
+<listitem><simpara> a combination of <link linkend="ThunarVfsInteractiveJobResponse"><type>ThunarVfsInteractiveJobResponse</type></link><!---->s.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the selected choice.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2><refsect2 id="ThunarVfsJob-ask-replace"><title>The <literal>&quot;ask-replace&quot;</literal> signal</title>
+<indexterm zone="ThunarVfsJob-ask-replace" role="0.8.1"><primary>ThunarVfsJob::ask-replace</primary></indexterm><programlisting><link linkend="ThunarVfsJobResponse">ThunarVfsJobResponse</link>user_function                      (<link linkend="ThunarVfsJob">ThunarVfsJob</link>  *job,
+                                                        <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *src_info,
+                                                        <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *dst_info,
+                                                        <link linkend="gpointer">gpointer</link>       user_data)      : Run Last / No Hooks</programlisting>
+<para>
+Emitted to ask the user whether the destination file should
+be replaced by the source file.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>job</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>src_info</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link> of the source file.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>dst_info</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link> of the destination file, that
+            may be replaced with the source file.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the selected choice.
+
+</simpara></listitem></varlistentry>
+</variablelist><para>Since  0.8.1
+</para></refsect2><refsect2 id="ThunarVfsJob-error"><title>The <literal>&quot;error&quot;</literal> signal</title>
+<indexterm zone="ThunarVfsJob-error"><primary>ThunarVfsJob::error</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="ThunarVfsJob">ThunarVfsJob</link> *job,
+                                                        <link linkend="gpointer">gpointer</link>      error,
+                                                        <link linkend="gpointer">gpointer</link>      user_data)      : No Hooks</programlisting>
+<para>
+Emitted whenever an error occurs while executing the
+<parameter>job</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>job</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GError"><type>GError</type></link> describing the cause.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2><refsect2 id="ThunarVfsJob-finished"><title>The <literal>&quot;finished&quot;</literal> signal</title>
+<indexterm zone="ThunarVfsJob-finished"><primary>ThunarVfsJob::finished</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="ThunarVfsJob">ThunarVfsJob</link> *job,
+                                                        <link linkend="gpointer">gpointer</link>      user_data)      : No Hooks</programlisting>
+<para>
+This signal will be automatically emitted once the
+<parameter>job</parameter> finishes its execution, no matter whether <parameter>job</parameter>
+completed successfully or was cancelled by the
+user.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>job</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2><refsect2 id="ThunarVfsJob-info-message"><title>The <literal>&quot;info-message&quot;</literal> signal</title>
+<indexterm zone="ThunarVfsJob-info-message"><primary>ThunarVfsJob::info-message</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="ThunarVfsJob">ThunarVfsJob</link> *job,
+                                                        <link linkend="gchar">gchar</link>        *message,
+                                                        <link linkend="gpointer">gpointer</link>      user_data)      : No Hooks</programlisting>
+<para>
+This signal is emitted to display information about the
+<parameter>job</parameter>. Examples of messages are "Preparing..." or
+"Cleaning up...".
+</para>
+<para>
+The <parameter>message</parameter> is garantied to contain valid UTF-8, so
+it can be displayed by <link linkend="GtkWidget"><type>GtkWidget</type></link><!---->s out of the
+box.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>job</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>message</parameter>&nbsp;:</term>
+<listitem><simpara> information to be displayed about <parameter>job</parameter>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2><refsect2 id="ThunarVfsJob-infos-ready"><title>The <literal>&quot;infos-ready&quot;</literal> signal</title>
+<indexterm zone="ThunarVfsJob-infos-ready"><primary>ThunarVfsJob::infos-ready</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            user_function                      (<link linkend="ThunarVfsJob">ThunarVfsJob</link> *job,
+                                                        <link linkend="gpointer">gpointer</link>      info_list,
+                                                        <link linkend="gpointer">gpointer</link>      user_data)      : No Hooks</programlisting>
+<para>
+This signal is used by <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link><!---->s returned by
+the <link linkend="thunar-vfs-listdir"><function>thunar_vfs_listdir()</function></link> function whenever there's a bunch
+of <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link><!---->s ready. This signal is garantied
+to be never emitted with an <parameter>info_list</parameter> parameter of <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</para>
+<para>
+To allow some further optimizations on the handler-side,
+the handler is allowed to take over ownership of the
+<parameter>info_list</parameter>, i.e. it can reuse the <parameter>infos</parameter> list and just replace
+the data elements with it's own objects based on the
+<link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link><!---->s contained within the <parameter>info_list</parameter> (and
+of course properly unreffing the previously contained infos).
+If a handler takes over ownership of <parameter>info_list</parameter> it must return
+<link linkend="TRUE:CAPS"><literal>TRUE</literal></link> here, and no further handlers will be run. Else, if
+the handler doesn't want to take over ownership of <parameter>infos</parameter>,
+it must return <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>, and other handlers will be run. Use
+this feature with care, and only if you can be sure that
+you are the only handler connected to this signal for a
+given job!</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>job</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>info_list</parameter>&nbsp;:</term>
+<listitem><simpara> a list of <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link><!---->s.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if the handler took over ownership of
+              <parameter>info_list</parameter>, else <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2><refsect2 id="ThunarVfsJob-new-files"><title>The <literal>&quot;new-files&quot;</literal> signal</title>
+<indexterm zone="ThunarVfsJob-new-files"><primary>ThunarVfsJob::new-files</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="ThunarVfsJob">ThunarVfsJob</link> *job,
+                                                        <link linkend="gpointer">gpointer</link>      path_list,
+                                                        <link linkend="gpointer">gpointer</link>      user_data)      : No Hooks</programlisting>
+<para>
+This signal is emitted by the <parameter>job</parameter> right before the <parameter>job</parameter> is terminated
+and informs the application about the list of created files in <parameter>path_list</parameter>.
+<parameter>path_list</parameter> contains only the toplevel path items, that were specified by
+the application on creation of the <parameter>job</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>job</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>path_list</parameter>&nbsp;:</term>
+<listitem><simpara> a list of <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link><!---->s that were created by <parameter>job</parameter>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2><refsect2 id="ThunarVfsJob-percent"><title>The <literal>&quot;percent&quot;</literal> signal</title>
+<indexterm zone="ThunarVfsJob-percent"><primary>ThunarVfsJob::percent</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="ThunarVfsJob">ThunarVfsJob</link> *job,
+                                                        <link linkend="gdouble">gdouble</link>       percent,
+                                                        <link linkend="gpointer">gpointer</link>      user_data)      : No Hooks</programlisting>
+<para>
+This signal is emitted to present the state
+of the overall progress.
+</para>
+<para>
+The <parameter>percent</parameter> value is garantied to be in the
+range 0.0 to 100.0.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>job</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>percent</parameter>&nbsp;:</term>
+<listitem><simpara> the percentage of completeness.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+</refsect1>
+
+
+
+</refentry>

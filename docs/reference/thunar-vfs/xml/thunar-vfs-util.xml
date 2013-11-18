@@ -1,0 +1,126 @@
+<refentry id="thunar-vfs-Utility-Functions">
+<refmeta>
+<refentrytitle role="top_of_page" id="thunar-vfs-Utility-Functions.top_of_page">Utility Functions</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNAR-VFS Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>Utility Functions</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="thunar-vfs-Utility-Functions.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunar-vfs/thunar-vfs.h&gt;
+
+<link linkend="gchar">gchar</link>*              <link linkend="thunar-vfs-canonicalize-filename">thunar_vfs_canonicalize_filename</link>    (const <link linkend="gchar">gchar</link> *filename);
+<link linkend="gchar">gchar</link>*              <link linkend="thunar-vfs-expand-filename">thunar_vfs_expand_filename</link>          (const <link linkend="gchar">gchar</link> *filename,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="gchar">gchar</link>*              <link linkend="thunar-vfs-humanize-size">thunar_vfs_humanize_size</link>            (<link linkend="ThunarVfsFileSize">ThunarVfsFileSize</link> size,
+                                                         <link linkend="gchar">gchar</link> *buffer,
+                                                         <link linkend="gsize">gsize</link> buflen);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="thunar-vfs-Utility-Functions.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="thunar-vfs-Utility-Functions.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="thunar-vfs-canonicalize-filename" role="function">
+<title>thunar_vfs_canonicalize_filename ()</title>
+<indexterm zone="thunar-vfs-canonicalize-filename"><primary>thunar_vfs_canonicalize_filename</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              thunar_vfs_canonicalize_filename    (const <link linkend="gchar">gchar</link> *filename);</programlisting>
+<para>
+Canonicalizes <parameter>filename</parameter> and returns a new path. The new path
+differs from <parameter>filename</parameter> in:
+</para>
+<para>
+<simplelist>
+<member>Multiple `/'s are collapsed to a single `/'.</member>
+<member>Leading `./'s and trailing `/.'s are removed.</member>
+<member>Non-leading `../'s and trailing `..'s are handled by removing portions of the path.</member>
+</simplelist>
+</para>
+<para>
+The caller is responsible to free the returned string using
+<link linkend="g-free"><function>g_free()</function></link> when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>filename</parameter>&nbsp;:</term>
+<listitem><simpara> a local filename.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the canonicalized path for <parameter>filename</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-expand-filename" role="function">
+<title>thunar_vfs_expand_filename ()</title>
+<indexterm zone="thunar-vfs-expand-filename"><primary>thunar_vfs_expand_filename</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              thunar_vfs_expand_filename          (const <link linkend="gchar">gchar</link> *filename,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Takes a user-typed <parameter>filename</parameter> and expands a tilde at the
+beginning of the <parameter>filename</parameter>.
+</para>
+<para>
+The caller is responsible to free the returned string using
+<link linkend="g-free"><function>g_free()</function></link> when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>filename</parameter>&nbsp;:</term>
+<listitem><simpara> a local filename.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the expanded <parameter>filename</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link> on error.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-humanize-size" role="function">
+<title>thunar_vfs_humanize_size ()</title>
+<indexterm zone="thunar-vfs-humanize-size"><primary>thunar_vfs_humanize_size</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              thunar_vfs_humanize_size            (<link linkend="ThunarVfsFileSize">ThunarVfsFileSize</link> size,
+                                                         <link linkend="gchar">gchar</link> *buffer,
+                                                         <link linkend="gsize">gsize</link> buflen);</programlisting>
+<para>
+The caller is responsible to free the returned string using <link linkend="g-free"><function>g_free()</function></link>
+if you pass <link linkend="NULL:CAPS"><literal>NULL</literal></link> for <parameter>buffer</parameter>. Else the returned string will be a
+pointer to <parameter>buffer</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>size</parameter>&nbsp;:</term>
+<listitem><simpara> size in bytes.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>buffer</parameter>&nbsp;:</term>
+<listitem><simpara> destination buffer or <link linkend="NULL:CAPS"><literal>NULL</literal></link> to dynamically allocate a buffer.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>buflen</parameter>&nbsp;:</term>
+<listitem><simpara> length of <parameter>buffer</parameter> in bytes.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a string containing a human readable description of <parameter>size</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

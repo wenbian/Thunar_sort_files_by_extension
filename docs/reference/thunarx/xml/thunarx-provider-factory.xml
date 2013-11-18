@@ -1,0 +1,125 @@
+<refentry id="ThunarxProviderFactory">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarxProviderFactory.top_of_page">ThunarxProviderFactory</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNARX Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarxProviderFactory</refname>
+<refpurpose>The provider factory support for applications</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+<refsect1 id="ThunarxProviderFactory.stability-level">
+<title>Stability Level</title>
+Stable, unless otherwise indicated
+</refsect1>
+
+<refsynopsisdiv id="ThunarxProviderFactory.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunarx/thunarx.h&gt;
+
+                    <link linkend="ThunarxProviderFactory-struct">ThunarxProviderFactory</link>;
+<link linkend="ThunarxProviderFactory">ThunarxProviderFactory</link>* <link linkend="thunarx-provider-factory-get-default">thunarx_provider_factory_get_default</link>
+                                                        (void);
+<link linkend="GList">GList</link>*              <link linkend="thunarx-provider-factory-list-providers">thunarx_provider_factory_list_providers</link>
+                                                        (<link linkend="ThunarxProviderFactory">ThunarxProviderFactory</link> *factory,
+                                                         <link linkend="GType">GType</link> type);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarxProviderFactory.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----ThunarxProviderFactory
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+
+
+<refsect1 id="ThunarxProviderFactory.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+  The <link linkend="ThunarxProviderFactory"><type>ThunarxProviderFactory</type></link> class allows applications to use Thunar plugins. It handles
+  the loading of the installed extensions and instantiates providers for the application.
+  For example, Thunar uses this class to access the installed extensions.
+</para>
+</refsect1>
+
+<refsect1 id="ThunarxProviderFactory.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarxProviderFactory-struct" role="struct">
+<title>ThunarxProviderFactory</title>
+<indexterm zone="ThunarxProviderFactory-struct"><primary>ThunarxProviderFactory</primary></indexterm><programlisting>typedef struct _ThunarxProviderFactory ThunarxProviderFactory;</programlisting>
+<para>
+  The <link linkend="ThunarxProviderFactory"><type>ThunarxProviderFactory</type></link> struct contains only private data. It should
+  only be accessed with the methods described below.
+</para></refsect2>
+<refsect2 id="thunarx-provider-factory-get-default" role="function">
+<title>thunarx_provider_factory_get_default ()</title>
+<indexterm zone="thunarx-provider-factory-get-default"><primary>thunarx_provider_factory_get_default</primary></indexterm><programlisting><link linkend="ThunarxProviderFactory">ThunarxProviderFactory</link>* thunarx_provider_factory_get_default
+                                                        (void);</programlisting>
+<para>
+Returns a reference to the default <link linkend="ThunarxProviderFactory"><type>ThunarxProviderFactory</type></link>
+instance.
+</para>
+<para>
+The caller is responsible to free the returned object
+using <link linkend="g-object-unref"><function>g_object_unref()</function></link> when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a reference to the default
+              <link linkend="ThunarxProviderFactory"><type>ThunarxProviderFactory</type></link> instance.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-provider-factory-list-providers" role="function">
+<title>thunarx_provider_factory_list_providers ()</title>
+<indexterm zone="thunarx-provider-factory-list-providers"><primary>thunarx_provider_factory_list_providers</primary></indexterm><programlisting><link linkend="GList">GList</link>*              thunarx_provider_factory_list_providers
+                                                        (<link linkend="ThunarxProviderFactory">ThunarxProviderFactory</link> *factory,
+                                                         <link linkend="GType">GType</link> type);</programlisting>
+<para>
+Returns all providers of the given <parameter>type</parameter>.
+</para>
+<para>
+The caller is responsible to release the returned
+list of providers using code like this:
+<informalexample><programlisting>
+g_list_foreach (list, (GFunc) g_object_unref, NULL);
+g_list_free (list);
+</programlisting></informalexample></para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>factory</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxProviderFactory"><type>ThunarxProviderFactory</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>type</parameter>&nbsp;:</term>
+<listitem><simpara> the provider <link linkend="GType"><type>GType</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the of providers for <parameter>type</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+<refsect1 id="ThunarxProviderFactory.see-also">
+<title>See Also</title>
+<para>
+  <link linkend="ThunarxMenuProvider"><type>ThunarxMenuProvider</type></link>, <link linkend="ThunarxPropertyPageProvider"><type>ThunarxPropertyPageProvider</type></link>, <link linkend="ThunarxRenamerProvider"><type>ThunarxRenamerProvider</type></link>
+</para>
+</refsect1>
+
+</refentry>

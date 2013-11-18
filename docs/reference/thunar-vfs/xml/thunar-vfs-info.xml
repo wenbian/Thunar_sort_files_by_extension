@@ -1,0 +1,467 @@
+<refentry id="thunar-vfs-ThunarVfsInfo">
+<refmeta>
+<refentrytitle role="top_of_page" id="thunar-vfs-ThunarVfsInfo.top_of_page">ThunarVfsInfo</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNAR-VFS Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarVfsInfo</refname>
+<refpurpose>Stores information about files.</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="thunar-vfs-ThunarVfsInfo.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunar-vfs/thunar-vfs.h&gt;
+
+                    <link linkend="ThunarVfsInfo">ThunarVfsInfo</link>;
+<link linkend="ThunarVfsInfo">ThunarVfsInfo</link>*      <link linkend="thunar-vfs-info-new-for-path">thunar_vfs_info_new_for_path</link>        (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="ThunarVfsInfo">ThunarVfsInfo</link>*      <link linkend="thunar-vfs-info-ref">thunar_vfs_info_ref</link>                 (<link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info);
+<link linkend="void">void</link>                <link linkend="thunar-vfs-info-unref">thunar_vfs_info_unref</link>               (<link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info);
+<link linkend="ThunarVfsInfo">ThunarVfsInfo</link>*      <link linkend="thunar-vfs-info-copy">thunar_vfs_info_copy</link>                (const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info);
+const <link linkend="gchar">gchar</link>*        <link linkend="thunar-vfs-info-get-custom-icon">thunar_vfs_info_get_custom_icon</link>     (const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-info-get-free-space">thunar_vfs_info_get_free_space</link>      (const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info,
+                                                         <link linkend="ThunarVfsFileSize">ThunarVfsFileSize</link> *free_space_return);
+<link linkend="gchar">gchar</link>*              <link linkend="thunar-vfs-info-get-metadata">thunar_vfs_info_get_metadata</link>        (const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info,
+                                                         <link linkend="ThunarVfsInfoMetadata">ThunarVfsInfoMetadata</link> metadata,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="gchar">gchar</link>*              <link linkend="thunar-vfs-info-read-link">thunar_vfs_info_read_link</link>           (const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-info-execute">thunar_vfs_info_execute</link>             (const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info,
+                                                         <link linkend="GdkScreen">GdkScreen</link> *screen,
+                                                         <link linkend="GList">GList</link> *path_list,
+                                                         const <link linkend="gchar">gchar</link> *working_directory,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-info-rename">thunar_vfs_info_rename</link>              (<link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info,
+                                                         const <link linkend="gchar">gchar</link> *name,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-info-matches">thunar_vfs_info_matches</link>             (const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *a,
+                                                         const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *b);
+<link linkend="void">void</link>                <link linkend="thunar-vfs-info-list-free">thunar_vfs_info_list_free</link>           (<link linkend="GList">GList</link> *info_list);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="thunar-vfs-ThunarVfsInfo.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="thunar-vfs-ThunarVfsInfo.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarVfsInfo" role="struct">
+<title>ThunarVfsInfo</title>
+<indexterm zone="ThunarVfsInfo"><primary>ThunarVfsInfo</primary></indexterm><programlisting>typedef struct {
+  /* File type */
+  ThunarVfsFileType type : 8;
+
+  /* File permissions and special mode flags */
+  ThunarVfsFileMode mode : 12;
+
+  /* File flags */
+  ThunarVfsFileFlags flags : 12;
+
+  /* Owner's user id */
+  ThunarVfsUserId uid;
+
+  /* Owner's group id */
+  ThunarVfsGroupId gid;
+
+  /* Size in bytes */
+  ThunarVfsFileSize size;
+
+  /* time of last access */
+  ThunarVfsFileTime atime;
+
+  /* time of last modification */
+  ThunarVfsFileTime mtime;
+
+  /* time of last status change */
+  ThunarVfsFileTime ctime;
+
+  /* device id */
+  ThunarVfsFileDevice device;
+
+  /* file's mime type */
+  ThunarVfsMimeInfo *mime_info;
+
+  /* file's absolute path */
+  ThunarVfsPath *path;
+
+  /* file's custom icon (path or themed icon name) */
+  gchar *custom_icon;
+
+  /* file's display name (UTF-8) */
+  gchar *display_name;
+} ThunarVfsInfo;
+</programlisting>
+<para>
+  The Thunar-VFS equivalent of <function>stat(2)</function>, extended with
+  advanced information like display name and mime type.
+</para><variablelist role="struct">
+<varlistentry>
+<term><link linkend="ThunarVfsFileType">ThunarVfsFileType</link>&nbsp;<structfield>type</structfield>&nbsp;:&nbsp;8;</term>
+<listitem><simpara>the file type.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="ThunarVfsFileMode">ThunarVfsFileMode</link>&nbsp;<structfield>mode</structfield>&nbsp;:&nbsp;12;</term>
+<listitem><simpara>the file permissions and special mode flags.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="ThunarVfsFileFlags">ThunarVfsFileFlags</link>&nbsp;<structfield>flags</structfield>&nbsp;:&nbsp;12;</term>
+<listitem><simpara>the file flags.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="ThunarVfsUserId">ThunarVfsUserId</link>&nbsp;<structfield>uid</structfield>;</term>
+<listitem><simpara>the owner's user id.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="ThunarVfsGroupId">ThunarVfsGroupId</link>&nbsp;<structfield>gid</structfield>;</term>
+<listitem><simpara>the owner's group id.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="ThunarVfsFileSize">ThunarVfsFileSize</link>&nbsp;<structfield>size</structfield>;</term>
+<listitem><simpara>the file size in bytes.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="ThunarVfsFileTime">ThunarVfsFileTime</link>&nbsp;<structfield>atime</structfield>;</term>
+<listitem><simpara>the time of last access.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="ThunarVfsFileTime">ThunarVfsFileTime</link>&nbsp;<structfield>mtime</structfield>;</term>
+<listitem><simpara>the time of last modification.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="ThunarVfsFileTime">ThunarVfsFileTime</link>&nbsp;<structfield>ctime</structfield>;</term>
+<listitem><simpara>the time of last status change.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="ThunarVfsFileDevice">ThunarVfsFileDevice</link>&nbsp;<structfield>device</structfield>;</term>
+<listitem><simpara>the file's device.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link>&nbsp;*<structfield>mime_info</structfield>;</term>
+<listitem><simpara>the file's mime type.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="ThunarVfsPath">ThunarVfsPath</link>&nbsp;*<structfield>path</structfield>;</term>
+<listitem><simpara>the file's path.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="gchar">gchar</link>&nbsp;*<structfield>custom_icon</structfield>;</term>
+<listitem><simpara>a custom icon name or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="gchar">gchar</link>&nbsp;*<structfield>display_name</structfield>;</term>
+<listitem><simpara>the file's display name (UTF-8).
+
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-info-new-for-path" role="function">
+<title>thunar_vfs_info_new_for_path ()</title>
+<indexterm zone="thunar-vfs-info-new-for-path"><primary>thunar_vfs_info_new_for_path</primary></indexterm><programlisting><link linkend="ThunarVfsInfo">ThunarVfsInfo</link>*      thunar_vfs_info_new_for_path        (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Queries the <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link> for the given <parameter>path</parameter>. Returns the
+<link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link> if the operation is successfull, else <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+In the latter case, <parameter>error</parameter> will be set to point to a <link linkend="GError"><type>GError</type></link>
+describing the cause of the failure.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link> of the file whose info should be queried.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link> for <parameter>path</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-info-ref" role="function">
+<title>thunar_vfs_info_ref ()</title>
+<indexterm zone="thunar-vfs-info-ref"><primary>thunar_vfs_info_ref</primary></indexterm><programlisting><link linkend="ThunarVfsInfo">ThunarVfsInfo</link>*      thunar_vfs_info_ref                 (<link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info);</programlisting>
+<para>
+Increments the reference count on <parameter>info</parameter> by 1 and
+returns a pointer to <parameter>info</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a pointer to <parameter>info</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-info-unref" role="function">
+<title>thunar_vfs_info_unref ()</title>
+<indexterm zone="thunar-vfs-info-unref"><primary>thunar_vfs_info_unref</primary></indexterm><programlisting><link linkend="void">void</link>                thunar_vfs_info_unref               (<link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info);</programlisting>
+<para>
+Decrements the reference count on <parameter>info</parameter> by 1 and if
+the reference count drops to zero as a result of this
+operation, the <parameter>info</parameter> will be freed completely.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-info-copy" role="function">
+<title>thunar_vfs_info_copy ()</title>
+<indexterm zone="thunar-vfs-info-copy"><primary>thunar_vfs_info_copy</primary></indexterm><programlisting><link linkend="ThunarVfsInfo">ThunarVfsInfo</link>*      thunar_vfs_info_copy                (const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info);</programlisting>
+<para>
+Takes a deep copy of the <parameter>info</parameter> and returns
+it.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a deep copy of <parameter>info</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-info-get-custom-icon" role="function">
+<title>thunar_vfs_info_get_custom_icon ()</title>
+<indexterm zone="thunar-vfs-info-get-custom-icon"><primary>thunar_vfs_info_get_custom_icon</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunar_vfs_info_get_custom_icon     (const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info);</programlisting>
+<para>
+Returns the custom icon for <parameter>info</parameter> if there's
+a custom icon, else <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</para>
+<para>
+The custom icon can be a themed icon name or
+an absolute path to an icon file in the local
+file system.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the custom icon for <parameter>info</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-info-get-free-space" role="function">
+<title>thunar_vfs_info_get_free_space ()</title>
+<indexterm zone="thunar-vfs-info-get-free-space"><primary>thunar_vfs_info_get_free_space</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_info_get_free_space      (const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info,
+                                                         <link linkend="ThunarVfsFileSize">ThunarVfsFileSize</link> *free_space_return);</programlisting>
+<para>
+Determines the amount of free space available on the volume on which the
+file to which <parameter>info</parameter> refers resides. If the system is able to determine the
+amount of free space, it will be placed into the location to which
+<parameter>free_space_return</parameter> points and <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> will be returned, else the function
+will return <link linkend="FALSE:CAPS"><literal>FALSE</literal></link> indicating that the system is unable to determine the
+amount of free space.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>free_space_return</parameter>&nbsp;:</term>
+<listitem><simpara> return location for the amount of free space or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if the amount of free space could be determined, else
+              <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>:
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-info-get-metadata" role="function">
+<title>thunar_vfs_info_get_metadata ()</title>
+<indexterm zone="thunar-vfs-info-get-metadata"><primary>thunar_vfs_info_get_metadata</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              thunar_vfs_info_get_metadata        (const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info,
+                                                         <link linkend="ThunarVfsInfoMetadata">ThunarVfsInfoMetadata</link> metadata,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Queries the <parameter>metadata</parameter> for <parameter>info</parameter> and returns a string with the
+data, or <link linkend="NULL:CAPS"><literal>NULL</literal></link> if either <parameter>metadata</parameter> is invalid for <parameter>info</parameter> or an
+error occurred while querying the <parameter>metadata</parameter>.
+</para>
+<para>
+The caller is responsible to free the returned string using
+<link linkend="g-free"><function>g_free()</function></link> when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>metadata</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="ThunarVfsInfoMetadata"><type>ThunarVfsInfoMetadata</type></link> you are interested in.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <parameter>metadata</parameter> for <parameter>info</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link> in case of an
+              error.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-info-read-link" role="function">
+<title>thunar_vfs_info_read_link ()</title>
+<indexterm zone="thunar-vfs-info-read-link"><primary>thunar_vfs_info_read_link</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              thunar_vfs_info_read_link           (const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Reads the contents of the symbolic link to which <parameter>info</parameter> refers to,
+like the POSIX <link linkend="readlink"><function>readlink()</function></link> function. The returned string is in the
+encoding used for filenames.
+</para>
+<para>
+The caller is responsible to free the returned string using <link linkend="g-free"><function>g_free()</function></link>
+when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a newly allocated string with the contents of the
+              symbolic link, or <link linkend="NULL:CAPS"><literal>NULL</literal></link> if an error occurred.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-info-execute" role="function">
+<title>thunar_vfs_info_execute ()</title>
+<indexterm zone="thunar-vfs-info-execute"><primary>thunar_vfs_info_execute</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_info_execute             (const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info,
+                                                         <link linkend="GdkScreen">GdkScreen</link> *screen,
+                                                         <link linkend="GList">GList</link> *path_list,
+                                                         const <link linkend="gchar">gchar</link> *working_directory,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Executes the file referred to by <parameter>info</parameter>, given <parameter>path_list</parameter> as parameters,
+on the specified <parameter>screen</parameter>. <parameter>info</parameter> may refer to either a regular,
+executable file, or a <filename>.desktop</filename> file, whose
+type is <literal>Application</literal>.
+</para>
+<para>
+If <parameter>working_directory</parameter> is <link linkend="NULL:CAPS"><literal>NULL</literal></link>, the directory of the first path in <parameter>path_list</parameter>
+will be used as working directory. If <parameter>path_list</parameter> is also <link linkend="NULL:CAPS"><literal>NULL</literal></link>, the directory
+of <parameter>info</parameter> will be used.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>screen</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GdkScreen"><type>GdkScreen</type></link> or <link linkend="NULL:CAPS"><literal>NULL</literal></link> to use the default <link linkend="GdkScreen"><type>GdkScreen</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>path_list</parameter>&nbsp;:</term>
+<listitem><simpara> the list of <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link><!---->s to give as parameters
+                     to the file referred to by <parameter>info</parameter> on execution.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>working_directory</parameter>&nbsp;:</term>
+<listitem><simpara> the working directory in which to execute <parameter>info</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> on success, else <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-info-rename" role="function">
+<title>thunar_vfs_info_rename ()</title>
+<indexterm zone="thunar-vfs-info-rename"><primary>thunar_vfs_info_rename</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_info_rename              (<link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info,
+                                                         const <link linkend="gchar">gchar</link> *name,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Tries to rename the file referred to by <parameter>info</parameter> to the
+new <parameter>name</parameter>.
+</para>
+<para>
+The rename operation is smart in that it checks the
+type of <parameter>info</parameter> first, and if <parameter>info</parameter> refers to a
+<filename>.desktop</filename> file, the file name
+won't be touched, but instead the <literal>Name</literal>
+field of the <filename>.desktop</filename> will be
+changed to <parameter>name</parameter>. Else, if <parameter>info</parameter> refers to a regular
+file or directory, the file will be given a new
+name.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara> the new file name in UTF-8 encoding.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> on success, else <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-info-matches" role="function">
+<title>thunar_vfs_info_matches ()</title>
+<indexterm zone="thunar-vfs-info-matches"><primary>thunar_vfs_info_matches</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_info_matches             (const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *a,
+                                                         const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *b);</programlisting>
+<para>
+Checks whether <parameter>a</parameter> and <parameter>b</parameter> refer to the same file
+and share the same properties.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>a</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>b</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>a</parameter> and <parameter>b</parameter> match.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-info-list-free" role="function">
+<title>thunar_vfs_info_list_free ()</title>
+<indexterm zone="thunar-vfs-info-list-free"><primary>thunar_vfs_info_list_free</primary></indexterm><programlisting><link linkend="void">void</link>                thunar_vfs_info_list_free           (<link linkend="GList">GList</link> *info_list);</programlisting>
+<para>
+Unrefs all <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link><!---->s in <parameter>info_list</parameter> and
+frees the list itself.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info_list</parameter>&nbsp;:</term>
+<listitem><simpara> a list of <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link><!---->s.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+<refsect1 id="thunar-vfs-ThunarVfsInfo.see-also">
+<title>See Also</title>
+<para>
+  <link linkend="thunar-vfs-Basic-Types">Basic Types</link>
+</para>
+</refsect1>
+
+</refentry>

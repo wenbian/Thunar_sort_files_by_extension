@@ -1,0 +1,153 @@
+<refentry id="ThunarVfsUserManager">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarVfsUserManager.top_of_page">ThunarVfsUserManager</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNAR-VFS Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarVfsUserManager</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="ThunarVfsUserManager.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunar-vfs/thunar-vfs.h&gt;
+
+                    <link linkend="ThunarVfsUserManager-struct">ThunarVfsUserManager</link>;
+<link linkend="ThunarVfsUserManager">ThunarVfsUserManager</link>* <link linkend="thunar-vfs-user-manager-get-default">thunar_vfs_user_manager_get_default</link>
+                                                        (void);
+<link linkend="ThunarVfsGroup">ThunarVfsGroup</link>*     <link linkend="thunar-vfs-user-manager-get-group-by-id">thunar_vfs_user_manager_get_group_by_id</link>
+                                                        (<link linkend="ThunarVfsUserManager">ThunarVfsUserManager</link> *manager,
+                                                         <link linkend="ThunarVfsGroupId">ThunarVfsGroupId</link> id);
+<link linkend="ThunarVfsUser">ThunarVfsUser</link>*      <link linkend="thunar-vfs-user-manager-get-user-by-id">thunar_vfs_user_manager_get_user_by_id</link>
+                                                        (<link linkend="ThunarVfsUserManager">ThunarVfsUserManager</link> *manager,
+                                                         <link linkend="ThunarVfsUserId">ThunarVfsUserId</link> id);
+<link linkend="GList">GList</link>*              <link linkend="thunar-vfs-user-manager-get-all-groups">thunar_vfs_user_manager_get_all_groups</link>
+                                                        (<link linkend="ThunarVfsUserManager">ThunarVfsUserManager</link> *manager);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarVfsUserManager.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----ThunarVfsUserManager
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+
+
+<refsect1 id="ThunarVfsUserManager.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="ThunarVfsUserManager.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarVfsUserManager-struct" role="struct">
+<title>ThunarVfsUserManager</title>
+<indexterm zone="ThunarVfsUserManager-struct"><primary>ThunarVfsUserManager</primary></indexterm><programlisting>typedef struct _ThunarVfsUserManager ThunarVfsUserManager;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="thunar-vfs-user-manager-get-default" role="function">
+<title>thunar_vfs_user_manager_get_default ()</title>
+<indexterm zone="thunar-vfs-user-manager-get-default"><primary>thunar_vfs_user_manager_get_default</primary></indexterm><programlisting><link linkend="ThunarVfsUserManager">ThunarVfsUserManager</link>* thunar_vfs_user_manager_get_default
+                                                        (void);</programlisting>
+<para>
+Returns the default <link linkend="ThunarVfsUserManager"><type>ThunarVfsUserManager</type></link> instance, which is shared
+by all modules using the user module. Call <link linkend="g-object-unref"><function>g_object_unref()</function></link> on the
+returned object when you are done with it.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the default <link linkend="ThunarVfsUserManager"><type>ThunarVfsUserManager</type></link> instance.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-user-manager-get-group-by-id" role="function">
+<title>thunar_vfs_user_manager_get_group_by_id ()</title>
+<indexterm zone="thunar-vfs-user-manager-get-group-by-id"><primary>thunar_vfs_user_manager_get_group_by_id</primary></indexterm><programlisting><link linkend="ThunarVfsGroup">ThunarVfsGroup</link>*     thunar_vfs_user_manager_get_group_by_id
+                                                        (<link linkend="ThunarVfsUserManager">ThunarVfsUserManager</link> *manager,
+                                                         <link linkend="ThunarVfsGroupId">ThunarVfsGroupId</link> id);</programlisting>
+<para>
+Looks up the <link linkend="ThunarVfsGroup"><type>ThunarVfsGroup</type></link> corresponding to <parameter>id</parameter> in <parameter>manager</parameter>. Returns
+<link linkend="NULL:CAPS"><literal>NULL</literal></link> if <parameter>manager</parameter> is unable to determine the <link linkend="ThunarVfsGroup"><type>ThunarVfsGroup</type></link> for <parameter>id</parameter>,
+else a pointer to the corresponding <link linkend="ThunarVfsGroup"><type>ThunarVfsGroup</type></link>. The caller is
+responsible for freeing the returned object using <link linkend="g-object-unref"><function>g_object_unref()</function></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>manager</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsUserManager"><type>ThunarVfsUserManager</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>id</parameter>&nbsp;:</term>
+<listitem><simpara> the group id.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="ThunarVfsGroup"><type>ThunarVfsGroup</type></link> corresponding to <parameter>id</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-user-manager-get-user-by-id" role="function">
+<title>thunar_vfs_user_manager_get_user_by_id ()</title>
+<indexterm zone="thunar-vfs-user-manager-get-user-by-id"><primary>thunar_vfs_user_manager_get_user_by_id</primary></indexterm><programlisting><link linkend="ThunarVfsUser">ThunarVfsUser</link>*      thunar_vfs_user_manager_get_user_by_id
+                                                        (<link linkend="ThunarVfsUserManager">ThunarVfsUserManager</link> *manager,
+                                                         <link linkend="ThunarVfsUserId">ThunarVfsUserId</link> id);</programlisting>
+<para>
+Looks up the <link linkend="ThunarVfsUser"><type>ThunarVfsUser</type></link> corresponding to <parameter>id</parameter> in <parameter>manager</parameter>. Returns
+<link linkend="NULL:CAPS"><literal>NULL</literal></link> if <parameter>manager</parameter> is unable to determine the <link linkend="ThunarVfsUser"><type>ThunarVfsUser</type></link> for <parameter>id</parameter>,
+else a pointer to the corresponding <link linkend="ThunarVfsUser"><type>ThunarVfsUser</type></link>. The caller is
+responsible for freeing the returned object using <link linkend="g-object-unref"><function>g_object_unref()</function></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>manager</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsUserManager"><type>ThunarVfsUserManager</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>id</parameter>&nbsp;:</term>
+<listitem><simpara> the user id.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="ThunarVfsUser"><type>ThunarVfsUser</type></link> corresponding to <parameter>id</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-user-manager-get-all-groups" role="function">
+<title>thunar_vfs_user_manager_get_all_groups ()</title>
+<indexterm zone="thunar-vfs-user-manager-get-all-groups"><primary>thunar_vfs_user_manager_get_all_groups</primary></indexterm><programlisting><link linkend="GList">GList</link>*              thunar_vfs_user_manager_get_all_groups
+                                                        (<link linkend="ThunarVfsUserManager">ThunarVfsUserManager</link> *manager);</programlisting>
+<para>
+Returns the list of all <link linkend="ThunarVfsGroup"><type>ThunarVfsGroup</type></link><!---->s in the system
+that are known to the <parameter>manager</parameter>.
+</para>
+<para>
+The caller is responsible to free the returned list using:
+<informalexample><programlisting>
+g_list_foreach (list, (GFunc) g_object_unref, NULL);
+g_list_free (list);
+</programlisting></informalexample></para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>manager</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsUserManager"><type>ThunarVfsUserManager</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the list of all groups known to the <parameter>manager</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

@@ -1,0 +1,250 @@
+<refentry id="ThunarVfsVolumeManager">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarVfsVolumeManager.top_of_page">ThunarVfsVolumeManager</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNAR-VFS Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarVfsVolumeManager</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="ThunarVfsVolumeManager.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunar-vfs/thunar-vfs.h&gt;
+
+                    <link linkend="ThunarVfsVolumeManager-struct">ThunarVfsVolumeManager</link>;
+<link linkend="ThunarVfsVolumeManager">ThunarVfsVolumeManager</link>* <link linkend="thunar-vfs-volume-manager-get-default">thunar_vfs_volume_manager_get_default</link>
+                                                        (void);
+<link linkend="ThunarVfsVolume">ThunarVfsVolume</link>*    <link linkend="thunar-vfs-volume-manager-get-volume-by-info">thunar_vfs_volume_manager_get_volume_by_info</link>
+                                                        (<link linkend="ThunarVfsVolumeManager">ThunarVfsVolumeManager</link> *manager,
+                                                         const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info);
+<link linkend="GList">GList</link>*              <link linkend="thunar-vfs-volume-manager-get-volumes">thunar_vfs_volume_manager_get_volumes</link>
+                                                        (<link linkend="ThunarVfsVolumeManager">ThunarVfsVolumeManager</link> *manager);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarVfsVolumeManager.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----ThunarVfsVolumeManager
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+<refsect1 id="ThunarVfsVolumeManager.signals" role="signal_proto">
+<title role="signal_proto.title">Signals</title>
+<synopsis>
+  &quot;<link linkend="ThunarVfsVolumeManager-volume-mounted">volume-mounted</link>&quot;                                 : Run Last
+  &quot;<link linkend="ThunarVfsVolumeManager-volume-pre-unmount">volume-pre-unmount</link>&quot;                             : Run Last
+  &quot;<link linkend="ThunarVfsVolumeManager-volume-unmounted">volume-unmounted</link>&quot;                               : Run Last
+  &quot;<link linkend="ThunarVfsVolumeManager-volumes-added">volumes-added</link>&quot;                                  : Run Last
+  &quot;<link linkend="ThunarVfsVolumeManager-volumes-removed">volumes-removed</link>&quot;                                : Run Last
+</synopsis>
+</refsect1>
+
+
+<refsect1 id="ThunarVfsVolumeManager.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="ThunarVfsVolumeManager.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarVfsVolumeManager-struct" role="struct">
+<title>ThunarVfsVolumeManager</title>
+<indexterm zone="ThunarVfsVolumeManager-struct"><primary>ThunarVfsVolumeManager</primary></indexterm><programlisting>typedef struct {
+  /* the list of available volumes */
+  GList  *volumes;
+} ThunarVfsVolumeManager;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="thunar-vfs-volume-manager-get-default" role="function">
+<title>thunar_vfs_volume_manager_get_default ()</title>
+<indexterm zone="thunar-vfs-volume-manager-get-default"><primary>thunar_vfs_volume_manager_get_default</primary></indexterm><programlisting><link linkend="ThunarVfsVolumeManager">ThunarVfsVolumeManager</link>* thunar_vfs_volume_manager_get_default
+                                                        (void);</programlisting>
+<para>
+Returns the default, shared <link linkend="ThunarVfsVolumeManager"><type>ThunarVfsVolumeManager</type></link> instance
+for this system. This function automatically determines, which
+implementation of <link linkend="ThunarVfsVolumeManager"><type>ThunarVfsVolumeManager</type></link> should be used for
+the target system and returns an instance of that class, which
+is shared among all modules using the volume manager facility.
+</para>
+<para>
+Call <link linkend="g-object-unref"><function>g_object_unref()</function></link> on the returned object when you are
+done with it.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the shared <link linkend="ThunarVfsVolumeManager"><type>ThunarVfsVolumeManager</type></link> instance.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-volume-manager-get-volume-by-info" role="function">
+<title>thunar_vfs_volume_manager_get_volume_by_info ()</title>
+<indexterm zone="thunar-vfs-volume-manager-get-volume-by-info"><primary>thunar_vfs_volume_manager_get_volume_by_info</primary></indexterm><programlisting><link linkend="ThunarVfsVolume">ThunarVfsVolume</link>*    thunar_vfs_volume_manager_get_volume_by_info
+                                                        (<link linkend="ThunarVfsVolumeManager">ThunarVfsVolumeManager</link> *manager,
+                                                         const <link linkend="ThunarVfsInfo">ThunarVfsInfo</link> *info);</programlisting>
+<para>
+Tries to lookup the <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> on which <parameter>info</parameter> is
+located. If <parameter>manager</parameter> doesn't know a <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link>
+for <parameter>info</parameter>, <link linkend="NULL:CAPS"><literal>NULL</literal></link> will be returned.
+</para>
+<para>
+The returned <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> (if any) is owned by
+<parameter>manager</parameter> and must not be freed by the caller.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>manager</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolumeManager"><type>ThunarVfsVolumeManager</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link>, on which <parameter>info</parameter> is
+              located or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-volume-manager-get-volumes" role="function">
+<title>thunar_vfs_volume_manager_get_volumes ()</title>
+<indexterm zone="thunar-vfs-volume-manager-get-volumes"><primary>thunar_vfs_volume_manager_get_volumes</primary></indexterm><programlisting><link linkend="GList">GList</link>*              thunar_vfs_volume_manager_get_volumes
+                                                        (<link linkend="ThunarVfsVolumeManager">ThunarVfsVolumeManager</link> *manager);</programlisting>
+<para>
+Returns all <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link><!---->s currently known for
+<parameter>manager</parameter>. The returned list is owned by <parameter>manager</parameter> and should
+therefore considered constant in the caller.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>manager</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolumeManager"><type>ThunarVfsVolumeManager</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the list of volumes known for <parameter>manager</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+<refsect1 id="ThunarVfsVolumeManager.signal-details" role="signals">
+<title role="signals.title">Signal Details</title>
+<refsect2 id="ThunarVfsVolumeManager-volume-mounted"><title>The <literal>&quot;volume-mounted&quot;</literal> signal</title>
+<indexterm zone="ThunarVfsVolumeManager-volume-mounted"><primary>ThunarVfsVolumeManager::volume-mounted</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="ThunarVfsVolumeManager">ThunarVfsVolumeManager</link> *manager,
+                                                        <link linkend="ThunarVfsVolume">ThunarVfsVolume</link>        *volume,
+                                                        <link linkend="gpointer">gpointer</link>                user_data)      : Run Last</programlisting>
+<para>
+Emitted by <parameter>manager</parameter> right after the <parameter>volume</parameter> was
+successfully mounted.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>manager</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolumeManager"><type>ThunarVfsVolumeManager</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2><refsect2 id="ThunarVfsVolumeManager-volume-pre-unmount"><title>The <literal>&quot;volume-pre-unmount&quot;</literal> signal</title>
+<indexterm zone="ThunarVfsVolumeManager-volume-pre-unmount"><primary>ThunarVfsVolumeManager::volume-pre-unmount</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="ThunarVfsVolumeManager">ThunarVfsVolumeManager</link> *manager,
+                                                        <link linkend="ThunarVfsVolume">ThunarVfsVolume</link>        *volume,
+                                                        <link linkend="gpointer">gpointer</link>                user_data)      : Run Last</programlisting>
+<para>
+Emitted by <parameter>manager</parameter> right before an attempt is
+made to unmount <parameter>volume</parameter>. Applications can connect
+to this signal to perform cleanups, like changing
+to a different folder if a folder on the <parameter>volume</parameter>
+is currently displayed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>manager</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolumeManager"><type>ThunarVfsVolumeManager</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2><refsect2 id="ThunarVfsVolumeManager-volume-unmounted"><title>The <literal>&quot;volume-unmounted&quot;</literal> signal</title>
+<indexterm zone="ThunarVfsVolumeManager-volume-unmounted"><primary>ThunarVfsVolumeManager::volume-unmounted</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="ThunarVfsVolumeManager">ThunarVfsVolumeManager</link> *manager,
+                                                        <link linkend="ThunarVfsVolume">ThunarVfsVolume</link>        *volume,
+                                                        <link linkend="gpointer">gpointer</link>                user_data)      : Run Last</programlisting>
+<para>
+Emitted by <parameter>manager</parameter> right after the <parameter>volume</parameter> was
+successfully unmounted.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>manager</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolumeManager"><type>ThunarVfsVolumeManager</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2><refsect2 id="ThunarVfsVolumeManager-volumes-added"><title>The <literal>&quot;volumes-added&quot;</literal> signal</title>
+<indexterm zone="ThunarVfsVolumeManager-volumes-added"><primary>ThunarVfsVolumeManager::volumes-added</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="ThunarVfsVolumeManager">ThunarVfsVolumeManager</link> *manager,
+                                                        <link linkend="gpointer">gpointer</link>                volumes,
+                                                        <link linkend="gpointer">gpointer</link>                user_data)      : Run Last</programlisting>
+<para>
+Invoked by the <parameter>manager</parameter> whenever new volumes have been
+attached to the system or the administrator changes the
+/etc/fstab file, or some other condition, depending
+on the manager implementation.
+</para>
+<para>
+Note that the implementation should not invoke this
+method when a volume is mounted, as that's a completely
+different condition!</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>manager</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolumeManager"><type>ThunarVfsVolumeManager</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>volumes</parameter>&nbsp;:</term>
+<listitem><simpara> a list of <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link><!---->s.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2><refsect2 id="ThunarVfsVolumeManager-volumes-removed"><title>The <literal>&quot;volumes-removed&quot;</literal> signal</title>
+<indexterm zone="ThunarVfsVolumeManager-volumes-removed"><primary>ThunarVfsVolumeManager::volumes-removed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="ThunarVfsVolumeManager">ThunarVfsVolumeManager</link> *manager,
+                                                        <link linkend="gpointer">gpointer</link>                volumes,
+                                                        <link linkend="gpointer">gpointer</link>                user_data)      : Run Last</programlisting>
+<para>
+Invoked whenever the <parameter>manager</parameter> notices that <parameter>volumes</parameter> have
+been detached from the system.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>manager</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolumeManager"><type>ThunarVfsVolumeManager</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>volumes</parameter>&nbsp;:</term>
+<listitem><simpara> a list of <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link><!---->s.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+</refsect1>
+
+
+
+</refentry>

@@ -1,0 +1,167 @@
+<refentry id="ThunarxPropertyPageProvider">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarxPropertyPageProvider.top_of_page">ThunarxPropertyPageProvider</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNARX Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarxPropertyPageProvider</refname>
+<refpurpose>The interface to extensions that provide additional property pages</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+<refsect1 id="ThunarxPropertyPageProvider.stability-level">
+<title>Stability Level</title>
+Stable, unless otherwise indicated
+</refsect1>
+
+<refsynopsisdiv id="ThunarxPropertyPageProvider.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunarx/thunarx.h&gt;
+
+                    <link linkend="ThunarxPropertyPageProvider-struct">ThunarxPropertyPageProvider</link>;
+                    <link linkend="ThunarxPropertyPageProviderIface">ThunarxPropertyPageProviderIface</link>;
+<link linkend="GList">GList</link>*              <link linkend="thunarx-property-page-provider-get-pages">thunarx_property_page_provider_get_pages</link>
+                                                        (<link linkend="ThunarxPropertyPageProvider">ThunarxPropertyPageProvider</link> *provider,
+                                                         <link linkend="GList">GList</link> *files);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarxPropertyPageProvider.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GInterface">GInterface</link>
+   +----ThunarxPropertyPageProvider
+</synopsis>
+
+</refsect1>
+
+<refsect1 id="ThunarxPropertyPageProvider.prerequisites" role="prerequisites">
+<title role="prerequisites.title">Prerequisites</title>
+<para>
+ThunarxPropertyPageProvider requires
+ <link linkend="GObject">GObject</link>.</para>
+
+</refsect1>
+
+
+
+
+
+
+
+<refsect1 id="ThunarxPropertyPageProvider.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+  To add a property page to the file properties dialog, extensions must implement the
+  <type>ThunarxPropertyPageProvider</type> interface. This interface has only one virtual
+  method, <function>get_pages</function>, that is passed a list of <link
+  linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link> objects and returns a list
+  of <link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link> objects.
+</para>
+</refsect1>
+
+<refsect1 id="ThunarxPropertyPageProvider.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarxPropertyPageProvider-struct" role="struct">
+<title>ThunarxPropertyPageProvider</title>
+<indexterm zone="ThunarxPropertyPageProvider-struct"><primary>ThunarxPropertyPageProvider</primary></indexterm><programlisting>typedef struct _ThunarxPropertyPageProvider ThunarxPropertyPageProvider;</programlisting>
+<para>
+  Property page provider type.
+</para></refsect2>
+<refsect2 id="ThunarxPropertyPageProviderIface" role="struct">
+<title>ThunarxPropertyPageProviderIface</title>
+<indexterm zone="ThunarxPropertyPageProviderIface"><primary>ThunarxPropertyPageProviderIface</primary></indexterm><programlisting>typedef struct {
+  GList *(*get_pages) (ThunarxPropertyPageProvider *provider,
+                       GList                       *files);
+} ThunarxPropertyPageProviderIface;
+</programlisting>
+<para>
+  Interface with virtual methods implemented by extensions that provide
+  additional pages for the file properties dialog.
+</para><variablelist role="struct">
+<varlistentry>
+<term><structfield>get_pages</structfield>&nbsp;()</term>
+<listitem><simpara>see <link linkend="thunarx-property-page-provider-get-pages"><function>thunarx_property_page_provider_get_pages()</function></link>.
+
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-property-page-provider-get-pages" role="function">
+<title>thunarx_property_page_provider_get_pages ()</title>
+<indexterm zone="thunarx-property-page-provider-get-pages"><primary>thunarx_property_page_provider_get_pages</primary></indexterm><programlisting><link linkend="GList">GList</link>*              thunarx_property_page_provider_get_pages
+                                                        (<link linkend="ThunarxPropertyPageProvider">ThunarxPropertyPageProvider</link> *provider,
+                                                         <link linkend="GList">GList</link> *files);</programlisting>
+<para>
+Returns the list of <link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link><!---->s that <parameter>provider</parameter> has to offer for <parameter>files</parameter>.
+</para>
+<para>
+Extensions that implement this interface, must first check whether they support all the
+<link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link><!---->s in the list of <parameter>files</parameter>. Most extensions will probably only support
+<link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link><!---->s for exactly one file of a certain type. For example an MP3-Tag
+editor property page will most probably support only a single audio file, and so the method
+would be implemented like this
+<informalexample><programlisting>
+GList*
+tag_provider_get_pages (ThunarxPropertyPageProvider *property_page_provider,
+                        GList                       *files)
+{
+  if (g_list_length (files) != 1)
+    return NULL;
+  else if (!thunarx_file_info_has_mime_type (files->data, "audio/mp3"))
+    return NULL;
+  else
+    return g_list_append (NULL, tag_page_new (files->data));
+}
+</programlisting></informalexample>
+where <link linkend="tag-page-new"><function>tag_page_new()</function></link> allocates a new <link linkend="TagPage"><type>TagPage</type></link> instance for a <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link> object
+passed to it. See the description of the <link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link> class for additional
+information about the <link linkend="TagPage"><type>TagPage</type></link> example class.
+</para>
+<para>
+As a special note, this method automatically takes a reference on the
+<parameter>provider</parameter> for every <link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link> object returned from the real implementation
+of this method in <parameter>provider</parameter>. This is to make sure that the extension stays
+in memory for atleast the time that the pages are used. If the extension
+wants to stay in memory for a longer time, it'll need to take care of this
+itself (e.g. by taking an additional reference on the <parameter>provider</parameter> itself,
+that's released at a later time).
+</para>
+<para>
+The caller is responsible to free the returned list of pages using
+something like this when no longer needed:
+<informalexample><programlisting>
+g_list_foreach (list, (GFunc) g_object_ref, NULL);
+g_list_foreach (list, (GFunc) gtk_object_sink, NULL);
+g_list_foreach (list, (GFunc) g_object_unref, NULL);
+g_list_free (list);
+</programlisting></informalexample></para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>provider</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxPropertyPageProvider"><type>ThunarxPropertyPageProvider</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>files</parameter>&nbsp;:</term>
+<listitem><simpara> the list of <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link><!---->s for which a properties dialog will be displayed.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the list of <link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link><!---->s that <parameter>provider</parameter> has to offer
+              for <parameter>files</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+<refsect1 id="ThunarxPropertyPageProvider.see-also">
+<title>See Also</title>
+<para>
+  The description of the <link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link> class.
+</para>
+</refsect1>
+
+</refentry>

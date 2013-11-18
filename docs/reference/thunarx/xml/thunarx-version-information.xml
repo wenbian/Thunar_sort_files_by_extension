@@ -1,0 +1,224 @@
+<refentry id="thunarx-Variables-and-functions-to-check-the-library-version">
+<refmeta>
+<refentrytitle role="top_of_page" id="thunarx-Variables-and-functions-to-check-the-library-version.top_of_page">Version information</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNARX Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>Version information</refname>
+<refpurpose>Variables and functions to check the library version</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+<refsect1 id="thunarx-Variables-and-functions-to-check-the-library-version.stability-level">
+<title>Stability Level</title>
+Stable, unless otherwise indicated
+</refsect1>
+
+<refsynopsisdiv id="thunarx-Variables-and-functions-to-check-the-library-version.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunarx/thunarx.h&gt;
+
+extern              const guint <link linkend="thunarx-major-version">thunarx_major_version</link>;
+extern              const guint <link linkend="thunarx-minor-version">thunarx_minor_version</link>;
+extern              const guint <link linkend="thunarx-micro-version">thunarx_micro_version</link>;
+const <link linkend="gchar">gchar</link>*        <link linkend="thunarx-check-version">thunarx_check_version</link>               (<link linkend="guint">guint</link> required_major,
+                                                         <link linkend="guint">guint</link> required_minor,
+                                                         <link linkend="guint">guint</link> required_micro);
+#define             <link linkend="THUNARX-MAJOR-VERSION:CAPS">THUNARX_MAJOR_VERSION</link>
+#define             <link linkend="THUNARX-MINOR-VERSION:CAPS">THUNARX_MINOR_VERSION</link>
+#define             <link linkend="THUNARX-MICRO-VERSION:CAPS">THUNARX_MICRO_VERSION</link>
+#define             <link linkend="THUNARX-CHECK-VERSION:CAPS">THUNARX_CHECK_VERSION</link>               (major,minor,micro)
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="thunarx-Variables-and-functions-to-check-the-library-version.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+  The Thunar Extension library provides version information,
+  which should be used by extensions.
+</para>
+</refsect1>
+
+<refsect1 id="thunarx-Variables-and-functions-to-check-the-library-version.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="thunarx-major-version" role="variable">
+<title>thunarx_major_version</title>
+<indexterm zone="thunarx-major-version"><primary>thunarx_major_version</primary></indexterm><programlisting>extern const guint thunarx_major_version;
+</programlisting>
+<para>
+The major version number of the
+<systemitem class="library">thunarx</systemitem> library (e.g. in
+version 0.5.1 this is 0).
+</para>
+<para>
+This variable is in the library, so represents the
+<systemitem class="library">thunarx</systemitem> library you have
+linked against. Contrast with the <link linkend="THUNARX-MAJOR-VERSION:CAPS"><type>THUNARX_MAJOR_VERSION</type></link> macro, which
+represents the major version of the
+<systemitem class="library">thunarx</systemitem> headers you have
+included.</para>
+<para>
+
+</para></refsect2>
+<refsect2 id="thunarx-minor-version" role="variable">
+<title>thunarx_minor_version</title>
+<indexterm zone="thunarx-minor-version"><primary>thunarx_minor_version</primary></indexterm><programlisting>extern const guint thunarx_minor_version;
+</programlisting>
+<para>
+The minor version number of the
+<systemitem class="library">thunarx</systemitem> library (e.g. in
+version 0.5.1 this is 5).
+</para>
+<para>
+This variable is in the library, so represents the
+<systemitem class="library">thunarx</systemitem> library you have
+linked against. Contrast with the <link linkend="THUNARX-MINOR-VERSION:CAPS"><type>THUNARX_MINOR_VERSION</type></link> macro, which
+represents the minor version of the
+<systemitem class="library">thunarx</systemitem> headers you have
+included.</para>
+<para>
+
+</para></refsect2>
+<refsect2 id="thunarx-micro-version" role="variable">
+<title>thunarx_micro_version</title>
+<indexterm zone="thunarx-micro-version"><primary>thunarx_micro_version</primary></indexterm><programlisting>extern const guint thunarx_micro_version;
+</programlisting>
+<para>
+The micro version number of the
+<systemitem class="library">thunarx</systemitem> library (e.g. in
+version 0.5.1 this is 1).
+</para>
+<para>
+This variable is in the library, so represents the
+<systemitem class="library">thunarx</systemitem> library you have
+linked against. Contrast with the <link linkend="THUNARX-MICRO-VERSION:CAPS"><type>THUNARX_MICRO_VERSION</type></link> macro, which
+represents the micro version of the
+<systemitem class="library">thunarx</systemitem> headers you have
+included.</para>
+<para>
+
+</para></refsect2>
+<refsect2 id="thunarx-check-version" role="function">
+<title>thunarx_check_version ()</title>
+<indexterm zone="thunarx-check-version"><primary>thunarx_check_version</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunarx_check_version               (<link linkend="guint">guint</link> required_major,
+                                                         <link linkend="guint">guint</link> required_minor,
+                                                         <link linkend="guint">guint</link> required_micro);</programlisting>
+<para>
+Checks that the <systemitem class="library">thunarx</systemitem> library
+in use is compatible with the given version. Generally you would pass in
+the constants <link linkend="THUNARX-MAJOR-VERSION:CAPS"><type>THUNARX_MAJOR_VERSION</type></link>, <link linkend="THUNARX-MINOR-VERSION:CAPS"><type>THUNARX_MINOR_VERSION</type></link> and
+<link linkend="THUNARX-VERSION-MICRO:CAPS"><type>THUNARX_VERSION_MICRO</type></link> as the three arguments to this function; that produces
+a check that the library in use is compatible with the version of
+<systemitem class="library">thunarx</systemitem> the extension was
+compiled against.
+</para>
+<para>
+This function should be called by extensions in the
+<link linkend="thunar-extension-initialize"><function>thunar_extension_initialize()</function></link> method to verify that the <systemitem
+class="library">thunarx</systemitem> library used by file manager is
+compatible with the version the extension was compiled with.
+</para>
+<para>
+<example>
+<title>Checking the runtime version of the Thunar Extension library</title>
+<programlisting>
+const gchar *mismatch;
+mismatch = thunarx_check_version (THUNARX_VERSION_MAJOR,
+                                  THUNARX_VERSION_MINOR,
+                                  THUNARX_VERSION_MICRO);
+if (G_UNLIKELY (mismatch != NULL))
+  g_error ("Version mismatch: %<!---->s", mismatch);
+</programlisting>
+</example></para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>required_major</parameter>&nbsp;:</term>
+<listitem><simpara> the required major version.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>required_minor</parameter>&nbsp;:</term>
+<listitem><simpara> the required minor version.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>required_micro</parameter>&nbsp;:</term>
+<listitem><simpara> the required micro version.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="NULL:CAPS"><literal>NULL</literal></link> if the library is compatible with the given version,
+              or a string describing the version mismatch. The returned
+              string is owned by the library and must not be freed or
+              modified by the caller.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="THUNARX-MAJOR-VERSION:CAPS" role="macro">
+<title>THUNARX_MAJOR_VERSION</title>
+<indexterm zone="THUNARX-MAJOR-VERSION:CAPS"><primary>THUNARX_MAJOR_VERSION</primary></indexterm><programlisting>#define THUNARX_MAJOR_VERSION 1
+</programlisting>
+<para>
+  The major version number of the <systemitem class="library">thunarx</systemitem> library.
+  Like thunarx_major_version, but from the headers used at application compile time, rather
+  than from the library linked against at application run time.
+</para></refsect2>
+<refsect2 id="THUNARX-MINOR-VERSION:CAPS" role="macro">
+<title>THUNARX_MINOR_VERSION</title>
+<indexterm zone="THUNARX-MINOR-VERSION:CAPS"><primary>THUNARX_MINOR_VERSION</primary></indexterm><programlisting>#define THUNARX_MINOR_VERSION 0
+</programlisting>
+<para>
+  The minor version number of the <systemitem class="library">thunarx</systemitem> library.
+  Like thunarx_minor_version, but from the headers used at application compile time, rather
+  than from the library linked against at application run time.
+</para></refsect2>
+<refsect2 id="THUNARX-MICRO-VERSION:CAPS" role="macro">
+<title>THUNARX_MICRO_VERSION</title>
+<indexterm zone="THUNARX-MICRO-VERSION:CAPS"><primary>THUNARX_MICRO_VERSION</primary></indexterm><programlisting>#define THUNARX_MICRO_VERSION 1
+</programlisting>
+<para>
+  The micro version number of the <systemitem class="library">thunarx</systemitem> library.
+  Like thunarx_micro_version, but from the headers used at application compile time, rather
+  than from the library linked against at application run time.
+</para></refsect2>
+<refsect2 id="THUNARX-CHECK-VERSION:CAPS" role="macro">
+<title>THUNARX_CHECK_VERSION()</title>
+<indexterm zone="THUNARX-CHECK-VERSION:CAPS"><primary>THUNARX_CHECK_VERSION</primary></indexterm><programlisting>#define             THUNARX_CHECK_VERSION(major,minor,micro)</programlisting>
+<para>
+  Checks the version of the <systemitem class="library">thunarx</systemitem> library. Returns
+  <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if the version of the <systemitem class="library">thunarx</systemitem> header files is
+  the same as or newer than the passed-in version.
+</para>
+
+<example>
+  <title>Checking the version of the Thunar Extension library</title>
+
+  <programlisting>
+if (!THUNARX_CHECK_VERSION (0, 1, 0))
+  g_error ("Thunarx version 0.1.0 or above is required");</programlisting>
+</example><variablelist role="params">
+<varlistentry><term><parameter>major</parameter>&nbsp;:</term>
+<listitem><simpara>the major version number.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>minor</parameter>&nbsp;:</term>
+<listitem><simpara>the minor version number
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>micro</parameter>&nbsp;:</term>
+<listitem><simpara>the micro version number.
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

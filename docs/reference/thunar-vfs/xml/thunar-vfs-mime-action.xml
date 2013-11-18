@@ -1,0 +1,71 @@
+<refentry id="ThunarVfsMimeAction">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarVfsMimeAction.top_of_page">ThunarVfsMimeAction</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNAR-VFS Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarVfsMimeAction</refname>
+<refpurpose>Registered desktop actions for <link linkend="ThunarVfsMimeApplication"><type>ThunarVfsMimeApplication</type></link><!---->s.</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="ThunarVfsMimeAction.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunar-vfs/thunar-vfs.h&gt;
+
+                    <link linkend="ThunarVfsMimeAction-struct">ThunarVfsMimeAction</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarVfsMimeAction.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="ThunarVfsMimeHandler">ThunarVfsMimeHandler</link>
+         +----ThunarVfsMimeAction
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+
+
+<refsect1 id="ThunarVfsMimeAction.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="ThunarVfsMimeAction.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarVfsMimeAction-struct" role="struct">
+<title>ThunarVfsMimeAction</title>
+<indexterm zone="ThunarVfsMimeAction-struct"><primary>ThunarVfsMimeAction</primary></indexterm><programlisting>typedef struct _ThunarVfsMimeAction ThunarVfsMimeAction;</programlisting>
+<para>
+  The <link linkend="ThunarVfsMimeAction-struct"><type>ThunarVfsMimeAction</type></link> contains private data only, and should
+  be accessed using the functions below.
+</para></refsect2>
+
+</refsect1>
+
+
+
+<refsect1 id="ThunarVfsMimeAction.see-also">
+<title>See Also</title>
+<para>
+  <link linkend="ThunarVfsMimeApplication">ThunarVfsMimeApplication</link>
+  and <link linked="ThunarVfsMimeHandler">ThunarVfsMimeHandler</link>
+</para>
+</refsect1>
+
+</refentry>

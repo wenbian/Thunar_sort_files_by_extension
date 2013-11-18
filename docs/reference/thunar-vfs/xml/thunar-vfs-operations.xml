@@ -1,0 +1,567 @@
+<refentry id="thunar-vfs-Operations">
+<refmeta>
+<refentrytitle role="top_of_page" id="thunar-vfs-Operations.top_of_page">Operations</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNAR-VFS Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>Operations</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="thunar-vfs-Operations.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunar-vfs/thunar-vfs.h&gt;
+
+<link linkend="ThunarVfsJob">ThunarVfsJob</link>*       <link linkend="thunar-vfs-listdir">thunar_vfs_listdir</link>                  (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="ThunarVfsJob">ThunarVfsJob</link>*       <link linkend="thunar-vfs-create-file">thunar_vfs_create_file</link>              (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="ThunarVfsJob">ThunarVfsJob</link>*       <link linkend="thunar-vfs-create-files">thunar_vfs_create_files</link>             (<link linkend="GList">GList</link> *path_list,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="ThunarVfsJob">ThunarVfsJob</link>*       <link linkend="thunar-vfs-copy-file">thunar_vfs_copy_file</link>                (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *source_path,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *target_path,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="ThunarVfsJob">ThunarVfsJob</link>*       <link linkend="thunar-vfs-copy-files">thunar_vfs_copy_files</link>               (<link linkend="GList">GList</link> *source_path_list,
+                                                         <link linkend="GList">GList</link> *target_path_list,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="ThunarVfsJob">ThunarVfsJob</link>*       <link linkend="thunar-vfs-link-file">thunar_vfs_link_file</link>                (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *source_path,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *target_path,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="ThunarVfsJob">ThunarVfsJob</link>*       <link linkend="thunar-vfs-link-files">thunar_vfs_link_files</link>               (<link linkend="GList">GList</link> *source_path_list,
+                                                         <link linkend="GList">GList</link> *target_path_list,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="ThunarVfsJob">ThunarVfsJob</link>*       <link linkend="thunar-vfs-move-file">thunar_vfs_move_file</link>                (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *source_path,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *target_path,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="ThunarVfsJob">ThunarVfsJob</link>*       <link linkend="thunar-vfs-move-files">thunar_vfs_move_files</link>               (<link linkend="GList">GList</link> *source_path_list,
+                                                         <link linkend="GList">GList</link> *target_path_list,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="ThunarVfsJob">ThunarVfsJob</link>*       <link linkend="thunar-vfs-unlink-file">thunar_vfs_unlink_file</link>              (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="ThunarVfsJob">ThunarVfsJob</link>*       <link linkend="thunar-vfs-unlink-files">thunar_vfs_unlink_files</link>             (<link linkend="GList">GList</link> *path_list,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="ThunarVfsJob">ThunarVfsJob</link>*       <link linkend="thunar-vfs-make-directory">thunar_vfs_make_directory</link>           (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="ThunarVfsJob">ThunarVfsJob</link>*       <link linkend="thunar-vfs-make-directories">thunar_vfs_make_directories</link>         (<link linkend="GList">GList</link> *path_list,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="ThunarVfsJob">ThunarVfsJob</link>*       <link linkend="thunar-vfs-change-mode">thunar_vfs_change_mode</link>              (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="ThunarVfsFileMode">ThunarVfsFileMode</link> dir_mask,
+                                                         <link linkend="ThunarVfsFileMode">ThunarVfsFileMode</link> dir_mode,
+                                                         <link linkend="ThunarVfsFileMode">ThunarVfsFileMode</link> file_mask,
+                                                         <link linkend="ThunarVfsFileMode">ThunarVfsFileMode</link> file_mode,
+                                                         <link linkend="gboolean">gboolean</link> recursive,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="ThunarVfsJob">ThunarVfsJob</link>*       <link linkend="thunar-vfs-change-group">thunar_vfs_change_group</link>             (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="ThunarVfsGroupId">ThunarVfsGroupId</link> gid,
+                                                         <link linkend="gboolean">gboolean</link> recursive,
+                                                         <link linkend="GError">GError</link> **error);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="thunar-vfs-Operations.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="thunar-vfs-Operations.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="thunar-vfs-listdir" role="function">
+<title>thunar_vfs_listdir ()</title>
+<indexterm zone="thunar-vfs-listdir"><primary>thunar_vfs_listdir</primary></indexterm><programlisting><link linkend="ThunarVfsJob">ThunarVfsJob</link>*       thunar_vfs_listdir                  (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Generates a <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link>, which lists the contents of the folder
+at the specified <parameter>path</parameter>. If the job could not be launched for
+some reason, <link linkend="NULL:CAPS"><literal>NULL</literal></link> will be returned and <parameter>error</parameter> will be set to
+point to a <link linkend="GError"><type>GError</type></link> describing the cause. Otherwise the newly
+allocated <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link> will be returned and the caller is
+responsible to call <link linkend="g-object-unref"><function>g_object_unref()</function></link>.
+</para>
+<para>
+Note, that the returned job is launched right away, so you
+don't need to call <link linkend="thunar-vfs-job-launch"><function>thunar_vfs_job_launch()</function></link> on it.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-create-file" role="function">
+<title>thunar_vfs_create_file ()</title>
+<indexterm zone="thunar-vfs-create-file"><primary>thunar_vfs_create_file</primary></indexterm><programlisting><link linkend="ThunarVfsJob">ThunarVfsJob</link>*       thunar_vfs_create_file              (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Allocates a new <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link>, which creates a new empty
+file at <parameter>path</parameter>.
+</para>
+<para>
+The caller is responsible to free the returned job using
+<link linkend="g-object-unref"><function>g_object_unref()</function></link> when no longer needed.
+</para>
+<para>
+Note that the returned job is launched right away, so you
+don't need to call <link linkend="thunar-vfs-job-launch"><function>thunar_vfs_job_launch()</function></link> on it.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-create-files" role="function">
+<title>thunar_vfs_create_files ()</title>
+<indexterm zone="thunar-vfs-create-files"><primary>thunar_vfs_create_files</primary></indexterm><programlisting><link linkend="ThunarVfsJob">ThunarVfsJob</link>*       thunar_vfs_create_files             (<link linkend="GList">GList</link> *path_list,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Allocates a new <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link> which creates new empty files for all
+<link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link><!---->s in <parameter>path_list</parameter>.
+</para>
+<para>
+The caller is responsible to free the returned job using
+<link linkend="g-object-unref"><function>g_object_unref()</function></link> when no longer needed.
+</para>
+<para>
+Note that the returned job is launched right away, so you
+don't need to call <link linkend="thunar-vfs-job-launch"><function>thunar_vfs_job_launch()</function></link> on it.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path_list</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-copy-file" role="function">
+<title>thunar_vfs_copy_file ()</title>
+<indexterm zone="thunar-vfs-copy-file"><primary>thunar_vfs_copy_file</primary></indexterm><programlisting><link linkend="ThunarVfsJob">ThunarVfsJob</link>*       thunar_vfs_copy_file                (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *source_path,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *target_path,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Allocates a new <link linkend="ThunarVfsTransferJob"><type>ThunarVfsTransferJob</type></link>, which copies the file
+from <parameter>source_path</parameter> to <parameter>target_path</parameter>. That said, the file or directory
+located at <parameter>source_path</parameter> will be placed at <parameter>target_path</parameter>, NOT INTO
+<parameter>target_path</parameter>.
+</para>
+<para>
+The caller is responsible to free the returned job using
+<link linkend="g-object-unref"><function>g_object_unref()</function></link> when no longer needed.
+</para>
+<para>
+Note, that the returned job is launched right away, so you don't
+need to call <link linkend="thunar-vfs-job-launch"><function>thunar_vfs_job_launch()</function></link> on it.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>source_path</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>target_path</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-copy-files" role="function">
+<title>thunar_vfs_copy_files ()</title>
+<indexterm zone="thunar-vfs-copy-files"><primary>thunar_vfs_copy_files</primary></indexterm><programlisting><link linkend="ThunarVfsJob">ThunarVfsJob</link>*       thunar_vfs_copy_files               (<link linkend="GList">GList</link> *source_path_list,
+                                                         <link linkend="GList">GList</link> *target_path_list,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Similar to <link linkend="thunar-vfs-copy-file"><function>thunar_vfs_copy_file()</function></link>, but takes a bunch of files. The
+<parameter>source_path_list</parameter> and <parameter>target_path_list</parameter> must be of the same size.
+</para>
+<para>
+Note, that the returned job is launched right away, so you don't
+need to call <link linkend="thunar-vfs-job-launch"><function>thunar_vfs_job_launch()</function></link> on it. The caller is responsible
+to free the returned object using <link linkend="g-object-unref"><function>g_object_unref()</function></link> when no longer
+needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>source_path_list</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>target_path_list</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-link-file" role="function">
+<title>thunar_vfs_link_file ()</title>
+<indexterm zone="thunar-vfs-link-file"><primary>thunar_vfs_link_file</primary></indexterm><programlisting><link linkend="ThunarVfsJob">ThunarVfsJob</link>*       thunar_vfs_link_file                (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *source_path,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *target_path,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Allocates a new <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link>, which creates a symbolic
+link from <parameter>source_path</parameter> to <parameter>target_path</parameter>.
+</para>
+<para>
+If <parameter>source_path</parameter> and <parameter>target_path</parameter> refer to the same file,
+a new unique target filename will be choosen automatically.
+</para>
+<para>
+The caller is responsible to free the returned job using
+<link linkend="g-object-unref"><function>g_object_unref()</function></link> when no longer needed.
+</para>
+<para>
+Note, that the returned job is launched right away, so you don't
+need to call <link linkend="thunar-vfs-job-launch"><function>thunar_vfs_job_launch()</function></link> on it.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>source_path</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>target_path</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-link-files" role="function">
+<title>thunar_vfs_link_files ()</title>
+<indexterm zone="thunar-vfs-link-files"><primary>thunar_vfs_link_files</primary></indexterm><programlisting><link linkend="ThunarVfsJob">ThunarVfsJob</link>*       thunar_vfs_link_files               (<link linkend="GList">GList</link> *source_path_list,
+                                                         <link linkend="GList">GList</link> *target_path_list,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Like <link linkend="thunar-vfs-link-file"><function>thunar_vfs_link_file()</function></link>, but works on path lists, rather than a single
+path. The length of the <parameter>source_path_list</parameter> and <parameter>target_path_list</parameter> must match,
+otherwise the behaviour is undefined, but its likely to crash the application.
+</para>
+<para>
+Right now links can only be created from local files to local files (with
+path scheme <link linkend="THUNAR-VFS-PATH-SCHEME-FILE:CAPS"><literal>THUNAR_VFS_PATH_SCHEME_FILE</literal></link>).
+</para>
+<para>
+The caller is responsible to free the returned job using
+<link linkend="g-object-unref"><function>g_object_unref()</function></link> when no longer needed.
+</para>
+<para>
+Note, that the returned job is launched right away, so you don't
+need to call <link linkend="thunar-vfs-job-launch"><function>thunar_vfs_job_launch()</function></link> on it.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>source_path_list</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>target_path_list</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-move-file" role="function">
+<title>thunar_vfs_move_file ()</title>
+<indexterm zone="thunar-vfs-move-file"><primary>thunar_vfs_move_file</primary></indexterm><programlisting><link linkend="ThunarVfsJob">ThunarVfsJob</link>*       thunar_vfs_move_file                (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *source_path,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *target_path,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Allocates a new <link linkend="ThunarVfsTransferJob"><type>ThunarVfsTransferJob</type></link>, which moves the file
+from <parameter>source_path</parameter> to <parameter>target_path</parameter>. That said, the file or directory
+located at <parameter>source_path</parameter> will be placed at <parameter>target_path</parameter>, NOT INTO
+<parameter>target_path</parameter>.
+</para>
+<para>
+The caller is responsible to free the returned job using
+<link linkend="g-object-unref"><function>g_object_unref()</function></link> when no longer needed.
+</para>
+<para>
+Note, that the returned job is launched right away, so you don't
+need to call <link linkend="thunar-vfs-job-launch"><function>thunar_vfs_job_launch()</function></link> on it.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>source_path</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>target_path</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-move-files" role="function">
+<title>thunar_vfs_move_files ()</title>
+<indexterm zone="thunar-vfs-move-files"><primary>thunar_vfs_move_files</primary></indexterm><programlisting><link linkend="ThunarVfsJob">ThunarVfsJob</link>*       thunar_vfs_move_files               (<link linkend="GList">GList</link> *source_path_list,
+                                                         <link linkend="GList">GList</link> *target_path_list,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Similar to <link linkend="thunar-vfs-move-file"><function>thunar_vfs_move_file()</function></link>, but takes a bunch of files. The
+<parameter>source_path_list</parameter> and <parameter>target_path_list</parameter> must be of the same size.
+</para>
+<para>
+Note, that the returned job is launched right away, so you don't
+need to call <link linkend="thunar-vfs-job-launch"><function>thunar_vfs_job_launch()</function></link> on it. The caller is responsible
+to free the returned object using <link linkend="g-object-unref"><function>g_object_unref()</function></link> when no longer
+needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>source_path_list</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>target_path_list</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-unlink-file" role="function">
+<title>thunar_vfs_unlink_file ()</title>
+<indexterm zone="thunar-vfs-unlink-file"><primary>thunar_vfs_unlink_file</primary></indexterm><programlisting><link linkend="ThunarVfsJob">ThunarVfsJob</link>*       thunar_vfs_unlink_file              (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Simple wrapper to <link linkend="thunar-vfs-unlink-files"><function>thunar_vfs_unlink_files()</function></link>, which takes
+only a single path.
+</para>
+<para>
+Note, that the returned job is launched right away, so you
+don't need to call <link linkend="thunar-vfs-job-launch"><function>thunar_vfs_job_launch()</function></link> on it. The caller
+is responsible to free the returned object using <link linkend="g-object-unref"><function>g_object_unref()</function></link>
+when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-unlink-files" role="function">
+<title>thunar_vfs_unlink_files ()</title>
+<indexterm zone="thunar-vfs-unlink-files"><primary>thunar_vfs_unlink_files</primary></indexterm><programlisting><link linkend="ThunarVfsJob">ThunarVfsJob</link>*       thunar_vfs_unlink_files             (<link linkend="GList">GList</link> *path_list,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Allocates a new <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link> which recursively unlinks all files
+referenced by the <parameter>path_list</parameter>. If the job cannot be launched for
+some reason, <link linkend="NULL:CAPS"><literal>NULL</literal></link> will be returned and <parameter>error</parameter> will be set to point to
+a <link linkend="GError"><type>GError</type></link> describing the cause. Else, the newly allocated <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link>
+will be returned, and the caller is responsible to free it using
+<link linkend="g-object-unref"><function>g_object_unref()</function></link> when no longer needed.
+</para>
+<para>
+Note, that the returned job is launched right away, so you
+don't need to call <link linkend="thunar-vfs-job-launch"><function>thunar_vfs_job_launch()</function></link> on it.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path_list</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-make-directory" role="function">
+<title>thunar_vfs_make_directory ()</title>
+<indexterm zone="thunar-vfs-make-directory"><primary>thunar_vfs_make_directory</primary></indexterm><programlisting><link linkend="ThunarVfsJob">ThunarVfsJob</link>*       thunar_vfs_make_directory           (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Simple wrapper for <link linkend="thunar-vfs-make-directories"><function>thunar_vfs_make_directories()</function></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-make-directories" role="function">
+<title>thunar_vfs_make_directories ()</title>
+<indexterm zone="thunar-vfs-make-directories"><primary>thunar_vfs_make_directories</primary></indexterm><programlisting><link linkend="ThunarVfsJob">ThunarVfsJob</link>*       thunar_vfs_make_directories         (<link linkend="GList">GList</link> *path_list,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Allocates a new <link linkend="ThunarVfsJob"><type>ThunarVfsJob</type></link> to create new directories at all
+<link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link><!---->s specified in <parameter>path_list</parameter>. Returns <link linkend="NULL:CAPS"><literal>NULL</literal></link> if
+the job could not be launched for some reason, and <parameter>error</parameter> will be
+set to point to a <link linkend="GError"><type>GError</type></link> describing the cause. Otherwise the
+job will be returned and the caller is responsible to free the
+returned object using <link linkend="g-object-unref"><function>g_object_unref()</function></link> when no longer needed.
+</para>
+<para>
+Note, that the returned job is launched right away, so you don't
+need to call <link linkend="thunar-vfs-job-launch"><function>thunar_vfs_job_launch()</function></link> on it.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path_list</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-change-mode" role="function">
+<title>thunar_vfs_change_mode ()</title>
+<indexterm zone="thunar-vfs-change-mode"><primary>thunar_vfs_change_mode</primary></indexterm><programlisting><link linkend="ThunarVfsJob">ThunarVfsJob</link>*       thunar_vfs_change_mode              (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="ThunarVfsFileMode">ThunarVfsFileMode</link> dir_mask,
+                                                         <link linkend="ThunarVfsFileMode">ThunarVfsFileMode</link> dir_mode,
+                                                         <link linkend="ThunarVfsFileMode">ThunarVfsFileMode</link> file_mask,
+                                                         <link linkend="ThunarVfsFileMode">ThunarVfsFileMode</link> file_mode,
+                                                         <link linkend="gboolean">gboolean</link> recursive,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+The caller is responsible to free the returned job using
+<link linkend="g-object-unref"><function>g_object_unref()</function></link> when no longer needed.
+</para>
+<para>
+Note, that the returned job is launched right away, so you don't
+need to call <link linkend="thunar-vfs-job-launch"><function>thunar_vfs_job_launch()</function></link> on it.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>dir_mask</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>dir_mode</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>file_mask</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>file_mode</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>recursive</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-change-group" role="function">
+<title>thunar_vfs_change_group ()</title>
+<indexterm zone="thunar-vfs-change-group"><primary>thunar_vfs_change_group</primary></indexterm><programlisting><link linkend="ThunarVfsJob">ThunarVfsJob</link>*       thunar_vfs_change_group             (<link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="ThunarVfsGroupId">ThunarVfsGroupId</link> gid,
+                                                         <link linkend="gboolean">gboolean</link> recursive,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+The caller is responsible to free the returned job using
+<link linkend="g-object-unref"><function>g_object_unref()</function></link> when no longer needed.
+</para>
+<para>
+Note, that the returned job is launched right away, so you don't
+need to call <link linkend="thunar-vfs-job-launch"><function>thunar_vfs_job_launch()</function></link> on it.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>gid</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>recursive</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

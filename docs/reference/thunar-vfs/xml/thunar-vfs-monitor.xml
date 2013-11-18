@@ -1,0 +1,294 @@
+<refentry id="ThunarVfsMonitor">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarVfsMonitor.top_of_page">ThunarVfsMonitor</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNAR-VFS Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarVfsMonitor</refname>
+<refpurpose>Portable file system monitoring class.</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="ThunarVfsMonitor.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunar-vfs/thunar-vfs.h&gt;
+
+                    <link linkend="ThunarVfsMonitor-struct">ThunarVfsMonitor</link>;
+enum                <link linkend="ThunarVfsMonitorEvent">ThunarVfsMonitorEvent</link>;
+                    <link linkend="ThunarVfsMonitorHandle">ThunarVfsMonitorHandle</link>;
+<link linkend="void">void</link>                (<link linkend="ThunarVfsMonitorCallback">*ThunarVfsMonitorCallback</link>)         (<link linkend="ThunarVfsMonitor">ThunarVfsMonitor</link> *monitor,
+                                                         <link linkend="ThunarVfsMonitorHandle">ThunarVfsMonitorHandle</link> *handle,
+                                                         <link linkend="ThunarVfsMonitorEvent">ThunarVfsMonitorEvent</link> event,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *handle_path,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *event_path,
+                                                         <link linkend="gpointer">gpointer</link> user_data);
+<link linkend="ThunarVfsMonitor">ThunarVfsMonitor</link>*   <link linkend="thunar-vfs-monitor-get-default">thunar_vfs_monitor_get_default</link>      (void);
+<link linkend="ThunarVfsMonitorHandle">ThunarVfsMonitorHandle</link>* <link linkend="thunar-vfs-monitor-add-directory">thunar_vfs_monitor_add_directory</link>
+                                                        (<link linkend="ThunarVfsMonitor">ThunarVfsMonitor</link> *monitor,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="ThunarVfsMonitorCallback">ThunarVfsMonitorCallback</link> callback,
+                                                         <link linkend="gpointer">gpointer</link> user_data);
+<link linkend="ThunarVfsMonitorHandle">ThunarVfsMonitorHandle</link>* <link linkend="thunar-vfs-monitor-add-file">thunar_vfs_monitor_add_file</link>     (<link linkend="ThunarVfsMonitor">ThunarVfsMonitor</link> *monitor,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="ThunarVfsMonitorCallback">ThunarVfsMonitorCallback</link> callback,
+                                                         <link linkend="gpointer">gpointer</link> user_data);
+<link linkend="void">void</link>                <link linkend="thunar-vfs-monitor-remove">thunar_vfs_monitor_remove</link>           (<link linkend="ThunarVfsMonitor">ThunarVfsMonitor</link> *monitor,
+                                                         <link linkend="ThunarVfsMonitorHandle">ThunarVfsMonitorHandle</link> *handle);
+<link linkend="void">void</link>                <link linkend="thunar-vfs-monitor-feed">thunar_vfs_monitor_feed</link>             (<link linkend="ThunarVfsMonitor">ThunarVfsMonitor</link> *monitor,
+                                                         <link linkend="ThunarVfsMonitorEvent">ThunarVfsMonitorEvent</link> event,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);
+<link linkend="void">void</link>                <link linkend="thunar-vfs-monitor-wait">thunar_vfs_monitor_wait</link>             (<link linkend="ThunarVfsMonitor">ThunarVfsMonitor</link> *monitor);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarVfsMonitor.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----ThunarVfsMonitor
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+
+
+<refsect1 id="ThunarVfsMonitor.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="ThunarVfsMonitor.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarVfsMonitor-struct" role="struct">
+<title>ThunarVfsMonitor</title>
+<indexterm zone="ThunarVfsMonitor-struct"><primary>ThunarVfsMonitor</primary></indexterm><programlisting>typedef struct _ThunarVfsMonitor ThunarVfsMonitor;</programlisting>
+<para>
+  The <link linkend="ThunarVfsMonitor-struct"><type>ThunarVfsMonitor</type></link> contains private data only, and should
+  be accessed using the functions below.
+</para></refsect2>
+<refsect2 id="ThunarVfsMonitorEvent" role="enum">
+<title>enum ThunarVfsMonitorEvent</title>
+<indexterm zone="ThunarVfsMonitorEvent"><primary>ThunarVfsMonitorEvent</primary></indexterm><programlisting>typedef enum
+{
+  THUNAR_VFS_MONITOR_EVENT_CHANGED,
+  THUNAR_VFS_MONITOR_EVENT_CREATED,
+  THUNAR_VFS_MONITOR_EVENT_DELETED,
+} ThunarVfsMonitorEvent;
+</programlisting>
+<para>
+Describes an event that occurred on a <link linkend="ThunarVfsMonitorHandle"><type>ThunarVfsMonitorHandle</type></link>.</para>
+<para>
+
+</para><variablelist role="enum">
+<varlistentry id="THUNAR-VFS-MONITOR-EVENT-CHANGED:CAPS" role="constant">
+<term><literal>THUNAR_VFS_MONITOR_EVENT_CHANGED</literal></term>
+<listitem><simpara> a file or directory was changed.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-MONITOR-EVENT-CREATED:CAPS" role="constant">
+<term><literal>THUNAR_VFS_MONITOR_EVENT_CREATED</literal></term>
+<listitem><simpara> a file or directory was created.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-MONITOR-EVENT-DELETED:CAPS" role="constant">
+<term><literal>THUNAR_VFS_MONITOR_EVENT_DELETED</literal></term>
+<listitem><simpara> a file or directory was deleted.
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="ThunarVfsMonitorHandle" role="struct">
+<title>ThunarVfsMonitorHandle</title>
+<indexterm zone="ThunarVfsMonitorHandle"><primary>ThunarVfsMonitorHandle</primary></indexterm><programlisting>typedef struct _ThunarVfsMonitorHandle ThunarVfsMonitorHandle;</programlisting>
+<para>
+A handle on a file system entity, which is currently watched
+by a <link linkend="ThunarVfsMonitor"><type>ThunarVfsMonitor</type></link>.</para>
+<para>
+
+</para></refsect2>
+<refsect2 id="ThunarVfsMonitorCallback" role="function">
+<title>ThunarVfsMonitorCallback ()</title>
+<indexterm zone="ThunarVfsMonitorCallback"><primary>ThunarVfsMonitorCallback</primary></indexterm><programlisting><link linkend="void">void</link>                (*ThunarVfsMonitorCallback)         (<link linkend="ThunarVfsMonitor">ThunarVfsMonitor</link> *monitor,
+                                                         <link linkend="ThunarVfsMonitorHandle">ThunarVfsMonitorHandle</link> *handle,
+                                                         <link linkend="ThunarVfsMonitorEvent">ThunarVfsMonitorEvent</link> event,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *handle_path,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *event_path,
+                                                         <link linkend="gpointer">gpointer</link> user_data);</programlisting>
+<para>
+The prototype for callback functions that will be called by a <link linkend="ThunarVfsMonitor"><type>ThunarVfsMonitor</type></link>
+whenever one of its associated <link linkend="ThunarVfsMonitorHandle"><type>ThunarVfsMonitorHandle</type></link><!---->s notice a
+change.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>monitor</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMonitor"><type>ThunarVfsMonitor</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>handle</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMonitorHandle"><type>ThunarVfsMonitorHandle</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>event</parameter>&nbsp;:</term>
+<listitem><simpara> the event that occurred.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>handle_path</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link> that was specified when registering the <parameter>handle</parameter>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>event_path</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link> on which the <parameter>event</parameter> occurred.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara> the user data that was specified when registering the <parameter>handle</parameter> with the <parameter>monitor</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-monitor-get-default" role="function">
+<title>thunar_vfs_monitor_get_default ()</title>
+<indexterm zone="thunar-vfs-monitor-get-default"><primary>thunar_vfs_monitor_get_default</primary></indexterm><programlisting><link linkend="ThunarVfsMonitor">ThunarVfsMonitor</link>*   thunar_vfs_monitor_get_default      (void);</programlisting>
+<para>
+Returns the shared <link linkend="ThunarVfsMonitor"><type>ThunarVfsMonitor</type></link> instance. The caller
+is responsible to call <link linkend="g-object-unref"><function>g_object_unref()</function></link> on the returned
+object when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a reference to the shared <link linkend="ThunarVfsMonitor"><type>ThunarVfsMonitor</type></link>
+              instance.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-monitor-add-directory" role="function">
+<title>thunar_vfs_monitor_add_directory ()</title>
+<indexterm zone="thunar-vfs-monitor-add-directory"><primary>thunar_vfs_monitor_add_directory</primary></indexterm><programlisting><link linkend="ThunarVfsMonitorHandle">ThunarVfsMonitorHandle</link>* thunar_vfs_monitor_add_directory
+                                                        (<link linkend="ThunarVfsMonitor">ThunarVfsMonitor</link> *monitor,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="ThunarVfsMonitorCallback">ThunarVfsMonitorCallback</link> callback,
+                                                         <link linkend="gpointer">gpointer</link> user_data);</programlisting>
+<para>
+Registers <parameter>path</parameter> as directory for <parameter>monitor</parameter>. <parameter>monitor</parameter> will invoke
+<parameter>callback</parameter> whenever it notices a change to the directory to which
+<parameter>path</parameter> refers or any of the files within the directory.
+</para>
+<para>
+The returned <link linkend="ThunarVfsMonitorHandle"><type>ThunarVfsMonitorHandle</type></link> can be used to remove
+the <parameter>path</parameter> from <parameter>monitor</parameter> using <link linkend="thunar-vfs-monitor-remove"><function>thunar_vfs_monitor_remove()</function></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>monitor</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMonitor"><type>ThunarVfsMonitor</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link> of the directory that should be watched.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>callback</parameter>&nbsp;:</term>
+<listitem><simpara> the callback function to invoke.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara> additional data to pass to <parameter>callback</parameter>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="ThunarVfsMonitorHandle"><type>ThunarVfsMonitorHandle</type></link> for the new watch.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-monitor-add-file" role="function">
+<title>thunar_vfs_monitor_add_file ()</title>
+<indexterm zone="thunar-vfs-monitor-add-file"><primary>thunar_vfs_monitor_add_file</primary></indexterm><programlisting><link linkend="ThunarVfsMonitorHandle">ThunarVfsMonitorHandle</link>* thunar_vfs_monitor_add_file     (<link linkend="ThunarVfsMonitor">ThunarVfsMonitor</link> *monitor,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path,
+                                                         <link linkend="ThunarVfsMonitorCallback">ThunarVfsMonitorCallback</link> callback,
+                                                         <link linkend="gpointer">gpointer</link> user_data);</programlisting>
+<para>
+Registers <parameter>path</parameter> as file with <parameter>monitor</parameter>. <parameter>monitor</parameter> will then invoke
+<parameter>callback</parameter> whenever it notices a change to the file to which
+<parameter>path</parameter> refers.
+</para>
+<para>
+The returned <link linkend="ThunarVfsMonitorHandle"><type>ThunarVfsMonitorHandle</type></link> can be used to remove
+the <parameter>path</parameter> from <parameter>monitor</parameter> using <link linkend="thunar-vfs-monitor-remove"><function>thunar_vfs_monitor_remove()</function></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>monitor</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMonitor"><type>ThunarVfsMonitor</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link> of the file that should be watched.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>callback</parameter>&nbsp;:</term>
+<listitem><simpara> the callback function to invoke.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara> additional data to pass to <parameter>callback</parameter>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="ThunarVfsMonitorHandle"><type>ThunarVfsMonitorHandle</type></link> for the new watch.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-monitor-remove" role="function">
+<title>thunar_vfs_monitor_remove ()</title>
+<indexterm zone="thunar-vfs-monitor-remove"><primary>thunar_vfs_monitor_remove</primary></indexterm><programlisting><link linkend="void">void</link>                thunar_vfs_monitor_remove           (<link linkend="ThunarVfsMonitor">ThunarVfsMonitor</link> *monitor,
+                                                         <link linkend="ThunarVfsMonitorHandle">ThunarVfsMonitorHandle</link> *handle);</programlisting>
+<para>
+Removes <parameter>handle</parameter> from <parameter>monitor</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>monitor</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMonitor"><type>ThunarVfsMonitor</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>handle</parameter>&nbsp;:</term>
+<listitem><simpara> a valid <link linkend="ThunarVfsMonitorHandle"><type>ThunarVfsMonitorHandle</type></link> for <parameter>monitor</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-monitor-feed" role="function">
+<title>thunar_vfs_monitor_feed ()</title>
+<indexterm zone="thunar-vfs-monitor-feed"><primary>thunar_vfs_monitor_feed</primary></indexterm><programlisting><link linkend="void">void</link>                thunar_vfs_monitor_feed             (<link linkend="ThunarVfsMonitor">ThunarVfsMonitor</link> *monitor,
+                                                         <link linkend="ThunarVfsMonitorEvent">ThunarVfsMonitorEvent</link> event,
+                                                         <link linkend="ThunarVfsPath">ThunarVfsPath</link> *path);</programlisting>
+<para>
+Explicitly injects the given <parameter>event</parameter> into <parameter>monitor</parameter><!---->s event
+processing logic.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>monitor</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMonitor"><type>ThunarVfsMonitor</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>event</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="ThunarVfsMonitorEvent"><type>ThunarVfsMonitorEvent</type></link> that should be emulated.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="ThunarVfsPath"><type>ThunarVfsPath</type></link> on which <parameter>event</parameter> took place.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-monitor-wait" role="function">
+<title>thunar_vfs_monitor_wait ()</title>
+<indexterm zone="thunar-vfs-monitor-wait"><primary>thunar_vfs_monitor_wait</primary></indexterm><programlisting><link linkend="void">void</link>                thunar_vfs_monitor_wait             (<link linkend="ThunarVfsMonitor">ThunarVfsMonitor</link> *monitor);</programlisting>
+<para>
+Suspends the execution of the current thread until the
+<parameter>monitor</parameter> has processed all currently pending events. The
+calling thread must own a reference on the <parameter>monitor</parameter>!
+</para>
+<para>
+This method should never be called from the main thread
+or you'll lock up your application!!</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>monitor</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMonitor"><type>ThunarVfsMonitor</type></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

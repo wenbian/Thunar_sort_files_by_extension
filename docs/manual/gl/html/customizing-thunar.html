@@ -1,0 +1,173 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Customizing Thunar</title><link rel="stylesheet" href="../thunar.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"><link rel="start" href="index.html" title="Xestor de ficheiros Thunar"><link rel="up" href="index.html" title="Xestor de ficheiros Thunar"><link rel="prev" href="preferences.html" title="File Management Preferences"><link rel="next" href="advanced-topics.html" title="Advanced Topics"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Customizing Thunar</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="preferences.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="advanced-topics.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="gl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="customizing-thunar"></a>Customizing Thunar</h2></div></div></div><p>
+      This chapter describes how to customize certain parts of the file manager to your own needs.
+    </p><div class="sect2" lang="gl"><div class="titlepage"><div><div><h3 class="title"><a name="sendto"></a>The "Send To" Menu</h3></div></div></div><p>
+        Thunar includes a <span class="guilabel"><strong>Send To</strong></span> menu, which provides possible targets where files and folders can
+        be sent to. To access the <span class="guilabel"><strong>Send To</strong></span> menu, choose
+        <span class="guimenu"><strong>File</strong></span> &#8594; <span class="guimenuitem"><strong>Send To</strong></span> from the main menu, or right-click
+        on a file or folder and choose <span class="guimenuitem"><strong>Send To</strong></span>.
+      </p><div class="screenshot"><div class="mediaobject"><img src="images/sendto-menu.png" alt='"Send To" Menu'></div></div><p>
+        By default, the <span class="guilabel"><strong>Send To</strong></span> menu includes an entry named <span class="guilabel"><strong>Desktop (Create Link)</strong></span> for all
+        files and folders, which simply creates a link on the desktop for each selected file. In addition, if the <span class="guilabel"><strong>Shortcuts
+        Pane</strong></span> is active, the menu also includes an entry called <span class="guilabel"><strong>Side Pane (Create Shortcut)</strong></span> for folders,
+        which allows users to add new shortcuts to the side pane. Following these entries, <strong class="application"><code>Thunar</code></strong> lists
+        the removable drives currently plugged into the computer. In the screenshot above, the <span class="guilabel"><strong>Floppy Drive</strong></span>
+        represents a possible target where files can be sent to. Note that the device is mounted automatically once selected from
+        the <span class="guilabel"><strong>Send To</strong></span> menu, so you do not need to manually mount it.
+      </p><p>
+        In addition <strong class="application"><code>Thunar</code></strong> also ships the <strong class="application"><code>thunar-sendto-email</code></strong> plugin, which adds
+        the entry <span class="guilabel"><strong>Mail Recipient</strong></span> to the menu, that opens the mail composer with the selected files attach to the
+        new email. If the selection contains atleast one folder, the selected items are added to a ZIP archive before attaching them
+        to the email. Otherwise, if the selection contains multiple files, or a single file, which is larger than 200Kib, the user will
+        be prompted whether to pack the files into a ZIP archive, and send the ZIP archive.
+      </p><p>
+        Like most other features of <strong class="application"><code>Thunar</code></strong>, the <span class="guilabel"><strong>Send to</strong></span> menu can be easily extended
+        by users and application developers with new targets, using standard <a class="ulink" href="http://freedesktop.org/wiki/Standards_2fdesktop_2dentry_2dspec" target="_top">desktop entry files</a>. These files must be
+        installed into one of the <code class="filename">$XDG_DATA_DIRS/Thunar/sendto/</code> folders (see the <a class="ulink" href="http://freedesktop.org/wiki/Standards_2fbasedir_2dspec" target="_top">XDG Base Directory Specification</a> for details about the
+        <code class="literal">$XDG_DATA_DIRS</code> variable).
+      </p><p>
+        The <code class="literal">MimeType</code> of the target <code class="filename">.desktop</code> specifies the types of files for which this action
+        should be available in the <span class="guilabel"><strong>Send To</strong></span> menu. For example, say you want to add entry for a <a class="ulink" href="http://flickr.com/" target="_top">Flickr</a> uploader tool, then this entry should only show up if the selection contains JPEG
+        files (other file formats are not supported by Flickr) and so you should add a line <code class="literal">MimeType=image/jpeg;</code>.
+        If you do not specify any <code class="literal">MimeType</code> your entry will show up for all file types.
+      </p><p>
+        A complete example using the <strong class="application"><code>postr</code></strong> application is shown below:
+      </p><pre class="programlisting">
+# postr.desktop - Integrate postr into
+#                 the "Send To" menu.
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+TryExec=postr
+Exec=postr %F
+Icon=postr
+Name=Flickr
+MimeType=image/jpeg;</pre><p>
+        If you install this file to <code class="filename">~/.local/share/Thunar/sendto/</code> (create the folder if
+        it does not exist yet), the <span class="guilabel"><strong>Send To</strong></span> menu for JPEG files will show the new entry <span class="guilabel"><strong>Flickr</strong></span>,
+        which can be used to upload JPEG images to Flickr.
+      </p><p>
+        The <a class="ulink" href="http://thunar.xfce.org/pwiki/documentation/sendto_menu" target="_top">Thunar Project Wiki</a> contains
+        additional examples of useful targets for the <span class="guilabel"><strong>Send To</strong></span> menu. Feel free to extend the Wiki page with
+        new examples.
+      </p></div><div class="sect2" lang="gl"><div class="titlepage"><div><div><h3 class="title"><a name="thumbnailers"></a>Thumbnailers</h3></div></div></div><p>
+        Thunar uses small utilities to create thumbnails of certain file types and displays the thumbnails as preview of the
+        file content. These small tools are called thumbnailers. Thunar ships with thumbnailers for image and font files, and
+        makes use of the installed thumbnailers from GNOME automatically if it was installed with support for <code class="literal">gconf</code>.
+        Users may however dynamically extend this basic functionality with thumbnailers for additional file types.
+      </p><p>
+        If you plan to write a custom thumbnailers, you need to start with a program that accepts atleast two command line parameters,
+        the input file, which is of the file type you plan to support and the output file, which is a PNG file that complies with the
+        format specified by the <a class="ulink" href="http://jens.triq.net/thumbnail-spec/creation.html#AEN139" target="_top">Thumbnail Management
+        Standard</a>. Additionally your program may also accept the desired size of the thumbnail, which is optional but highly
+        recommended. If you write the output file at an arbitrary image size, Thunar will afterwards scale it to the desired size,
+        which might produce a less optimal result than generating the thumbnail with the requested dimensions.
+      </p><p>
+        Once your utility to generate the thumbnails is done, you will need to register your thumbnailer, so Thunar is able to locate
+        and use it. Therefore all you need to do is to install a description file for the thumbnailer (a <code class="filename">.desktop</code> file)
+        in one of the <code class="filename">$XDG_DATA_DIRS/thumbnailers/</code> paths. For example, if you want to register the
+        thumbnailer for your user account only, you can install the file into the folder <code class="filename">~/.local/share/thumbnailers/</code>. The <code class="filename">.desktop</code> for thumbnailers has the following format.
+      </p><div class="sect3" lang="gl"><div class="titlepage"><div><div><h4 class="title"><a name="thumbnailer-desktop-file-format"></a>Thumbnailer Description File Format</h4></div></div></div><p>
+          Thumbnailer description files utilize the <a class="ulink" href="http://standards.freedesktop.org/desktop-entry-spec/latest/" target="_top">Desktop
+          Entry Format</a> with a special <code class="literal">Type</code> of <code class="literal">X-Thumbnailer</code> and special field
+          <code class="literal">X-Thumbnailer-Exec</code> with new field codes. Basically, a thumbnailer description file has the following format.
+        </p><pre class="programlisting">
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=X-Thumbnailer
+Name=Your Thumbnailer
+MimeType=your-supported/mime-type;
+X-Thumbnailer-Exec=your-thumbnailer %i %o %s</pre><p>
+          The <code class="literal">Version</code> and <code class="literal">Encoding</code> are mandated by the Desktop Entry Specification, just use the values shown
+          in the example above. The <code class="literal">Type</code> field must have the special value <code class="literal">X-Thumbnailer</code>, otherwise your
+          thumbnailer will not be recognized. The <code class="literal">Name</code> value describes your thumbnailer.
+        </p><p>
+          The <code class="literal">X-Thumbnailer-Exec</code> field contains the command to run your thumbnailer, and supports certain field codes that will
+          be substituted when the thumbnailer is run. Recognized field codes are as follows:
+        </p><div class="variablelist"><dl><dt><span class="term"><code class="varname">%i</code></span></dt><dd>
+              The local path to the input file for which to create a thumbnail. May be either a path relative to the directory from which the
+              thumbnailer was invoked or an absolute path.
+            </dd><dt><span class="term"><code class="varname">%o</code></span></dt><dd>
+              The local path to the output file where to store the generated thumbnail. The output file must be written as valid PNG file according
+              to the thumbnail standard (see above). Note that the path may not end with <code class="literal">.png</code>, which matters if you invoke certain
+              third party tools.
+            </dd><dt><span class="term"><code class="varname">%s</code></span></dt><dd>
+              The desired size of the generated thumbnail in pixels. This parameter is optional.
+            </dd><dt><span class="term"><code class="varname">%u</code></span></dt><dd>
+              Similar to <code class="literal">%i</code>, but substituted with the URI of the file, rather than the path. This was added for compatibility with
+              GNOME.
+            </dd><dt><span class="term"><code class="varname">%%</code></span></dt><dd>
+              Will be substituted with a single <code class="literal">%</code>.
+            </dd></dl></div><p>
+          You need to include atleast <code class="literal">%o</code> and <code class="literal">%i</code> or <code class="literal">%u</code>, otherwise your thumbnailer will
+          be useless.
+        </p><p>
+          The <code class="literal">MimeType</code> lists the MIME types - separated by semicolon - for which your thumbnailer is able to create previews.
+        </p></div><div class="sect3" lang="gl"><div class="titlepage"><div><div><h4 class="title"><a name="eps-thumbnailer-example"></a>Example EPS Thumbnailer</h4></div></div></div><p>
+          This example demonstrates how to write and install a new thumbnailer for <code class="filename">.eps</code> files, which uses the
+          <span class="command"><strong>convert</strong></span> utility that ships as part of ImageMagick. First, we start with a simple script that invokes
+          <span class="command"><strong>convert</strong></span> to generate a thumbnail at the requested size.
+        </p><pre class="programlisting">
+#!/bin/sh
+#
+# eps-thumbnailer - Example thumbnailer script for EPS files.
+#
+# Usage: esp-thumbnailer eps-file png-file size
+#
+
+# command line parameters
+ifile=$1
+ofile=$2
+size=$3
+
+# invoke convert (ImageMagick)
+exec convert "eps:$ifile" -scale "$sizex$size" "png:$ofile"</pre><p>
+          Save this script above to a file <code class="filename">eps-thumbnailer</code>, make sure the file is executable and install it
+          to <code class="filename">/usr/local/bin</code>.
+        </p><pre class="screen">
+$ chmod +x eps-thumbnailer
+$ sudo install eps-thumbnailer /usr/local/bin/eps-thumbnailer</pre><p>
+          Next we need to create the thumbnail description file <code class="filename">eps-thumbnailer.desktop</code>, which looks like this:
+        </p><pre class="programlisting">
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=X-Thumbnailer
+Name=EPS Thumbnailer
+TryExec=convert
+MimeType=image/x-eps;
+X-Thumbnailer-Exec=/usr/local/bin/eps-thumbnailer %i %o %s</pre><p>
+          This file must be installed to <code class="filename">/usr/local/share/thumbnailers</code> (create the folder if
+          it does not exists).
+        </p><pre class="screen">
+$ sudo install -d /usr/local/share/thumbnailers
+$ sudo install eps-thumbnailer.desktop /usr/local/share/thumbnailers/eps-thumbnailer.desktop</pre><p>
+          The <code class="filename">eps-thumbnailer.desktop</code> file uses the special key <code class="literal">TryExec</code>, which, if specified,
+          names a command that must be present on the system for the thumbnailer to be useful. In this case, our script is useless if
+          the <span class="command"><strong>convert</strong></span> utility is not present.
+        </p><p>
+          The last step is to regenerate the thumbnailer cache, so Thunar will pick up our thumbnailer. The thumbnailer cache is located
+          at <code class="filename">$XDG_CACHE_HOME/Thunar/thumbnailers.cache</code> (unless overridden by your or your system administrator, the
+          <code class="varname">$XDG_CACHE_HOME</code> points to the folder <code class="filename">~/.cache/</code>). The thumbnailers
+          cache is regenerated periodically by Thunar, but you can force to regenerate it by invoking the
+          <code class="filename">thunar-vfs-update-thumbnailers-cache-1</code> utility, that ships as part of Thunar. This utility is usually installed
+          in the <code class="filename">libexec</code> subfolder of your installation prefix (<code class="filename">sbin</code>
+          on Debian/Ubuntu). So for example, if Thunar is installed in <code class="filename">/usr</code>, invoke the utility as
+          follows:
+        </p><pre class="screen">$ /usr/libexec/thunar-vfs-update-thumbnailers-cache-1</pre><p>
+          But make sure you run the program from your user account, not the superuser account, since the thumbnailers cache is stored in
+          your home folder, rather than a system wide location.
+        </p><p>
+          Now, if Thunar is compiled with support for file alteration monitoring (using the FAM or Gamin services), it will automatically
+          pick up the new thumbnailers cache within a few seconds and afterwards be able to generate thumbnails using your custom
+          thumbnailers. Otherwise you might need to completely restart Thunar to apply the changes, using
+        </p><pre class="screen">$ Thunar -q</pre><p>
+          to terminate any running instance, and afterwards restart it from your launcher.
+        </p></div><div class="sect3" lang="gl"><div class="titlepage"><div><div><h4 class="title"><a name="cleaning-up-thumbnails"></a>Cleaning up Thumbnails</h4></div></div></div><p>
+          The generated thumbnails are stored in the folder <code class="filename">~/.thumbnails/</code> complying with the <a class="ulink" href="http://jens.triq.net/thumbnail-spec/index.html" target="_top">Thumbnail Management Standard</a>. While testing a new
+          thumbnailer, it might help to clean up the thumbnail cache using
+        </p><pre class="screen">$ rm -rf ~/.thumbnails/</pre><p>
+          which will also give you some free space in your home folder. Since all the information stored within this folder was automatically
+          generated from files in your file system, you will not loose any sensitive data.
+        </p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="preferences.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="advanced-topics.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">File Management Preferences </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Advanced Topics</td></tr></table></div></body></html>

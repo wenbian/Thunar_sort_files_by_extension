@@ -1,0 +1,289 @@
+<refentry id="thunar-vfs-ThunarVfsMimeInfo">
+<refmeta>
+<refentrytitle role="top_of_page" id="thunar-vfs-ThunarVfsMimeInfo.top_of_page">ThunarVfsMimeInfo</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNAR-VFS Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarVfsMimeInfo</refname>
+<refpurpose>Represents a MIME type in the system.</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="thunar-vfs-ThunarVfsMimeInfo.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunar-vfs/thunar-vfs.h&gt;
+
+                    <link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link>;
+<link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link>*  <link linkend="thunar-vfs-mime-info-new">thunar_vfs_mime_info_new</link>            (const <link linkend="gchar">gchar</link> *name,
+                                                         <link linkend="gssize">gssize</link> len);
+<link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link>*  <link linkend="thunar-vfs-mime-info-ref">thunar_vfs_mime_info_ref</link>            (<link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);
+<link linkend="void">void</link>                <link linkend="thunar-vfs-mime-info-unref">thunar_vfs_mime_info_unref</link>          (<link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);
+const <link linkend="gchar">gchar</link>*        <link linkend="thunar-vfs-mime-info-get-comment">thunar_vfs_mime_info_get_comment</link>    (<link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);
+const <link linkend="gchar">gchar</link>*        <link linkend="thunar-vfs-mime-info-get-name">thunar_vfs_mime_info_get_name</link>       (const <link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);
+<link linkend="gchar">gchar</link>*              <link linkend="thunar-vfs-mime-info-get-media">thunar_vfs_mime_info_get_media</link>      (const <link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);
+<link linkend="gchar">gchar</link>*              <link linkend="thunar-vfs-mime-info-get-subtype">thunar_vfs_mime_info_get_subtype</link>    (const <link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);
+<link linkend="guint">guint</link>               <link linkend="thunar-vfs-mime-info-hash">thunar_vfs_mime_info_hash</link>           (<link linkend="gconstpointer">gconstpointer</link> info);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-mime-info-equal">thunar_vfs_mime_info_equal</link>          (<link linkend="gconstpointer">gconstpointer</link> a,
+                                                         <link linkend="gconstpointer">gconstpointer</link> b);
+const <link linkend="gchar">gchar</link>*        <link linkend="thunar-vfs-mime-info-lookup-icon-name">thunar_vfs_mime_info_lookup_icon_name</link>
+                                                        (<link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info,
+                                                         <link linkend="GtkIconTheme">GtkIconTheme</link> *icon_theme);
+<link linkend="void">void</link>                <link linkend="thunar-vfs-mime-info-list-free">thunar_vfs_mime_info_list_free</link>      (<link linkend="GList">GList</link> *info_list);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="thunar-vfs-ThunarVfsMimeInfo.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="thunar-vfs-ThunarVfsMimeInfo.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarVfsMimeInfo" role="struct">
+<title>ThunarVfsMimeInfo</title>
+<indexterm zone="ThunarVfsMimeInfo"><primary>ThunarVfsMimeInfo</primary></indexterm><programlisting>typedef struct {
+} ThunarVfsMimeInfo;
+</programlisting>
+<para>
+  The <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link> struct contains private data only, and should be
+  accessed using the functions below.
+</para></refsect2>
+<refsect2 id="thunar-vfs-mime-info-new" role="function">
+<title>thunar_vfs_mime_info_new ()</title>
+<indexterm zone="thunar-vfs-mime-info-new"><primary>thunar_vfs_mime_info_new</primary></indexterm><programlisting><link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link>*  thunar_vfs_mime_info_new            (const <link linkend="gchar">gchar</link> *name,
+                                                         <link linkend="gssize">gssize</link> len);</programlisting>
+<para>
+Allocates a new <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link> object with an
+initial reference count of one and sets it to the
+given <parameter>name</parameter>.
+</para>
+<para>
+Note that no checking is performed on the given <parameter>name</parameter>.
+You should not normally use this function, but use
+<link linkend="thunar-vfs-mime-database-get-info"><function>thunar_vfs_mime_database_get_info()</function></link> instead.
+</para>
+<para>
+In addition, if you allocate <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link><!---->s
+using this function, you cannot mix them with the objects
+allocated in a <link linkend="ThunarVfsMimeDatabase"><type>ThunarVfsMimeDatabase</type></link>, because the
+<link linkend="ThunarVfsMimeDatabase"><type>ThunarVfsMimeDatabase</type></link> and associated functions assume
+that <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link> objects are unique.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara> the mime type name.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>len</parameter>&nbsp;:</term>
+<listitem><simpara> the length of <parameter>name</parameter> or <link linkend="1:CAPS"><literal>-1</literal></link> if zero-terminated.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the newly allocated <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-info-ref" role="function">
+<title>thunar_vfs_mime_info_ref ()</title>
+<indexterm zone="thunar-vfs-mime-info-ref"><primary>thunar_vfs_mime_info_ref</primary></indexterm><programlisting><link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link>*  thunar_vfs_mime_info_ref            (<link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);</programlisting>
+<para>
+Increments the reference count on <parameter>info</parameter> and returns
+the reference to <parameter>info</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a reference to <parameter>info</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-info-unref" role="function">
+<title>thunar_vfs_mime_info_unref ()</title>
+<indexterm zone="thunar-vfs-mime-info-unref"><primary>thunar_vfs_mime_info_unref</primary></indexterm><programlisting><link linkend="void">void</link>                thunar_vfs_mime_info_unref          (<link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);</programlisting>
+<para>
+Decrements the reference count on <parameter>info</parameter> and releases
+the resources allocated for <parameter>info</parameter> once the reference
+count drops to zero.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-info-get-comment" role="function">
+<title>thunar_vfs_mime_info_get_comment ()</title>
+<indexterm zone="thunar-vfs-mime-info-get-comment"><primary>thunar_vfs_mime_info_get_comment</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunar_vfs_mime_info_get_comment    (<link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);</programlisting>
+<para>
+Determines the description for the given <parameter>info</parameter>.
+</para>
+<para>
+Note that this method MUST NOT be called from threads other than
+the main thread, because it's not thread-safe!</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the comment associated with the <parameter>info</parameter> or the empty string
+              if no comment was provided.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-info-get-name" role="function">
+<title>thunar_vfs_mime_info_get_name ()</title>
+<indexterm zone="thunar-vfs-mime-info-get-name"><primary>thunar_vfs_mime_info_get_name</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunar_vfs_mime_info_get_name       (const <link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);</programlisting>
+<para>
+Returns the full qualified name of the MIME type
+described by the <parameter>info</parameter> object.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the name of <parameter>info</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-info-get-media" role="function">
+<title>thunar_vfs_mime_info_get_media ()</title>
+<indexterm zone="thunar-vfs-mime-info-get-media"><primary>thunar_vfs_mime_info_get_media</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              thunar_vfs_mime_info_get_media      (const <link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);</programlisting>
+<para>
+Returns the media portion of the MIME type, e.g. if your
+<link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link> instance refers to "text/plain", invoking
+this method will return "text".
+</para>
+<para>
+The caller is responsible to free the returned string
+using <link linkend="g-free"><function>g_free()</function></link> when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the media portion of the MIME type.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-info-get-subtype" role="function">
+<title>thunar_vfs_mime_info_get_subtype ()</title>
+<indexterm zone="thunar-vfs-mime-info-get-subtype"><primary>thunar_vfs_mime_info_get_subtype</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              thunar_vfs_mime_info_get_subtype    (const <link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info);</programlisting>
+<para>
+Returns the subtype portion of the MIME type, e.g. if <parameter>info</parameter>
+refers to "application/octect-stream", this method will
+return "octect-stream".
+</para>
+<para>
+The caller is responsible to free the returned string
+using <link linkend="g-free"><function>g_free()</function></link> when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the subtype portion of <parameter>info</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-info-hash" role="function">
+<title>thunar_vfs_mime_info_hash ()</title>
+<indexterm zone="thunar-vfs-mime-info-hash"><primary>thunar_vfs_mime_info_hash</primary></indexterm><programlisting><link linkend="guint">guint</link>               thunar_vfs_mime_info_hash           (<link linkend="gconstpointer">gconstpointer</link> info);</programlisting>
+<para>
+Calculates a hash value for <parameter>info</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a hash value for <parameter>info</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-info-equal" role="function">
+<title>thunar_vfs_mime_info_equal ()</title>
+<indexterm zone="thunar-vfs-mime-info-equal"><primary>thunar_vfs_mime_info_equal</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_mime_info_equal          (<link linkend="gconstpointer">gconstpointer</link> a,
+                                                         <link linkend="gconstpointer">gconstpointer</link> b);</programlisting>
+<para>
+Compares <parameter>a</parameter> and <parameter>b</parameter> and returns <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if both
+are equal.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>a</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>b</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>a</parameter> and <parameter>b</parameter> are equal.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-info-lookup-icon-name" role="function">
+<title>thunar_vfs_mime_info_lookup_icon_name ()</title>
+<indexterm zone="thunar-vfs-mime-info-lookup-icon-name"><primary>thunar_vfs_mime_info_lookup_icon_name</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunar_vfs_mime_info_lookup_icon_name
+                                                        (<link linkend="ThunarVfsMimeInfo">ThunarVfsMimeInfo</link> *info,
+                                                         <link linkend="GtkIconTheme">GtkIconTheme</link> *icon_theme);</programlisting>
+<para>
+Tries to determine the name of a suitable icon for <parameter>info</parameter>
+in <parameter>icon_theme</parameter>. The returned icon name can then be used
+in calls to <link linkend="gtk-icon-theme-lookup-icon"><function>gtk_icon_theme_lookup_icon()</function></link> or
+<link linkend="gtk-icon-theme-load-icon"><function>gtk_icon_theme_load_icon()</function></link>.
+</para>
+<para>
+The returned icon name is owned by <parameter>info</parameter> and MUST NOT be freed
+by the caller.
+</para>
+<para>
+Note that this method MUST NOT be called from threads other than
+the main thread, because it's not thread-safe!</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>icon_theme</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="GtkIconTheme"><type>GtkIconTheme</type></link> on which to perform the lookup.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a suitable icon name for <parameter>info</parameter> in <parameter>icon_theme</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-mime-info-list-free" role="function">
+<title>thunar_vfs_mime_info_list_free ()</title>
+<indexterm zone="thunar-vfs-mime-info-list-free"><primary>thunar_vfs_mime_info_list_free</primary></indexterm><programlisting><link linkend="void">void</link>                thunar_vfs_mime_info_list_free      (<link linkend="GList">GList</link> *info_list);</programlisting>
+<para>
+Frees the list and all <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link><!---->s
+contained within the list.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>info_list</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GList"><type>GList</type></link> of <link linkend="ThunarVfsMimeInfo"><type>ThunarVfsMimeInfo</type></link><!---->s
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+<refsect1 id="thunar-vfs-ThunarVfsMimeInfo.see-also">
+<title>See Also</title>
+<para>
+  <link linkend="ThunarVfsMimeDatabase">ThunarVfsMimeDatabase</link>
+</para>
+</refsect1>
+
+</refentry>

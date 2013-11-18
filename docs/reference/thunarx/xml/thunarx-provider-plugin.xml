@@ -1,0 +1,562 @@
+<refentry id="ThunarxProviderPlugin">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarxProviderPlugin.top_of_page">ThunarxProviderPlugin</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNARX Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarxProviderPlugin</refname>
+<refpurpose>The interface to the plugin type registration</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+<refsect1 id="ThunarxProviderPlugin.stability-level">
+<title>Stability Level</title>
+Stable, unless otherwise indicated
+</refsect1>
+
+<refsynopsisdiv id="ThunarxProviderPlugin.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunarx/thunarx.h&gt;
+
+                    <link linkend="ThunarxProviderPlugin-struct">ThunarxProviderPlugin</link>;
+                    <link linkend="ThunarxProviderPluginIface">ThunarxProviderPluginIface</link>;
+<link linkend="gboolean">gboolean</link>            <link linkend="thunarx-provider-plugin-get-resident">thunarx_provider_plugin_get_resident</link>
+                                                        (const <link linkend="ThunarxProviderPlugin">ThunarxProviderPlugin</link> *plugin);
+<link linkend="void">void</link>                <link linkend="thunarx-provider-plugin-set-resident">thunarx_provider_plugin_set_resident</link>
+                                                        (<link linkend="ThunarxProviderPlugin">ThunarxProviderPlugin</link> *plugin,
+                                                         <link linkend="gboolean">gboolean</link> resident);
+<link linkend="GType">GType</link>               <link linkend="thunarx-provider-plugin-register-type">thunarx_provider_plugin_register_type</link>
+                                                        (<link linkend="ThunarxProviderPlugin">ThunarxProviderPlugin</link> *plugin,
+                                                         <link linkend="GType">GType</link> type_parent,
+                                                         const <link linkend="gchar">gchar</link> *type_name,
+                                                         const <link linkend="GTypeInfo">GTypeInfo</link> *type_info,
+                                                         <link linkend="GTypeFlags">GTypeFlags</link> type_flags);
+<link linkend="void">void</link>                <link linkend="thunarx-provider-plugin-add-interface">thunarx_provider_plugin_add_interface</link>
+                                                        (<link linkend="ThunarxProviderPlugin">ThunarxProviderPlugin</link> *plugin,
+                                                         <link linkend="GType">GType</link> instance_type,
+                                                         <link linkend="GType">GType</link> interface_type,
+                                                         const <link linkend="GInterfaceInfo">GInterfaceInfo</link> *interface_info);
+<link linkend="GType">GType</link>               <link linkend="thunarx-provider-plugin-register-enum">thunarx_provider_plugin_register_enum</link>
+                                                        (<link linkend="ThunarxProviderPlugin">ThunarxProviderPlugin</link> *plugin,
+                                                         const <link linkend="gchar">gchar</link> *name,
+                                                         const <link linkend="GEnumValue">GEnumValue</link> *const_static_values);
+<link linkend="GType">GType</link>               <link linkend="thunarx-provider-plugin-register-flags">thunarx_provider_plugin_register_flags</link>
+                                                        (<link linkend="ThunarxProviderPlugin">ThunarxProviderPlugin</link> *plugin,
+                                                         const <link linkend="gchar">gchar</link> *name,
+                                                         const <link linkend="GFlagsValue">GFlagsValue</link> *const_static_values);
+#define             <link linkend="THUNARX-DEFINE-TYPE:CAPS">THUNARX_DEFINE_TYPE</link>                 (TN, t_n, T_P)
+#define             <link linkend="THUNARX-DEFINE-TYPE-WITH-CODE:CAPS">THUNARX_DEFINE_TYPE_WITH_CODE</link>       (TN, t_n, T_P, _C_)
+#define             <link linkend="THUNARX-DEFINE-ABSTRACT-TYPE:CAPS">THUNARX_DEFINE_ABSTRACT_TYPE</link>        (TN, t_n, T_P)
+#define             <link linkend="THUNARX-DEFINE-ABSTRACT-TYPE-WITH-CODE:CAPS">THUNARX_DEFINE_ABSTRACT_TYPE_WITH_CODE</link>(TN, t_n, T_P, _C_)
+#define             <link linkend="THUNARX-DEFINE-TYPE-EXTENDED:CAPS">THUNARX_DEFINE_TYPE_EXTENDED</link>        (TypeName, type_name, TYPE_PARENT, flags, CODE)
+#define             <link linkend="THUNARX-IMPLEMENT-INTERFACE:CAPS">THUNARX_IMPLEMENT_INTERFACE</link>         (TYPE_IFACE, iface_init)
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarxProviderPlugin.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GInterface">GInterface</link>
+   +----ThunarxProviderPlugin
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+<refsect1 id="ThunarxProviderPlugin.properties" role="properties">
+<title role="properties.title">Properties</title>
+<synopsis>
+  &quot;<link linkend="ThunarxProviderPlugin--resident">resident</link>&quot;                 <link linkend="gboolean">gboolean</link>              : Read / Write
+</synopsis>
+</refsect1>
+
+
+
+<refsect1 id="ThunarxProviderPlugin.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+  <link linkend="ThunarxProviderPlugin"><type>ThunarxProviderPlugin</type></link> is the interface to the file manager's type plugin loader implementation. It
+  provides methods to extensions - also called <emphasis>provider plugins</emphasis> - to register dynamic
+  types and control certain aspects of the plugin (see <link linkend="thunarx-provider-plugin-set-resident"><function>thunarx_provider_plugin_set_resident()</function></link>).
+</para>
+</refsect1>
+
+<refsect1 id="ThunarxProviderPlugin.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarxProviderPlugin-struct" role="struct">
+<title>ThunarxProviderPlugin</title>
+<indexterm zone="ThunarxProviderPlugin-struct"><primary>ThunarxProviderPlugin</primary></indexterm><programlisting>typedef struct _ThunarxProviderPlugin ThunarxProviderPlugin;</programlisting>
+<para>
+  The <link linkend="ThunarxProviderPlugin"><type>ThunarxProviderPlugin</type></link> struct is just a typedef for
+  the interface instance type.
+</para></refsect2>
+<refsect2 id="ThunarxProviderPluginIface" role="struct">
+<title>ThunarxProviderPluginIface</title>
+<indexterm zone="ThunarxProviderPluginIface"><primary>ThunarxProviderPluginIface</primary></indexterm><programlisting>typedef struct {
+  gboolean (*get_resident)    (const ThunarxProviderPlugin *plugin);
+  void     (*set_resident)    (ThunarxProviderPlugin       *plugin,
+                               gboolean                     resident);
+
+  GType    (*register_type)   (ThunarxProviderPlugin       *plugin,
+                               GType                        type_parent,
+                               const gchar                 *type_name,
+                               const GTypeInfo             *type_info,
+                               GTypeFlags                   type_flags);
+  void     (*add_interface)   (ThunarxProviderPlugin       *plugin,
+                               GType                        instance_type,
+                               GType                        interface_type,
+                               const GInterfaceInfo        *interface_info);
+  GType    (*register_enum)   (ThunarxProviderPlugin       *plugin,
+                               const gchar                 *name,
+                               const GEnumValue            *const_static_values);
+  GType    (*register_flags)  (ThunarxProviderPlugin       *plugin,
+                               const gchar                 *name,
+                               const GFlagsValue           *const_static_values);
+} ThunarxProviderPluginIface;
+</programlisting>
+<para>
+  Interface with virtual methods implemented by the file manager and
+  accessible from the extensions.
+</para><variablelist role="struct">
+<varlistentry>
+<term><structfield>get_resident</structfield>&nbsp;()</term>
+<listitem><simpara>see <link linkend="thunarx-provider-plugin-get-resident"><function>thunarx_provider_plugin_get_resident()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>set_resident</structfield>&nbsp;()</term>
+<listitem><simpara>see <link linkend="thunarx-provider-plugin-set-resident"><function>thunarx_provider_plugin_set_resident()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>register_type</structfield>&nbsp;()</term>
+<listitem><simpara>see <link linkend="thunarx-provider-plugin-register-type"><function>thunarx_provider_plugin_register_type()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>add_interface</structfield>&nbsp;()</term>
+<listitem><simpara>see <link linkend="thunarx-provider-plugin-add-interface"><function>thunarx_provider_plugin_add_interface()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>register_enum</structfield>&nbsp;()</term>
+<listitem><simpara>see <link linkend="thunarx-provider-plugin-register-enum"><function>thunarx_provider_plugin_register_enum()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>register_flags</structfield>&nbsp;()</term>
+<listitem><simpara>see <link linkend="thunarx-provider-plugin-register-flags"><function>thunarx_provider_plugin_register_flags()</function></link>.
+
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-provider-plugin-get-resident" role="function">
+<title>thunarx_provider_plugin_get_resident ()</title>
+<indexterm zone="thunarx-provider-plugin-get-resident"><primary>thunarx_provider_plugin_get_resident</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunarx_provider_plugin_get_resident
+                                                        (const <link linkend="ThunarxProviderPlugin">ThunarxProviderPlugin</link> *plugin);</programlisting>
+<para>
+Determines whether the application is allowed to unload <parameter>plugin</parameter>
+from memory when no longer needed and reload it on demand. If
+<link linkend="FALSE:CAPS"><literal>FALSE</literal></link> is returned, then the application may unload <parameter>plugin</parameter>, else
+if <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> is returned the application will take care that <parameter>plugin</parameter>
+is never unloaded from memory during the lifetime of the application.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>plugin</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxProviderPlugin"><type>ThunarxProviderPlugin</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>plugin</parameter> will be kept in memory once loaded
+              for the first time.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-provider-plugin-set-resident" role="function">
+<title>thunarx_provider_plugin_set_resident ()</title>
+<indexterm zone="thunarx-provider-plugin-set-resident"><primary>thunarx_provider_plugin_set_resident</primary></indexterm><programlisting><link linkend="void">void</link>                thunarx_provider_plugin_set_resident
+                                                        (<link linkend="ThunarxProviderPlugin">ThunarxProviderPlugin</link> *plugin,
+                                                         <link linkend="gboolean">gboolean</link> resident);</programlisting>
+<para>
+This method is used to instruct the application that <parameter>plugin</parameter> must be
+kept in memory during the lifetime of the application. The default
+is to allow the application to unload <parameter>plugin</parameter> from the memory when
+no longer needed. If this method is invoked with a <parameter>resident</parameter> value
+of <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> then the application will never try to unload <parameter>plugin</parameter>.
+</para>
+<para>
+This method has no effect unless called from the 
+<link linkend="thunar-extension-initialize"><literal>thunar_extension_initialize</literal></link> method of the <parameter>plugin</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>plugin</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxProviderPlugin"><type>ThunarxProviderPlugin</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>resident</parameter>&nbsp;:</term>
+<listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> to make <parameter>plugin</parameter> resident in memory.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-provider-plugin-register-type" role="function">
+<title>thunarx_provider_plugin_register_type ()</title>
+<indexterm zone="thunarx-provider-plugin-register-type"><primary>thunarx_provider_plugin_register_type</primary></indexterm><programlisting><link linkend="GType">GType</link>               thunarx_provider_plugin_register_type
+                                                        (<link linkend="ThunarxProviderPlugin">ThunarxProviderPlugin</link> *plugin,
+                                                         <link linkend="GType">GType</link> type_parent,
+                                                         const <link linkend="gchar">gchar</link> *type_name,
+                                                         const <link linkend="GTypeInfo">GTypeInfo</link> *type_info,
+                                                         <link linkend="GTypeFlags">GTypeFlags</link> type_flags);</programlisting>
+<para>
+Looks up or registers a type that is implemented with a particular type <parameter>plugin</parameter>. If a type with name <parameter>type_name</parameter>
+was previously registered, the <link linkend="GType"><type>GType</type></link> identifier for the type is returned, otherwise the type is newly registered,
+and the resulting <link linkend="GType"><type>GType</type></link> identifier returned.
+</para>
+<para>
+When reregistering a type (typically because a module is unloaded then reloaded, and reinitialized), module and
+<parameter>type_parent</parameter> must be the same as they were previously.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>plugin</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxProviderPlugin"><type>ThunarxProviderPlugin</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>type_parent</parameter>&nbsp;:</term>
+<listitem><simpara> the type for the parent class.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>type_name</parameter>&nbsp;:</term>
+<listitem><simpara> name for the type.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>type_info</parameter>&nbsp;:</term>
+<listitem><simpara> type information structure.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>type_flags</parameter>&nbsp;:</term>
+<listitem><simpara> flags field providing details about the type.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the new or existing type id.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-provider-plugin-add-interface" role="function">
+<title>thunarx_provider_plugin_add_interface ()</title>
+<indexterm zone="thunarx-provider-plugin-add-interface"><primary>thunarx_provider_plugin_add_interface</primary></indexterm><programlisting><link linkend="void">void</link>                thunarx_provider_plugin_add_interface
+                                                        (<link linkend="ThunarxProviderPlugin">ThunarxProviderPlugin</link> *plugin,
+                                                         <link linkend="GType">GType</link> instance_type,
+                                                         <link linkend="GType">GType</link> interface_type,
+                                                         const <link linkend="GInterfaceInfo">GInterfaceInfo</link> *interface_info);</programlisting>
+<para>
+Registers an additional interface for a type, whose interface lives in the given type <parameter>plugin</parameter>.
+If the interface was already registered for the type in this <parameter>plugin</parameter>, nothing will be done.
+</para>
+<para>
+As long as any instances of the type exist, the type <parameter>plugin</parameter> will not be unloaded.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>plugin</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxProviderPlugin"><type>ThunarxProviderPlugin</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>instance_type</parameter>&nbsp;:</term>
+<listitem><simpara> type to which to add the interface.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>interface_type</parameter>&nbsp;:</term>
+<listitem><simpara> interface type to add.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>interface_info</parameter>&nbsp;:</term>
+<listitem><simpara> type information structure.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-provider-plugin-register-enum" role="function">
+<title>thunarx_provider_plugin_register_enum ()</title>
+<indexterm zone="thunarx-provider-plugin-register-enum"><primary>thunarx_provider_plugin_register_enum</primary></indexterm><programlisting><link linkend="GType">GType</link>               thunarx_provider_plugin_register_enum
+                                                        (<link linkend="ThunarxProviderPlugin">ThunarxProviderPlugin</link> *plugin,
+                                                         const <link linkend="gchar">gchar</link> *name,
+                                                         const <link linkend="GEnumValue">GEnumValue</link> *const_static_values);</programlisting>
+<para>
+Looks up or registers an enumeration that is implemented with a particular type <parameter>plugin</parameter>. If a type 
+with name <parameter>name</parameter> was previously registered, the <link linkend="GType"><type>GType</type></link> identifier for the type is returned,
+otherwise the type is newly registered, and the resulting <link linkend="GType"><type>GType</type></link> identifier returned.
+</para>
+<para>
+As long as any instances of the type exist, the type <parameter>plugin</parameter> will not be unloaded.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>plugin</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxProviderPlugin"><type>ThunarxProviderPlugin</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara> the name for the type.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>const_static_values</parameter>&nbsp;:</term>
+<listitem><simpara> an array of <link linkend="GEnumValue"><type>GEnumValue</type></link> structs for the possible enumeration values.
+                       The array is terminated by a struct with all members being <link linkend="0:CAPS"><literal>0</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the new or existing type id.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-provider-plugin-register-flags" role="function">
+<title>thunarx_provider_plugin_register_flags ()</title>
+<indexterm zone="thunarx-provider-plugin-register-flags"><primary>thunarx_provider_plugin_register_flags</primary></indexterm><programlisting><link linkend="GType">GType</link>               thunarx_provider_plugin_register_flags
+                                                        (<link linkend="ThunarxProviderPlugin">ThunarxProviderPlugin</link> *plugin,
+                                                         const <link linkend="gchar">gchar</link> *name,
+                                                         const <link linkend="GFlagsValue">GFlagsValue</link> *const_static_values);</programlisting>
+<para>
+Looks up or registers a flags type that is implemented with a particular type <parameter>plugin</parameter>. If a type with name
+qname was previously registered, the <link linkend="GType"><type>GType</type></link> identifier for the type is returned, otherwise the type is newly
+registered, and the resulting <link linkend="GType"><type>GType</type></link> identifier returned.
+</para>
+<para>
+As long as any instances of the type exist, the type <parameter>plugin</parameter> will not be unloaded.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>plugin</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxProviderPlugin"><type>ThunarxProviderPlugin</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara> name for the type.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>const_static_values</parameter>&nbsp;:</term>
+<listitem><simpara> an array of <link linkend="GFlagsValue"><type>GFlagsValue</type></link> structs for the possible flags values.
+                       The array is terminated by a struct with all members being <link linkend="0:CAPS"><literal>0</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the new or existing type id.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="THUNARX-DEFINE-TYPE:CAPS" role="macro">
+<title>THUNARX_DEFINE_TYPE()</title>
+<indexterm zone="THUNARX-DEFINE-TYPE:CAPS"><primary>THUNARX_DEFINE_TYPE</primary></indexterm><programlisting>#define THUNARX_DEFINE_TYPE(TN, t_n, T_P)                         THUNARX_DEFINE_TYPE_EXTENDED (TN, t_n, T_P, 0, {})
+</programlisting>
+<para>
+  A convenience macro for plugin type implementations, which declares a class
+  initialization function, a static variable named <parameter>t_n</parameter><!---->_parent_class
+  pointing to the parent and a static variable named <parameter>t_n</parameter><!---->_type containing
+  the <link linkend="GType"><type>GType</type></link> of the type to define. Furthermore, it defines a <parameter>t_n</parameter><!----><link linkend="get-type"><function>_get_type()</function></link>
+  function and a <parameter>t_n</parameter><!----><link linkend="register-type"><function>_register_type()</function></link> function. See <link linkend="THUNARX-DEFINE-TYPE-EXTENDED:CAPS"><function>THUNARX_DEFINE_TYPE_EXTENDED()</function></link>
+  for an example.
+</para><variablelist role="params">
+<varlistentry><term><parameter>TN</parameter>&nbsp;:</term>
+<listitem><simpara>the name of the new type, in Camel case.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>t_n</parameter>&nbsp;:</term>
+<listitem><simpara>the name of the new type, in lowercase, with words separated by '_'.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>T_P</parameter>&nbsp;:</term>
+<listitem><simpara>the <link linkend="GType"><type>GType</type></link> of the parent type.
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="THUNARX-DEFINE-TYPE-WITH-CODE:CAPS" role="macro">
+<title>THUNARX_DEFINE_TYPE_WITH_CODE()</title>
+<indexterm zone="THUNARX-DEFINE-TYPE-WITH-CODE:CAPS"><primary>THUNARX_DEFINE_TYPE_WITH_CODE</primary></indexterm><programlisting>#define THUNARX_DEFINE_TYPE_WITH_CODE(TN, t_n, T_P, _C_)          THUNARX_DEFINE_TYPE_EXTENDED (TN, t_n, T_P, 0, _C_)
+</programlisting>
+<para>
+  A convenience macro for plugin type implementations. Similar to <link linkend="THUNARX-DEFINE-TYPE:CAPS"><function>THUNARX_DEFINE_TYPE()</function></link>, but
+  allows to insert custom code into the <code>*<link linkend="get-type"><function>_get_type()</function></link></code> function, e.g. interface
+  implemenations via <link linkend="THUNARX-IMPLEMENT-INTERFACE:CAPS"><function>THUNARX_IMPLEMENT_INTERFACE()</function></link>. See <link linkend="THUNARX-DEFINE-TYPE-EXTENDED:CAPS"><function>THUNARX_DEFINE_TYPE_EXTENDED()</function></link> for
+  an example.
+</para><variablelist role="params">
+<varlistentry><term><parameter>TN</parameter>&nbsp;:</term>
+<listitem><simpara>the name of the new type, in Camel case.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>t_n</parameter>&nbsp;:</term>
+<listitem><simpara>the name of the new type, in lowercase, with words separated by '_'.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>T_P</parameter>&nbsp;:</term>
+<listitem><simpara>the <link linkend="GType"><type>GType</type></link> of the parent type.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>_C_</parameter>&nbsp;:</term>
+<listitem><simpara>custom code that gets inserted in the <code>*<link linkend="get-type"><function>_get_type()</function></link></code> function.
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="THUNARX-DEFINE-ABSTRACT-TYPE:CAPS" role="macro">
+<title>THUNARX_DEFINE_ABSTRACT_TYPE()</title>
+<indexterm zone="THUNARX-DEFINE-ABSTRACT-TYPE:CAPS"><primary>THUNARX_DEFINE_ABSTRACT_TYPE</primary></indexterm><programlisting>#define THUNARX_DEFINE_ABSTRACT_TYPE(TN, t_n, T_P)                THUNARX_DEFINE_TYPE_EXTENDED (TN, t_n, T_P, G_TYPE_FLAG_ABSTRACT, {})
+</programlisting>
+<para>
+  A convenience macro for plugin type implementations. Similar to <link linkend="THUNARX-DEFINE-TYPE:CAPS"><function>THUNARX_DEFINE_TYPE()</function></link>, but defines
+  an abstract type. See <link linkend="THUNARX-DEFINE-TYPE-EXTENDED:CAPS"><function>THUNARX_DEFINE_TYPE_EXTENDED()</function></link> for an example.
+</para><variablelist role="params">
+<varlistentry><term><parameter>TN</parameter>&nbsp;:</term>
+<listitem><simpara>the name of the new type, in Camel case.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>t_n</parameter>&nbsp;:</term>
+<listitem><simpara>the name of the new type, in lowercase, with words separated by '_'.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>T_P</parameter>&nbsp;:</term>
+<listitem><simpara>the <link linkend="GType"><type>GType</type></link> of the parent type.
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="THUNARX-DEFINE-ABSTRACT-TYPE-WITH-CODE:CAPS" role="macro">
+<title>THUNARX_DEFINE_ABSTRACT_TYPE_WITH_CODE()</title>
+<indexterm zone="THUNARX-DEFINE-ABSTRACT-TYPE-WITH-CODE:CAPS"><primary>THUNARX_DEFINE_ABSTRACT_TYPE_WITH_CODE</primary></indexterm><programlisting>#define THUNARX_DEFINE_ABSTRACT_TYPE_WITH_CODE(TN, t_n, T_P, _C_) THUNARX_DEFINE_TYPE_EXTENDED (TN, t_n, T_P, G_TYPE_FLAG_ABSTRACT, _C_)
+</programlisting>
+<para>
+  A convenience macro for plugin type implementations. Similar to <link linkend="THUNARX-DEFINE-TYPE-WITH-CODE:CAPS"><function>THUNARX_DEFINE_TYPE_WITH_CODE()</function></link>, but defines
+  an abstract type and allows to insert custom code into the <code>*<link linkend="get-type"><function>_get_type()</function></link></code> function, e.g. interface
+  implementations via <link linkend="THUNARX-IMPLEMENT-INTERFACE:CAPS"><function>THUNARX_IMPLEMENT_INTERFACE()</function></link>. See <link linkend="THUNARX-DEFINE-TYPE-EXTENDED:CAPS"><function>THUNARX_DEFINE_TYPE_EXTENDED()</function></link> for an example.
+</para><variablelist role="params">
+<varlistentry><term><parameter>TN</parameter>&nbsp;:</term>
+<listitem><simpara>the name of the new type, in Camel case.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>t_n</parameter>&nbsp;:</term>
+<listitem><simpara>the name of the new type, in lowercase, with words separated by '_'.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>T_P</parameter>&nbsp;:</term>
+<listitem><simpara>the <link linkend="GType"><type>GType</type></link> of the parent type.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>_C_</parameter>&nbsp;:</term>
+<listitem><simpara>custom code that gets inserted in the <code>*<link linkend="get-type"><function>_get_type()</function></link></code> function.
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="THUNARX-DEFINE-TYPE-EXTENDED:CAPS" role="macro">
+<title>THUNARX_DEFINE_TYPE_EXTENDED()</title>
+<indexterm zone="THUNARX-DEFINE-TYPE-EXTENDED:CAPS"><primary>THUNARX_DEFINE_TYPE_EXTENDED</primary></indexterm><programlisting>#define             THUNARX_DEFINE_TYPE_EXTENDED(TypeName, type_name, TYPE_PARENT, flags, CODE)</programlisting>
+<para>
+  The most general convenience macro for plugin type implementations, on which <link linkend="THUNARX-DEFINE-TYPE:CAPS"><function>THUNARX_DEFINE_TYPE()</function></link>, <link linkend="THUNARX-DEFINE-TYPE-WITH-CODE:CAPS"><function>THUNARX_DEFINE_TYPE_WITH_CODE()</function></link>,
+  <link linkend="THUNARX-DEFINE-ABSTRACT-TYPE:CAPS"><function>THUNARX_DEFINE_ABSTRACT_TYPE()</function></link> and <link linkend="THUNARX-DEFINE-ABSTRACT-TYPE-WITH-CODE:CAPS"><function>THUNARX_DEFINE_ABSTRACT_TYPE_WITH_CODE()</function></link> are based.
+
+</para>
+
+<informalexample><programlisting>
+THUNARX_DEFINE_TYPE_EXTENDED (FooExtension,
+                              foo_extension,
+                              G_TYPE_OBJECT,
+                              0,
+                              THUNARX_IMPLEMENT_INTERFACE (TYPE_BAR,
+                                                           foo_extension_bar_init));
+</programlisting></informalexample>
+
+<para>
+  expands to
+</para>
+
+<informalexample><programlisting>
+static gpointer foo_extension_parent_class = NULL;
+static GType    foo_extension_type = G_TYPE_INVALID;
+
+static void     foo_extension_init              (FooExtension *self);
+static void     foo_extension_class_init        (FooExtensionClass *klass);
+static void     foo_extension_class_intern_init (FooExtensionClass *klass)
+{
+  foo_extension_parent_class = g_type_class_peek_parent (klass);
+  foo_extension_class_init (klass);
+}
+
+GType
+foo_extension_get_type (void)
+{
+  return foo_extension_type;
+}
+
+void
+foo_extension_register_type (ThunarxProviderPlugin *plugin)
+{
+  GType thunarx_define_type_id;
+  static const thunarx_define_type_info =
+  {
+    sizeof (FooExtensionClass),
+    NULL,
+    NULL,
+    (GClassInitFunc) foo_extension_class_intern_init,
+    NULL,
+    NULL,
+    sizeof (FooExtension),
+    0,
+    (GInstanceInitFunc) foo_extension_init,
+    NULL,
+  };
+  thunarx_define_type_id = thunarx_provider_plugin_register_type (thunarx_define_type_plugin, G_TYPE_OBJECT,
+                                                                  "FooExtension", &amp;thunarx_define_type_info, 0);
+  {
+    static const GInterfaceInfo thunarx_implement_interface_info =
+    {
+      (GInterfaceInitFunc) foo_extension_bar_init,
+    };
+    thunarx_provider_plugin_add_interface (thunarx_define_type_plugin, thunarx_define_type_id,
+                                           TYPE_BAR, &amp;thunarx_implement_interface_info);
+  };
+  foo_extension_type = thunarx_define_type_id;
+}
+</programlisting></informalexample>
+
+<para>
+  The only pieces which have to be manually provided are the definitions of the instance and
+  class structure and the definitions of the instance and class init functions.
+</para><variablelist role="params">
+<varlistentry><term><parameter>TypeName</parameter>&nbsp;:</term>
+<listitem><simpara>   The name of the new type, in Camel case.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>type_name</parameter>&nbsp;:</term>
+<listitem><simpara>  The name of the new type, in lowercase, with words separated by '_'.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>TYPE_PARENT</parameter>&nbsp;:</term>
+<listitem><simpara>The <link linkend="GType"><type>GType</type></link> of the parent type.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&nbsp;:</term>
+<listitem><simpara>      <link linkend="GTypeFlags"><type>GTypeFlags</type></link> to pass to <link linkend="thunarx-provider-plugin-register-type"><function>thunarx_provider_plugin_register_type()</function></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>CODE</parameter>&nbsp;:</term>
+<listitem><simpara>       Custom code that gets inserted in the <code>*<link linkend="register-type"><function>_register_type()</function></link></code> function.
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="THUNARX-IMPLEMENT-INTERFACE:CAPS" role="macro">
+<title>THUNARX_IMPLEMENT_INTERFACE()</title>
+<indexterm zone="THUNARX-IMPLEMENT-INTERFACE:CAPS"><primary>THUNARX_IMPLEMENT_INTERFACE</primary></indexterm><programlisting>#define             THUNARX_IMPLEMENT_INTERFACE(TYPE_IFACE, iface_init)</programlisting>
+<para>
+  A convenience macro to ease interface addition in the <parameter>_C_</parameter> section of <link linkend="THUNARX-DEFINE-TYPE-WITH-CODE:CAPS"><function>THUNARX_DEFINE_TYPE_WITH_CODE()</function></link>
+  or <link linkend="THUNARX-DEFINE-ABSTRACT-TYPE-WITH-CODE:CAPS"><function>THUNARX_DEFINE_ABSTRACT_TYPE_WITH_CODE()</function></link>. See <link linkend="THUNARX-DEFINE-TYPE-EXTENDED:CAPS"><function>THUNARX_DEFINE_TYPE_EXTENDED()</function></link> for an example.
+</para>
+
+<para>
+  Note that this macro can only be used together with the <code>THUNARX_DEFINE_*</code> macros, since
+  it depends on variable names used by those macros.
+</para><variablelist role="params">
+<varlistentry><term><parameter>TYPE_IFACE</parameter>&nbsp;:</term>
+<listitem><simpara>the <link linkend="GType"><type>GType</type></link> of the interface to add.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>iface_init</parameter>&nbsp;:</term>
+<listitem><simpara>the interface init function.
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+<refsect1 id="ThunarxProviderPlugin.property-details" role="property_details">
+<title role="property_details.title">Property Details</title>
+<refsect2 id="ThunarxProviderPlugin--resident"><title>The <literal>&quot;resident&quot;</literal> property</title>
+<indexterm zone="ThunarxProviderPlugin--resident"><primary>ThunarxProviderPlugin:resident</primary></indexterm><programlisting>  &quot;resident&quot;                 <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
+<para>
+Tells whether a plugin must reside in memory once loaded for
+the first time. See <link linkend="thunarx-provider-plugin-get-resident"><function>thunarx_provider_plugin_get_resident()</function></link> and
+<link linkend="thunarx-provider-plugin-set-resident"><function>thunarx_provider_plugin_set_resident()</function></link> for more details.</para>
+<para>
+
+</para><para>Default value: FALSE</para>
+</refsect2>
+
+</refsect1>
+
+
+
+<refsect1 id="ThunarxProviderPlugin.see-also">
+<title>See Also</title>
+<para>
+	<link linkend="ThunarxProviderFactory"><type>ThunarxProviderFactory</type></link>
+</para>
+</refsect1>
+
+</refentry>

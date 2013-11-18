@@ -1,0 +1,74 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>File Management Preferences</title><link rel="stylesheet" href="../thunar.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"><link rel="start" href="index.html" title="Xestor de ficheiros Thunar"><link rel="up" href="index.html" title="Xestor de ficheiros Thunar"><link rel="prev" href="using-removable-media.html" title="Using Removable Media"><link rel="next" href="customizing-thunar.html" title="Customizing Thunar"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">File Management Preferences</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="using-removable-media.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="customizing-thunar.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="gl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="preferences"></a>File Management Preferences</h2></div></div></div><p>
+      Use the <span class="guilabel"><strong>File Manager Preferences</strong></span> dialog to set your <strong class="application"><code>Thunar</code></strong> file manager
+      preferences. To open the preferences dialog, choose <span class="guimenu"><strong>Edit</strong></span> &#8594; <span class="guimenuitem"><strong>Preferences...</strong></span>
+      from the menu bar, or click on the <span class="guibutton"><strong>File Manager</strong></span> button in the Xfce Settings Manager.
+    </p><p>
+      The <span class="guilabel"><strong>File Manager Preferences</strong></span> dialog is divided into four pages with different options, each described in
+      a separate section below. Basically you can set preferences in the following categories:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>The default settings for the views.</p></li><li><p>The default settings for the side pane.</p></li><li><p>The behavior of the file manager windows.</p></li><li><p>Advanced features of the file manager.</p></li></ul></div><p>
+      Thunar also supports a bunch of so-called <span class="emphasis"><em>Hidden Options</em></span>, which control several advanced features of the
+      file manager, but are not included in the preferences in order to keep the preferences dialog simple. The <a class="ulink" href="http://svn.xfce.org/svn/xfce/thunar/trunk/docs/README.thunarrc" target="_top"><code class="filename">README.thunarrc</code></a> file that
+      is included with the Thunar distribution describes all available options in detail.
+    </p><div class="sect2" lang="gl"><div class="titlepage"><div><div><h3 class="title"><a name="preferences-views"></a>Views Preferences</h3></div></div></div><p>
+        You can specify a default view, select sort options and display options. You can
+        also specify whether thumbnails should be displayed for file types that support
+        this.
+      </p><div class="screenshot"><div class="mediaobject"><img src="images/preferences-views.png" alt="Views Preferences"></div></div><div class="variablelist"><dl><dt><span class="term"><span class="guilabel"><strong>View new folder using</strong></span></span></dt><dd><p>
+              Select the default view for folders. When you open a new window, the is displayed
+              in the view that you select. This can be either the icon view, the compact list view
+              or the detailed list view. You can also select <span class="guilabel"><strong>Last Active View</strong></span>
+              here to use the view you used for the last active window.
+            </p></dd><dt><span class="term"><span class="guilabel"><strong>Sort folders before files</strong></span></span></dt><dd><p>
+              Select this option to list folders before files when you sort a folder.
+            </p></dd><dt><span class="term"><span class="guilabel"><strong>Show thumbnails</strong></span></span></dt><dd><p>
+              Select this option to show thumbnails of image files and other supported files. The
+              file manager stores the thumbnail files for each folder in the hidden <code class="filename">.thumbnails</code> directory in the user's Home Folder.
+            </p><p>
+              See <a class="xref" href="customizing-thunar.html#thumbnailers" title="Thumbnailers">the section called &#8220;Thumbnailers&#8221;</a> if you want to extend the basic
+              thumbnail functionality provided by <strong class="application"><code>Thunar</code></strong> with support
+              for additional file types.
+            </p></dd><dt><span class="term"><span class="guilabel"><strong>Text beside icons</strong></span></span></dt><dd><p>
+              Select this options to place the icon captions for items in the icon view beside the
+              icon rather than under the icon.
+            </p></dd></dl></div></div><div class="sect2" lang="gl"><div class="titlepage"><div><div><h3 class="title"><a name="preferences-side-pane"></a>Side Pane Preferences</h3></div></div></div><p>
+        You can select display options for the shortcuts pane and the tree pane.
+      </p><div class="screenshot"><div class="mediaobject"><img src="images/preferences-side-pane.png" alt="Side Pane Preferences"></div></div><p>
+        The side pane can either display a list of shortcuts for folders in your file system, which
+        is the default, or a tree view of your file system. This page allows you to select the size
+        of the icons for the shortcuts and the tree pane. You can also specify whether emblems should
+        be displayed.
+      </p><div class="variablelist"><dl><dt><span class="term"><span class="guilabel"><strong>Icon Size</strong></span></span></dt><dd><p>
+              The size of the icons displayed in the side, ranging from <span class="guilabel"><strong>Very Small</strong></span> (around
+              16x16 pixels) to <span class="guilabel"><strong>Very Large</strong></span> (around 128x128 pixels).
+            </p></dd><dt><span class="term"><span class="guilabel"><strong>Show Icon Emblems</strong></span></span></dt><dd><p>
+              Select this option to display emblems for folders in the side pane. You can assign emblems to
+              folders in the <span class="guilabel"><strong>Properties</strong></span> dialog. Select a folder in the main area and
+              choose <span class="guimenu"><strong>File</strong></span> &#8594; <span class="guimenuitem"><strong>Properties...</strong></span>
+              from the main menu, or right-click the folder and select <span class="guimenuitem"><strong>Properties...</strong></span>
+              from the context menu.
+            </p></dd></dl></div></div><div class="sect2" lang="gl"><div class="titlepage"><div><div><h3 class="title"><a name="preferences-behavior"></a>Behavior Preferences</h3></div></div></div><p>
+        You can select the preferred behavior to interact with the file manager.
+      </p><div class="screenshot"><div class="mediaobject"><img src="images/preferences-behavior.png" alt="Behavior Preferences"></div></div><div class="variablelist"><dl><dt><span class="term"><span class="guilabel"><strong>Single click to active items</strong></span></span></dt><dd><p>
+              Select this option to perform the default action for an item when you
+              click on the item. When this option is selected, and you point to an
+              item, the title of the item is underlined and the item will be
+              selected automatically after a short delay.
+            </p><p>
+              This delay can be configured below the option. You can also disable the
+              automatic selection of items by moving the selector to the left-most
+              position.
+            </p></dd><dt><span class="term"><span class="guilabel"><strong>Double click to activate items</strong></span></span></dt><dd><p>
+              Select this option to perform the default action for an item when you
+              double click on the item, and select the item with a single click.
+            </p></dd></dl></div></div><div class="sect2" lang="gl"><div class="titlepage"><div><div><h3 class="title"><a name="preferences-advanced"></a>Advanced Preferences</h3></div></div></div><p>
+        You can control advanced features of the file manager.
+      </p><div class="screenshot"><div class="mediaobject"><img src="images/preferences-advanced.png" alt="Advanced Preferences"></div></div><div class="variablelist"><dl><dt><span class="term"><span class="guilabel"><strong>Folder Permissions</strong></span></span></dt><dd><p>
+              Choose the action that should be performed when you change the permissions of a folder in
+              the <span class="guilabel"><strong>Properties</strong></span> dialog. You can choose to let <strong class="application"><code>Thunar</code></strong>
+              ask everytime when you change folder permissions, tell it to default to applying the new permissions
+              to the folder only or to apply them recursively to the folder contents as well.
+            </p></dd><dt><span class="term"><span class="guilabel"><strong>Volume Management</strong></span></span></dt><dd><p>
+              If <strong class="application"><code>Thunar</code></strong> was installed with support for HAL and the <strong class="application"><code>thunar-volman</code></strong>
+              package is also installed, you can enable the integrated volume manager. See <a class="xref" href="using-removable-media.html#management-of-removable-drives-and-media" title="Management of Removable Drives and Media">the section called &#8220;Management of Removable Drives and Media&#8221;</a>
+              for details about this feature.
+            </p></dd></dl></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="using-removable-media.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="customizing-thunar.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Using Removable Media </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Customizing Thunar</td></tr></table></div></body></html>

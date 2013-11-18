@@ -1,0 +1,480 @@
+<refentry id="ThunarxFileInfo">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarxFileInfo.top_of_page">ThunarxFileInfo</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNARX Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarxFileInfo</refname>
+<refpurpose>Abstraction of a file handled within the file manager</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+<refsect1 id="ThunarxFileInfo.stability-level">
+<title>Stability Level</title>
+Stable, unless otherwise indicated
+</refsect1>
+
+<refsynopsisdiv id="ThunarxFileInfo.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunarx/thunarx.h&gt;
+
+                    <link linkend="ThunarxFileInfoIface">ThunarxFileInfoIface</link>;
+                    <link linkend="ThunarxFileInfo-struct">ThunarxFileInfo</link>;
+<link linkend="gchar">gchar</link>*              <link linkend="thunarx-file-info-get-name">thunarx_file_info_get_name</link>          (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);
+<link linkend="gchar">gchar</link>*              <link linkend="thunarx-file-info-get-uri">thunarx_file_info_get_uri</link>           (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);
+<link linkend="gchar">gchar</link>*              <link linkend="thunarx-file-info-get-parent-uri">thunarx_file_info_get_parent_uri</link>    (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);
+<link linkend="gchar">gchar</link>*              <link linkend="thunarx-file-info-get-uri-scheme">thunarx_file_info_get_uri_scheme</link>    (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);
+<link linkend="gchar">gchar</link>*              <link linkend="thunarx-file-info-get-mime-type">thunarx_file_info_get_mime_type</link>     (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunarx-file-info-has-mime-type">thunarx_file_info_has_mime_type</link>     (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info,
+                                                         const <link linkend="gchar">gchar</link> *mime_type);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunarx-file-info-is-directory">thunarx_file_info_is_directory</link>      (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);
+<link linkend="ThunarVfsInfo">ThunarVfsInfo</link>*      <link linkend="thunarx-file-info-get-vfs-info">thunarx_file_info_get_vfs_info</link>      (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);
+<link linkend="void">void</link>                <link linkend="thunarx-file-info-changed">thunarx_file_info_changed</link>           (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);
+<link linkend="void">void</link>                <link linkend="thunarx-file-info-renamed">thunarx_file_info_renamed</link>           (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);
+#define             <link linkend="THUNARX-TYPE-FILE-INFO-LIST:CAPS">THUNARX_TYPE_FILE_INFO_LIST</link>
+<link linkend="GList">GList</link>*              <link linkend="thunarx-file-info-list-copy">thunarx_file_info_list_copy</link>         (<link linkend="GList">GList</link> *file_infos);
+<link linkend="void">void</link>                <link linkend="thunarx-file-info-list-free">thunarx_file_info_list_free</link>         (<link linkend="GList">GList</link> *file_infos);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarxFileInfo.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GInterface">GInterface</link>
+   +----ThunarxFileInfo
+</synopsis>
+
+</refsect1>
+
+<refsect1 id="ThunarxFileInfo.prerequisites" role="prerequisites">
+<title role="prerequisites.title">Prerequisites</title>
+<para>
+ThunarxFileInfo requires
+ <link linkend="GObject">GObject</link>.</para>
+
+</refsect1>
+
+
+
+
+
+<refsect1 id="ThunarxFileInfo.signals" role="signal_proto">
+<title role="signal_proto.title">Signals</title>
+<synopsis>
+  &quot;<link linkend="ThunarxFileInfo-changed">changed</link>&quot;                                        : Run First
+  &quot;<link linkend="ThunarxFileInfo-renamed">renamed</link>&quot;                                        : Run First
+</synopsis>
+</refsect1>
+
+
+<refsect1 id="ThunarxFileInfo.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+  The <interface>ThunarxFileInfo</interface> interface provides extensions with
+  a way to access information about a file handled within the file manager.
+</para>
+</refsect1>
+
+<refsect1 id="ThunarxFileInfo.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarxFileInfoIface" role="struct">
+<title>ThunarxFileInfoIface</title>
+<indexterm zone="ThunarxFileInfoIface"><primary>ThunarxFileInfoIface</primary></indexterm><programlisting>typedef struct {
+  /* virtual methods */
+  gchar         *(*get_name)        (ThunarxFileInfo *file_info);
+
+  gchar         *(*get_uri)         (ThunarxFileInfo *file_info);
+  gchar         *(*get_parent_uri)  (ThunarxFileInfo *file_info);
+  gchar         *(*get_uri_scheme)  (ThunarxFileInfo *file_info);
+
+  gchar         *(*get_mime_type)   (ThunarxFileInfo *file_info);
+  gboolean       (*has_mime_type)   (ThunarxFileInfo *file_info,
+                                     const gchar     *mime_type);
+
+  gboolean       (*is_directory)    (ThunarxFileInfo *file_info);
+
+  ThunarVfsInfo *(*get_vfs_info)    (ThunarxFileInfo *file_info);
+
+
+  /* signals */
+  void (*changed) (ThunarxFileInfo *file_info);
+  void (*renamed) (ThunarxFileInfo *file_info);
+} ThunarxFileInfoIface;
+</programlisting>
+<para>
+  Interface with virtual methods implemented by the file manager and accessible
+  from the extensions.
+</para><variablelist role="struct">
+<varlistentry>
+<term><structfield>get_name</structfield>&nbsp;()</term>
+<listitem><simpara>See <link linkend="thunarx-file-info-get-name"><function>thunarx_file_info_get_name()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>get_uri</structfield>&nbsp;()</term>
+<listitem><simpara>See <link linkend="thunarx-file-info-get-uri"><function>thunarx_file_info_get_uri()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>get_parent_uri</structfield>&nbsp;()</term>
+<listitem><simpara>See <link linkend="thunarx-file-info-get-parent-uri"><function>thunarx_file_info_get_parent_uri()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>get_uri_scheme</structfield>&nbsp;()</term>
+<listitem><simpara>See <link linkend="thunarx-file-info-get-uri-scheme"><function>thunarx_file_info_get_uri_scheme()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>get_mime_type</structfield>&nbsp;()</term>
+<listitem><simpara>See <link linkend="thunarx-file-info-get-mime-type"><function>thunarx_file_info_get_mime_type()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>has_mime_type</structfield>&nbsp;()</term>
+<listitem><simpara>See <link linkend="thunarx-file-info-has-mime-type"><function>thunarx_file_info_has_mime_type()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>is_directory</structfield>&nbsp;()</term>
+<listitem><simpara>See <link linkend="thunarx-file-info-is-directory"><function>thunarx_file_info_is_directory()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>get_vfs_info</structfield>&nbsp;()</term>
+<listitem><simpara>See <link linkend="thunarx-file-info-get-vfs-info"><function>thunarx_file_info_get_vfs_info()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>changed</structfield>&nbsp;()</term>
+<listitem><simpara>See <link linkend="thunarx-file-info-changed"><function>thunarx_file_info_changed()</function></link>.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>renamed</structfield>&nbsp;()</term>
+<listitem><simpara>See <link linkend="thunarx-file-info-renamed"><function>thunarx_file_info_renamed()</function></link>.
+
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="ThunarxFileInfo-struct" role="struct">
+<title>ThunarxFileInfo</title>
+<indexterm zone="ThunarxFileInfo-struct"><primary>ThunarxFileInfo</primary></indexterm><programlisting>typedef struct _ThunarxFileInfo ThunarxFileInfo;</programlisting>
+<para>
+	File info type, which is mapped to the real file info implementation
+	within the file manager.
+</para></refsect2>
+<refsect2 id="thunarx-file-info-get-name" role="function">
+<title>thunarx_file_info_get_name ()</title>
+<indexterm zone="thunarx-file-info-get-name"><primary>thunarx_file_info_get_name</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              thunarx_file_info_get_name          (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);</programlisting>
+<para>
+Returns the real name of the file represented
+by <parameter>file_info</parameter> in the local file system encoding.
+You can use <link linkend="g-filename-display-name"><function>g_filename_display_name()</function></link> or similar
+functions to generate an UTF-8 version of the
+name, which is suitable for use in the user
+interface.
+</para>
+<para>
+The caller is responsible to free the returned
+string using <link linkend="g-free"><function>g_free()</function></link> when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>file_info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the real name of the file represented
+              by <parameter>file_info</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-file-info-get-uri" role="function">
+<title>thunarx_file_info_get_uri ()</title>
+<indexterm zone="thunarx-file-info-get-uri"><primary>thunarx_file_info_get_uri</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              thunarx_file_info_get_uri           (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);</programlisting>
+<para>
+Returns the escaped, fully qualified URI
+of the file object represented by <parameter>file_info</parameter>.
+You may use <link linkend="g-filename-from-uri"><function>g_filename_from_uri()</function></link> and similar
+functions to work with the returned URI.
+</para>
+<para>
+The caller is responsible to free the returned
+string using <link linkend="g-free"><function>g_free()</function></link> when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>file_info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the fully qualified URI of <parameter>file_info</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-file-info-get-parent-uri" role="function">
+<title>thunarx_file_info_get_parent_uri ()</title>
+<indexterm zone="thunarx-file-info-get-parent-uri"><primary>thunarx_file_info_get_parent_uri</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              thunarx_file_info_get_parent_uri    (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);</programlisting>
+<para>
+Returns the URI to the parent file of
+<parameter>file_info</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link> if <parameter>file_info</parameter> has
+no parent. Note that the parent URI
+may be of a different type than the
+URI of <parameter>file_info</parameter>. For example, the
+parent of "file:///" is "computer:///".
+</para>
+<para>
+The caller is responsible to free the
+returned string using <link linkend="g-free"><function>g_free()</function></link> when no
+longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>file_info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the parent URI for <parameter>file_info</parameter>
+              or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-file-info-get-uri-scheme" role="function">
+<title>thunarx_file_info_get_uri_scheme ()</title>
+<indexterm zone="thunarx-file-info-get-uri-scheme"><primary>thunarx_file_info_get_uri_scheme</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              thunarx_file_info_get_uri_scheme    (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);</programlisting>
+<para>
+Returns the URI scheme of the file represented
+by <parameter>file_info</parameter>. E.g. if <parameter>file_info</parameter> refers to the
+file "file:///usr/home", the return value will
+be "file".
+</para>
+<para>
+The caller is responsible to free the returned
+string using <link linkend="g-free"><function>g_free()</function></link> when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>file_info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the URI scheme for <parameter>file_info</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-file-info-get-mime-type" role="function">
+<title>thunarx_file_info_get_mime_type ()</title>
+<indexterm zone="thunarx-file-info-get-mime-type"><primary>thunarx_file_info_get_mime_type</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              thunarx_file_info_get_mime_type     (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);</programlisting>
+<para>
+Returns the MIME-type of the file represented by
+<parameter>file_info</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link> if no MIME-type is known for
+<parameter>file_info</parameter>.
+</para>
+<para>
+The caller is responsible to free the returned
+string using <link linkend="g-free"><function>g_free()</function></link> when no longer needed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>file_info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the MIME-type for <parameter>file_info</parameter> or
+              <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-file-info-has-mime-type" role="function">
+<title>thunarx_file_info_has_mime_type ()</title>
+<indexterm zone="thunarx-file-info-has-mime-type"><primary>thunarx_file_info_has_mime_type</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunarx_file_info_has_mime_type     (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info,
+                                                         const <link linkend="gchar">gchar</link> *mime_type);</programlisting>
+<para>
+Checks whether <parameter>file_info</parameter> is of the given <parameter>mime_type</parameter>
+or whether the MIME-type of <parameter>file_info</parameter> is a subclass
+of <parameter>mime_type</parameter>.
+</para>
+<para>
+This is the preferred way for most extensions to check
+whether they support a given file or not, and you should
+consider using this method rather than
+<link linkend="thunarx-file-info-get-mime-type"><function>thunarx_file_info_get_mime_type()</function></link>. A simple example would
+be a menu extension that performs a certain action on
+text files. In this case you want to check whether a given
+<link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link> refers to any kind of text file, not only
+to "text/plain" (e.g. this also includes "text/xml" and
+"application/x-desktop").
+</para>
+<para>
+But you should be aware that this method may take some
+time to test whether <parameter>mime_type</parameter> is valid for <parameter>file_info</parameter>,
+so don't call it too often.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>file_info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>mime_type</parameter>&nbsp;:</term>
+<listitem><simpara> a MIME-type (e.g. "text/plain").
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>mime_type</parameter> is valid for <parameter>file_info</parameter>,
+              else <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-file-info-is-directory" role="function">
+<title>thunarx_file_info_is_directory ()</title>
+<indexterm zone="thunarx-file-info-is-directory"><primary>thunarx_file_info_is_directory</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunarx_file_info_is_directory      (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);</programlisting>
+<para>
+Checks whether <parameter>file_info</parameter> refers to a directory.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>file_info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>file_info</parameter> is a directory.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-file-info-get-vfs-info" role="function">
+<title>thunarx_file_info_get_vfs_info ()</title>
+<indexterm zone="thunarx-file-info-get-vfs-info"><primary>thunarx_file_info_get_vfs_info</primary></indexterm><programlisting><link linkend="ThunarVfsInfo">ThunarVfsInfo</link>*      thunarx_file_info_get_vfs_info      (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);</programlisting>
+<para>
+Returns the <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link> associated with <parameter>file_info</parameter>,
+which includes additional information about the <parameter>file_info</parameter>
+as queried from the VFS library earlier. The caller is
+responsible to free the returned <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link> object
+using <link linkend="thunar-vfs-info-unref"><function>thunar_vfs_info_unref()</function></link> when no longer needed.
+</para>
+<para>
+Note that the <application>thunarx</application> library itself
+is not linked to the <application>thunar-vfs</application> library,
+and so, if you need to use this method, you'll need to include
+<code>&lt;thunar-vfs/thunar-vfs.h&gt;</code> in your code and
+add <code>`pkg-config --cflags thunar-vfs-1`</code> to your
+<envar>CFLAGS</envar>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>file_info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="ThunarVfsInfo"><type>ThunarVfsInfo</type></link> object associated with <parameter>file_info</parameter>,
+              which MUST be freed using <link linkend="thunar-vfs-info-unref"><function>thunar_vfs_info_unref()</function></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-file-info-changed" role="function">
+<title>thunarx_file_info_changed ()</title>
+<indexterm zone="thunarx-file-info-changed"><primary>thunarx_file_info_changed</primary></indexterm><programlisting><link linkend="void">void</link>                thunarx_file_info_changed           (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);</programlisting>
+<para>
+Emits the ::changed signal on <parameter>file_info</parameter>. This method should not
+be invoked by Thunar plugins, instead the file manager itself
+will use this method to emit ::changed whenever it notices a
+change on <parameter>file_info</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>file_info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-file-info-renamed" role="function">
+<title>thunarx_file_info_renamed ()</title>
+<indexterm zone="thunarx-file-info-renamed"><primary>thunarx_file_info_renamed</primary></indexterm><programlisting><link linkend="void">void</link>                thunarx_file_info_renamed           (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info);</programlisting>
+<para>
+Emits the ::renamed signal on <parameter>file_info</parameter>. This method should
+not be invoked by Thunar plugins, instead the file manager
+will emit this signal whenever the user renamed the <parameter>file_info</parameter>.
+</para>
+<para>
+The plugins should instead connect to the ::renamed signal
+and update it's internal state and it's user interface
+after the file manager renamed a file.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>file_info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="THUNARX-TYPE-FILE-INFO-LIST:CAPS" role="macro">
+<title>THUNARX_TYPE_FILE_INFO_LIST</title>
+<indexterm zone="THUNARX-TYPE-FILE-INFO-LIST:CAPS"><primary>THUNARX_TYPE_FILE_INFO_LIST</primary></indexterm><programlisting>#define THUNARX_TYPE_FILE_INFO_LIST (thunarx_file_info_list_get_type ())
+</programlisting>
+<para>
+  The <link linkend="GType"><type>GType</type></link> for a boxed type holding a <link linkend="GList"><type>GList</type></link> of <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link><!---->s.
+  See <link linkend="thunarx-file-info-list-copy"><function>thunarx_file_info_list_copy()</function></link> and <link linkend="thunarx-file-info-list-free"><function>thunarx_file_info_list_free()</function></link>.
+</para></refsect2>
+<refsect2 id="thunarx-file-info-list-copy" role="function">
+<title>thunarx_file_info_list_copy ()</title>
+<indexterm zone="thunarx-file-info-list-copy"><primary>thunarx_file_info_list_copy</primary></indexterm><programlisting><link linkend="GList">GList</link>*              thunarx_file_info_list_copy         (<link linkend="GList">GList</link> *file_infos);</programlisting>
+<para>
+Does a deep copy of <parameter>file_infos</parameter> and returns the
+new list.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>file_infos</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GList"><type>GList</type></link> of <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link><!---->s.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a copy of <parameter>file_infos</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunarx-file-info-list-free" role="function">
+<title>thunarx_file_info_list_free ()</title>
+<indexterm zone="thunarx-file-info-list-free"><primary>thunarx_file_info_list_free</primary></indexterm><programlisting><link linkend="void">void</link>                thunarx_file_info_list_free         (<link linkend="GList">GList</link> *file_infos);</programlisting>
+<para>
+Frees the resources allocated for the <parameter>file_infos</parameter>
+list and decreases the reference count on the
+<link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link><!---->s contained within.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>file_infos</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GList"><type>GList</type></link> of <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link><!---->s.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+<refsect1 id="ThunarxFileInfo.signal-details" role="signals">
+<title role="signals.title">Signal Details</title>
+<refsect2 id="ThunarxFileInfo-changed"><title>The <literal>&quot;changed&quot;</literal> signal</title>
+<indexterm zone="ThunarxFileInfo-changed"><primary>ThunarxFileInfo::changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info,
+                                                        <link linkend="gpointer">gpointer</link>         user_data)      : Run First</programlisting>
+<para>
+Emitted whenever the system notices a change to <parameter>file_info</parameter>.
+</para>
+<para>
+Thunar plugins should use this signal to stay informed about
+changes to a <parameter>file_info</parameter> for which they currently display
+information (i.e. in a <link linkend="ThunarxPropertyPage"><type>ThunarxPropertyPage</type></link>), and update
+it's user interface whenever a change is noticed on <parameter>file_info</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>file_info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2><refsect2 id="ThunarxFileInfo-renamed"><title>The <literal>&quot;renamed&quot;</literal> signal</title>
+<indexterm zone="ThunarxFileInfo-renamed"><primary>ThunarxFileInfo::renamed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="ThunarxFileInfo">ThunarxFileInfo</link> *file_info,
+                                                        <link linkend="gpointer">gpointer</link>         user_data)      : Run First</programlisting>
+<para>
+Emitted when the <parameter>file_info</parameter> is renamed to another
+name.
+</para>
+<para>
+For example, within Thunar, <link linkend="ThunarFolder"><type>ThunarFolder</type></link> uses this
+signal to reregister it's VFS directory monitor, after
+the corresponding file was renamed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>file_info</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxFileInfo"><type>ThunarxFileInfo</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+</refsect1>
+
+
+
+</refentry>

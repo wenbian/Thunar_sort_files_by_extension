@@ -1,0 +1,204 @@
+<refentry id="ThunarxPreferencesProvider">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarxPreferencesProvider.top_of_page">ThunarxPreferencesProvider</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNARX Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarxPreferencesProvider</refname>
+<refpurpose>The interface to extensions that provide preferences</refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+<refsect1 id="ThunarxPreferencesProvider.stability-level">
+<title>Stability Level</title>
+Stable, unless otherwise indicated
+</refsect1>
+
+<refsynopsisdiv id="ThunarxPreferencesProvider.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunarx/thunarx.h&gt;
+
+                    <link linkend="ThunarxPreferencesProviderIface">ThunarxPreferencesProviderIface</link>;
+                    <link linkend="ThunarxPreferencesProvider-struct">ThunarxPreferencesProvider</link>;
+<link linkend="GList">GList</link>*              <link linkend="thunarx-preferences-provider-get-actions">thunarx_preferences_provider_get_actions</link>
+                                                        (<link linkend="ThunarxPreferencesProvider">ThunarxPreferencesProvider</link> *provider,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *window);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarxPreferencesProvider.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GInterface">GInterface</link>
+   +----ThunarxPreferencesProvider
+</synopsis>
+
+</refsect1>
+
+<refsect1 id="ThunarxPreferencesProvider.prerequisites" role="prerequisites">
+<title role="prerequisites.title">Prerequisites</title>
+<para>
+ThunarxPreferencesProvider requires
+ <link linkend="GObject">GObject</link>.</para>
+
+</refsect1>
+
+
+
+
+
+
+
+<refsect1 id="ThunarxPreferencesProvider.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+  The ThunarxPreferencesProvider interface is implemented by extensions that
+  want to register additional actions in the preferences menu of the file
+  manager. In general this should only be done by extensions that are closely
+  tied to the file manager (for example, the <literal>thunar-uca</literal> is
+  such an extension, while an extension that just adds <guimenuitem>Compress
+  file</guimenuitem> and <guimenuitem>Uncompress file</guimenuitem> to the
+  context menu of compressed files should not add their own preferences to
+  the file manager menu, because it should use desktop-wide settings for
+  archive managers instead).
+</para>
+
+<para>
+  The <link linkend="GtkAction"><type>GtkAction</type></link>s returned from the
+  <link linkend="thunarx-preferences-provider-get-actions"><function>thunarx_preferences_provider_get_actions()</function></link> method must be namespaced with the
+  model to avoid collision with internal file manager actions and actions provided
+  by other extensions. For example, the preferences action provided by the
+  <literal>thunar-uca</literal> extension is called
+  <literal>ThunarUca::manage-actions</literal>.
+</para>
+
+<example>
+  <title>Preferences provider example</title>
+
+  <programlisting>
+static void hello_preferences_provider_init (ThunarxPreferencesProviderIface *iface);
+static void hello_get_actions               (ThunarxPreferencesProvider      *provider,
+                                             GtkWidget                       *window);
+
+THUNARX_DEFINE_TYPE_WITH_CODE (Hello, hello, G_TYPE_OBJECT,
+                               THUNARX_IMPLEMENT_INTERFACE (THUNARX_TYPE_PREFERENCES_PROVIDER,
+                                                            hello_preferences_provider_init));
+
+static void
+hello_preferences_provider_init (ThunarxPreferencesProviderIface *iface)
+{
+  iface->get_actions = hello_get_actions;
+}
+
+static void
+hello_activated (GtkWidget *window)
+{
+  GtkWidget *dialog;
+
+  dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                   GTK_DIALOG_MODAL
+                                   | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   GTK_MESSAGE_INFO,
+                                   GTK_BUTTONS_OK,
+                                   "Hello World!");
+  gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (dialog);
+}
+
+static GList*
+hello_get_actions (ThunarxPreferencesProvider *provider,
+                   GtkWidget                  *window)
+{
+  GtkAction *action;
+  GClosure  *closure;
+
+  action = gtk_action_new ("Hello::say-hello", "Say hello", "Say hello", NULL);
+  closure = g_cclosure_object_new_swap (G_CALLBACK (hello_activated), G_OBJECT (window));
+  g_signal_connect_closure (G_OBJECT (action), "activate", closure, TRUE);
+
+  return g_list_prepend (NULL, action);
+}
+  </programlisting>
+</example>
+</refsect1>
+
+<refsect1 id="ThunarxPreferencesProvider.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarxPreferencesProviderIface" role="struct">
+<title>ThunarxPreferencesProviderIface</title>
+<indexterm zone="ThunarxPreferencesProviderIface"><primary>ThunarxPreferencesProviderIface</primary></indexterm><programlisting>typedef struct {
+  GList *(*get_actions) (ThunarxPreferencesProvider *provider,
+                         GtkWidget                  *window);
+} ThunarxPreferencesProviderIface;
+</programlisting>
+<para>
+  Interface with virtual methods implementation by extensions that
+  want to install preferences actions in the file managers menu.
+</para>
+
+<para>
+  Providers don't need to implement all of the virtual methods listed
+  in the interface.
+</para><variablelist role="struct">
+<varlistentry>
+<term><structfield>get_actions</structfield>&nbsp;()</term>
+<listitem><simpara>See <link linkend="thunarx-preferences-provider-get-actions"><function>thunarx_preferences_provider_get_actions()</function></link>.
+
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="ThunarxPreferencesProvider-struct" role="struct">
+<title>ThunarxPreferencesProvider</title>
+<indexterm zone="ThunarxPreferencesProvider-struct"><primary>ThunarxPreferencesProvider</primary></indexterm><programlisting>typedef struct _ThunarxPreferencesProvider ThunarxPreferencesProvider;</programlisting>
+<para>
+  Preferences provider type.
+</para></refsect2>
+<refsect2 id="thunarx-preferences-provider-get-actions" role="function">
+<title>thunarx_preferences_provider_get_actions ()</title>
+<indexterm zone="thunarx-preferences-provider-get-actions"><primary>thunarx_preferences_provider_get_actions</primary></indexterm><programlisting><link linkend="GList">GList</link>*              thunarx_preferences_provider_get_actions
+                                                        (<link linkend="ThunarxPreferencesProvider">ThunarxPreferencesProvider</link> *provider,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *window);</programlisting>
+<para>
+Returns the list of <link linkend="GtkAction"><type>GtkAction</type></link><!---->s that <parameter>provider</parameter> has to offer
+as preferences within <parameter>window</parameter>. These actions will usually be added
+to the builtin list of preferences in the "Edit" menu of the file
+manager's <parameter>window</parameter>.
+</para>
+<para>
+Plugin writers that implement this interface should make sure to
+choose descriptive action names and tooltips, and not to crowd the
+"Edit" menu too much. That said, think twice before implementing
+this interface, as too many preference actions will render the
+file manager useless over time!
+</para>
+<para>
+The caller is responsible to free the returned list of actions using
+something like this when no longer needed:
+<informalexample><programlisting>
+g_list_foreach (list, (GFunc) g_object_unref, NULL);
+g_list_free (list);
+</programlisting></informalexample></para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>provider</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarxPreferencesProvider"><type>ThunarxPreferencesProvider</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>window</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="GtkWindow"><type>GtkWindow</type></link> within which the actions will be used.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the list of <link linkend="GtkAction"><type>GtkAction</type></link><!---->s that <parameter>provider</parameter> has
+              to offer as preferences within <parameter>window</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

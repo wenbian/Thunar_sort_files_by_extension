@@ -1,0 +1,170 @@
+<refentry id="ThunarVfsUser">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarVfsUser.top_of_page">ThunarVfsUser</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNAR-VFS Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarVfsUser</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="ThunarVfsUser.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunar-vfs/thunar-vfs.h&gt;
+
+                    <link linkend="ThunarVfsUser-struct">ThunarVfsUser</link>;
+<link linkend="GList">GList</link>*              <link linkend="thunar-vfs-user-get-groups">thunar_vfs_user_get_groups</link>          (<link linkend="ThunarVfsUser">ThunarVfsUser</link> *user);
+<link linkend="ThunarVfsGroup">ThunarVfsGroup</link>*     <link linkend="thunar-vfs-user-get-primary-group">thunar_vfs_user_get_primary_group</link>   (<link linkend="ThunarVfsUser">ThunarVfsUser</link> *user);
+<link linkend="ThunarVfsUserId">ThunarVfsUserId</link>     <link linkend="thunar-vfs-user-get-id">thunar_vfs_user_get_id</link>              (<link linkend="ThunarVfsUser">ThunarVfsUser</link> *user);
+const <link linkend="gchar">gchar</link>*        <link linkend="thunar-vfs-user-get-name">thunar_vfs_user_get_name</link>            (<link linkend="ThunarVfsUser">ThunarVfsUser</link> *user);
+const <link linkend="gchar">gchar</link>*        <link linkend="thunar-vfs-user-get-real-name">thunar_vfs_user_get_real_name</link>       (<link linkend="ThunarVfsUser">ThunarVfsUser</link> *user);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-user-is-me">thunar_vfs_user_is_me</link>               (<link linkend="ThunarVfsUser">ThunarVfsUser</link> *user);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarVfsUser.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----ThunarVfsUser
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+
+
+<refsect1 id="ThunarVfsUser.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="ThunarVfsUser.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarVfsUser-struct" role="struct">
+<title>ThunarVfsUser</title>
+<indexterm zone="ThunarVfsUser-struct"><primary>ThunarVfsUser</primary></indexterm><programlisting>typedef struct _ThunarVfsUser ThunarVfsUser;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="thunar-vfs-user-get-groups" role="function">
+<title>thunar_vfs_user_get_groups ()</title>
+<indexterm zone="thunar-vfs-user-get-groups"><primary>thunar_vfs_user_get_groups</primary></indexterm><programlisting><link linkend="GList">GList</link>*              thunar_vfs_user_get_groups          (<link linkend="ThunarVfsUser">ThunarVfsUser</link> *user);</programlisting>
+<para>
+Returns all <link linkend="ThunarVfsGroup"><type>ThunarVfsGroup</type></link><!---->s that <parameter>user</parameter>
+belongs to. The returned list and the <link linkend="ThunarVfsGroup"><type>ThunarVfsGroup</type></link><!---->s
+contained within the list are owned by <parameter>user</parameter> and must not be
+freed or altered by the caller.
+</para>
+<para>
+Note that if <parameter>user</parameter> has a primary group, this group will
+also be contained in the returned list.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>user</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsUser"><type>ThunarVfsUser</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the groups that <parameter>user</parameter> belongs to.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-user-get-primary-group" role="function">
+<title>thunar_vfs_user_get_primary_group ()</title>
+<indexterm zone="thunar-vfs-user-get-primary-group"><primary>thunar_vfs_user_get_primary_group</primary></indexterm><programlisting><link linkend="ThunarVfsGroup">ThunarVfsGroup</link>*     thunar_vfs_user_get_primary_group   (<link linkend="ThunarVfsUser">ThunarVfsUser</link> *user);</programlisting>
+<para>
+Returns the primary group of <parameter>user</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link> if <parameter>user</parameter>
+has no primary group.
+</para>
+<para>
+No reference is taken for the caller, so you must
+not call <link linkend="g-object-unref"><function>g_object_unref()</function></link> on the returned object.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>user</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsUser"><type>ThunarVfsUser</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the primary group of <parameter>user</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-user-get-id" role="function">
+<title>thunar_vfs_user_get_id ()</title>
+<indexterm zone="thunar-vfs-user-get-id"><primary>thunar_vfs_user_get_id</primary></indexterm><programlisting><link linkend="ThunarVfsUserId">ThunarVfsUserId</link>     thunar_vfs_user_get_id              (<link linkend="ThunarVfsUser">ThunarVfsUser</link> *user);</programlisting>
+<para>
+Returns the unique id of <parameter>user</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>user</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsUser"><type>ThunarVfsUser</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the unique id of <parameter>user</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-user-get-name" role="function">
+<title>thunar_vfs_user_get_name ()</title>
+<indexterm zone="thunar-vfs-user-get-name"><primary>thunar_vfs_user_get_name</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunar_vfs_user_get_name            (<link linkend="ThunarVfsUser">ThunarVfsUser</link> *user);</programlisting>
+<para>
+Returns the name of <parameter>user</parameter>. If the system is
+unable to determine the account name of <parameter>user</parameter>,
+it'll return the user id as string.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>user</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsUser"><type>ThunarVfsUser</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the name of <parameter>user</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-user-get-real-name" role="function">
+<title>thunar_vfs_user_get_real_name ()</title>
+<indexterm zone="thunar-vfs-user-get-real-name"><primary>thunar_vfs_user_get_real_name</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunar_vfs_user_get_real_name       (<link linkend="ThunarVfsUser">ThunarVfsUser</link> *user);</programlisting>
+<para>
+Returns the real name of <parameter>user</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link> if the
+real name for <parameter>user</parameter> is not known to the underlying
+system.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>user</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsUser"><type>ThunarVfsUser</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the real name for <parameter>user</parameter> or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-user-is-me" role="function">
+<title>thunar_vfs_user_is_me ()</title>
+<indexterm zone="thunar-vfs-user-is-me"><primary>thunar_vfs_user_is_me</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_user_is_me               (<link linkend="ThunarVfsUser">ThunarVfsUser</link> *user);</programlisting>
+<para>
+Checks whether the owner of the current process is
+described by <parameter>user</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>user</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsUser"><type>ThunarVfsUser</type></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>user</parameter> is the owner of the current
+              process, else <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

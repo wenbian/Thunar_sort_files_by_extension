@@ -1,0 +1,535 @@
+<refentry id="ThunarVfsVolume">
+<refmeta>
+<refentrytitle role="top_of_page" id="ThunarVfsVolume.top_of_page">ThunarVfsVolume</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>THUNAR-VFS Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>ThunarVfsVolume</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="ThunarVfsVolume.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;thunar-vfs/thunar-vfs.h&gt;
+
+enum                <link linkend="ThunarVfsVolumeKind">ThunarVfsVolumeKind</link>;
+enum                <link linkend="ThunarVfsVolumeStatus">ThunarVfsVolumeStatus</link>;
+                    <link linkend="ThunarVfsVolume-struct">ThunarVfsVolume</link>;
+<link linkend="ThunarVfsVolumeKind">ThunarVfsVolumeKind</link> <link linkend="thunar-vfs-volume-get-kind">thunar_vfs_volume_get_kind</link>          (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume);
+const <link linkend="gchar">gchar</link>*        <link linkend="thunar-vfs-volume-get-name">thunar_vfs_volume_get_name</link>          (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume);
+<link linkend="ThunarVfsVolumeStatus">ThunarVfsVolumeStatus</link> <link linkend="thunar-vfs-volume-get-status">thunar_vfs_volume_get_status</link>      (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume);
+<link linkend="ThunarVfsPath">ThunarVfsPath</link>*      <link linkend="thunar-vfs-volume-get-mount-point">thunar_vfs_volume_get_mount_point</link>   (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-volume-is-mounted">thunar_vfs_volume_is_mounted</link>        (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-volume-is-present">thunar_vfs_volume_is_present</link>        (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-volume-is-ejectable">thunar_vfs_volume_is_ejectable</link>      (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-volume-is-removable">thunar_vfs_volume_is_removable</link>      (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume);
+const <link linkend="gchar">gchar</link>*        <link linkend="thunar-vfs-volume-lookup-icon-name">thunar_vfs_volume_lookup_icon_name</link>  (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume,
+                                                         <link linkend="GtkIconTheme">GtkIconTheme</link> *icon_theme);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-volume-eject">thunar_vfs_volume_eject</link>             (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *window,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-volume-mount">thunar_vfs_volume_mount</link>             (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *window,
+                                                         <link linkend="GError">GError</link> **error);
+<link linkend="gboolean">gboolean</link>            <link linkend="thunar-vfs-volume-unmount">thunar_vfs_volume_unmount</link>           (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *window,
+                                                         <link linkend="GError">GError</link> **error);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="ThunarVfsVolume.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----ThunarVfsVolume
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+<refsect1 id="ThunarVfsVolume.signals" role="signal_proto">
+<title role="signal_proto.title">Signals</title>
+<synopsis>
+  &quot;<link linkend="ThunarVfsVolume-changed">changed</link>&quot;                                        : Run Last
+  &quot;<link linkend="ThunarVfsVolume-mounted">mounted</link>&quot;                                        : Run Last
+  &quot;<link linkend="ThunarVfsVolume-pre-unmount">pre-unmount</link>&quot;                                    : Run Last
+  &quot;<link linkend="ThunarVfsVolume-unmounted">unmounted</link>&quot;                                      : Run Last
+</synopsis>
+</refsect1>
+
+
+<refsect1 id="ThunarVfsVolume.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="ThunarVfsVolume.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ThunarVfsVolumeKind" role="enum">
+<title>enum ThunarVfsVolumeKind</title>
+<indexterm zone="ThunarVfsVolumeKind"><primary>ThunarVfsVolumeKind</primary></indexterm><programlisting>typedef enum
+{
+  THUNAR_VFS_VOLUME_KIND_UNKNOWN,
+  THUNAR_VFS_VOLUME_KIND_CDROM,
+  THUNAR_VFS_VOLUME_KIND_CDR,
+  THUNAR_VFS_VOLUME_KIND_CDRW,
+  THUNAR_VFS_VOLUME_KIND_DVDROM,
+  THUNAR_VFS_VOLUME_KIND_DVDRAM,
+  THUNAR_VFS_VOLUME_KIND_DVDR,
+  THUNAR_VFS_VOLUME_KIND_DVDRW,
+  THUNAR_VFS_VOLUME_KIND_DVDPLUSR,
+  THUNAR_VFS_VOLUME_KIND_DVDPLUSRW,
+  THUNAR_VFS_VOLUME_KIND_FLOPPY,
+  THUNAR_VFS_VOLUME_KIND_HARDDISK,
+  THUNAR_VFS_VOLUME_KIND_USBSTICK,
+  THUNAR_VFS_VOLUME_KIND_AUDIO_PLAYER,
+  THUNAR_VFS_VOLUME_KIND_AUDIO_CD,
+  THUNAR_VFS_VOLUME_KIND_MEMORY_CARD,
+  THUNAR_VFS_VOLUME_KIND_REMOVABLE_DISK,
+} ThunarVfsVolumeKind;
+</programlisting>
+<para>
+Describes the type of a VFS volume.</para>
+<para>
+
+</para><variablelist role="enum">
+<varlistentry id="THUNAR-VFS-VOLUME-KIND-UNKNOWN:CAPS" role="constant">
+<term><literal>THUNAR_VFS_VOLUME_KIND_UNKNOWN</literal></term>
+<listitem><simpara> Unknown volume.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-VOLUME-KIND-CDROM:CAPS" role="constant">
+<term><literal>THUNAR_VFS_VOLUME_KIND_CDROM</literal></term>
+<listitem><simpara> CD-ROMs.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-VOLUME-KIND-CDR:CAPS" role="constant">
+<term><literal>THUNAR_VFS_VOLUME_KIND_CDR</literal></term>
+<listitem><simpara> CD-Rs.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-VOLUME-KIND-CDRW:CAPS" role="constant">
+<term><literal>THUNAR_VFS_VOLUME_KIND_CDRW</literal></term>
+<listitem><simpara> CD-RWs.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-VOLUME-KIND-DVDROM:CAPS" role="constant">
+<term><literal>THUNAR_VFS_VOLUME_KIND_DVDROM</literal></term>
+<listitem><simpara> DVD-ROMs.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-VOLUME-KIND-DVDRAM:CAPS" role="constant">
+<term><literal>THUNAR_VFS_VOLUME_KIND_DVDRAM</literal></term>
+<listitem><simpara> DVD-RAMs.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-VOLUME-KIND-DVDR:CAPS" role="constant">
+<term><literal>THUNAR_VFS_VOLUME_KIND_DVDR</literal></term>
+<listitem><simpara> DVD-Rs.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-VOLUME-KIND-DVDRW:CAPS" role="constant">
+<term><literal>THUNAR_VFS_VOLUME_KIND_DVDRW</literal></term>
+<listitem><simpara> DVD-RWs.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-VOLUME-KIND-DVDPLUSR:CAPS" role="constant">
+<term><literal>THUNAR_VFS_VOLUME_KIND_DVDPLUSR</literal></term>
+<listitem><simpara> DVD+Rs.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-VOLUME-KIND-DVDPLUSRW:CAPS" role="constant">
+<term><literal>THUNAR_VFS_VOLUME_KIND_DVDPLUSRW</literal></term>
+<listitem><simpara> DVD+RWs.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-VOLUME-KIND-FLOPPY:CAPS" role="constant">
+<term><literal>THUNAR_VFS_VOLUME_KIND_FLOPPY</literal></term>
+<listitem><simpara> Floppy drives.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-VOLUME-KIND-HARDDISK:CAPS" role="constant">
+<term><literal>THUNAR_VFS_VOLUME_KIND_HARDDISK</literal></term>
+<listitem><simpara> Hard disk drives.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-VOLUME-KIND-USBSTICK:CAPS" role="constant">
+<term><literal>THUNAR_VFS_VOLUME_KIND_USBSTICK</literal></term>
+<listitem><simpara> USB sticks.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-VOLUME-KIND-AUDIO-PLAYER:CAPS" role="constant">
+<term><literal>THUNAR_VFS_VOLUME_KIND_AUDIO_PLAYER</literal></term>
+<listitem><simpara> Portable audio players (i.e. iPod).
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-VOLUME-KIND-AUDIO-CD:CAPS" role="constant">
+<term><literal>THUNAR_VFS_VOLUME_KIND_AUDIO_CD</literal></term>
+<listitem><simpara> Audio CDs.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-VOLUME-KIND-MEMORY-CARD:CAPS" role="constant">
+<term><literal>THUNAR_VFS_VOLUME_KIND_MEMORY_CARD</literal></term>
+<listitem><simpara> Memory cards.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="THUNAR-VFS-VOLUME-KIND-REMOVABLE-DISK:CAPS" role="constant">
+<term><literal>THUNAR_VFS_VOLUME_KIND_REMOVABLE_DISK</literal></term>
+<listitem><simpara> Other removable disks.
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="ThunarVfsVolumeStatus" role="enum">
+<title>enum ThunarVfsVolumeStatus</title>
+<indexterm zone="ThunarVfsVolumeStatus"><primary>ThunarVfsVolumeStatus</primary></indexterm><programlisting>typedef enum /*&lt; flags &gt;*/
+{
+  THUNAR_VFS_VOLUME_STATUS_MOUNTED   = 1 &lt;&lt; 0,
+  THUNAR_VFS_VOLUME_STATUS_PRESENT   = 1 &lt;&lt; 1,
+  THUNAR_VFS_VOLUME_STATUS_MOUNTABLE = 1 &lt;&lt; 2,
+} ThunarVfsVolumeStatus;
+</programlisting>
+<para>
+Describes the current status of a VFS volume.</para>
+<para>
+
+</para><variablelist role="enum">
+</variablelist></refsect2>
+<refsect2 id="ThunarVfsVolume-struct" role="struct">
+<title>ThunarVfsVolume</title>
+<indexterm zone="ThunarVfsVolume-struct"><primary>ThunarVfsVolume</primary></indexterm><programlisting>typedef struct _ThunarVfsVolume ThunarVfsVolume;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="thunar-vfs-volume-get-kind" role="function">
+<title>thunar_vfs_volume_get_kind ()</title>
+<indexterm zone="thunar-vfs-volume-get-kind"><primary>thunar_vfs_volume_get_kind</primary></indexterm><programlisting><link linkend="ThunarVfsVolumeKind">ThunarVfsVolumeKind</link> thunar_vfs_volume_get_kind          (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume);</programlisting>
+<para>
+Returns the kind of drive/device representd by <parameter>volume</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the kind of <parameter>volume</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-volume-get-name" role="function">
+<title>thunar_vfs_volume_get_name ()</title>
+<indexterm zone="thunar-vfs-volume-get-name"><primary>thunar_vfs_volume_get_name</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunar_vfs_volume_get_name          (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume);</programlisting>
+<para>
+Returns the name of the <parameter>volume</parameter>. This is usually the
+name of the device or the label of the medium, if a
+medium is present.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the name of <parameter>volume</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-volume-get-status" role="function">
+<title>thunar_vfs_volume_get_status ()</title>
+<indexterm zone="thunar-vfs-volume-get-status"><primary>thunar_vfs_volume_get_status</primary></indexterm><programlisting><link linkend="ThunarVfsVolumeStatus">ThunarVfsVolumeStatus</link> thunar_vfs_volume_get_status      (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume);</programlisting>
+<para>
+Determines the current status of the <parameter>volume</parameter>, e.g. whether
+or not the <parameter>volume</parameter> is currently mounted, or whether a
+medium is present.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the status for <parameter>volume</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-volume-get-mount-point" role="function">
+<title>thunar_vfs_volume_get_mount_point ()</title>
+<indexterm zone="thunar-vfs-volume-get-mount-point"><primary>thunar_vfs_volume_get_mount_point</primary></indexterm><programlisting><link linkend="ThunarVfsPath">ThunarVfsPath</link>*      thunar_vfs_volume_get_mount_point   (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume);</programlisting>
+<para>
+Determines the current mount point for <parameter>volume</parameter>. If <parameter>volume</parameter>
+is mounted this will be the location at which it is currently
+mounted. Else it will be the location where <parameter>volume</parameter> is most
+probably being mounted. Note that this location may change
+during a call to <link linkend="thunar-vfs-volume-mount"><function>thunar_vfs_volume_mount()</function></link>, so be sure to
+check the mount point after the call to <link linkend="thunar-vfs-volume-mount"><function>thunar_vfs_volume_mount()</function></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the path which identifies the path where
+              the volume will be mounted (or is already
+              mounted).
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-volume-is-mounted" role="function">
+<title>thunar_vfs_volume_is_mounted ()</title>
+<indexterm zone="thunar-vfs-volume-is-mounted"><primary>thunar_vfs_volume_is_mounted</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_volume_is_mounted        (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume);</programlisting>
+<para>
+Determines whether <parameter>volume</parameter> is currently mounted into the
+filesystem hierarchy.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>volume</parameter> is mounted, else <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-volume-is-present" role="function">
+<title>thunar_vfs_volume_is_present ()</title>
+<indexterm zone="thunar-vfs-volume-is-present"><primary>thunar_vfs_volume_is_present</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_volume_is_present        (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume);</programlisting>
+<para>
+Determines whether a medium is currently inserted for
+<parameter>volume</parameter>, e.g. for a CD-ROM drive, this will be <link linkend="TRUE:CAPS"><literal>TRUE</literal></link>
+only if a disc is present in the slot.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>volume</parameter> is present, else <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-volume-is-ejectable" role="function">
+<title>thunar_vfs_volume_is_ejectable ()</title>
+<indexterm zone="thunar-vfs-volume-is-ejectable"><primary>thunar_vfs_volume_is_ejectable</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_volume_is_ejectable      (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume);</programlisting>
+<para>
+Determines whether the current user is allowed to eject the medium
+for <parameter>volume</parameter>. This method should return <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> only if a medium is
+present and the <parameter>volume</parameter> is removable. Still, there's no warranty
+that a call to <link linkend="thunar-vfs-volume-eject"><function>thunar_vfs_volume_eject()</function></link> will succeed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> whether the medium for <parameter>volume</parameter> can be ejected.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-volume-is-removable" role="function">
+<title>thunar_vfs_volume_is_removable ()</title>
+<indexterm zone="thunar-vfs-volume-is-removable"><primary>thunar_vfs_volume_is_removable</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_volume_is_removable      (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume);</programlisting>
+<para>
+Determines whether <parameter>volume</parameter> is a removable device, for example
+a CD-ROM, an USB stick or a floppy drive.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>volume</parameter> is a removable device, else <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-volume-lookup-icon-name" role="function">
+<title>thunar_vfs_volume_lookup_icon_name ()</title>
+<indexterm zone="thunar-vfs-volume-lookup-icon-name"><primary>thunar_vfs_volume_lookup_icon_name</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        thunar_vfs_volume_lookup_icon_name  (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume,
+                                                         <link linkend="GtkIconTheme">GtkIconTheme</link> *icon_theme);</programlisting>
+<para>
+Tries to find a suitable icon for <parameter>volume</parameter> in the given <parameter>icon_theme</parameter> and
+returns its name. If no suitable icon is found in <parameter>icon_theme</parameter>, then
+a fallback icon name will be returned. This way you can always count
+on this method to return a valid string.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>icon_theme</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GtkIconTheme"><type>GtkIconTheme</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the icon name.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-volume-eject" role="function">
+<title>thunar_vfs_volume_eject ()</title>
+<indexterm zone="thunar-vfs-volume-eject"><primary>thunar_vfs_volume_eject</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_volume_eject             (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *window,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Tries to eject the medium present for <parameter>volume</parameter> (or atleast to
+unmount the <parameter>volume</parameter>).
+</para>
+<para>
+If ejecting <parameter>volume</parameter> requires some complex user interaction
+(basicly everything else than displaying an error dialog), it
+should popup a modal dialog on <parameter>window</parameter> (or on the default
+<link linkend="GdkScreen"><type>GdkScreen</type></link> if <parameter>window</parameter> is <link linkend="NULL:CAPS"><literal>NULL</literal></link>). But be aware, that if an
+implementation of <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> performs user interaction
+during a call to this method, it must implement this method
+in a reentrant fashion!</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>window</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GtkWindow"><type>GtkWindow</type></link> or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if the medium for <parameter>volume</parameter> was successfully
+              ejected (or atleast the <parameter>volume</parameter> was unmounted
+              successfully), else <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-volume-mount" role="function">
+<title>thunar_vfs_volume_mount ()</title>
+<indexterm zone="thunar-vfs-volume-mount"><primary>thunar_vfs_volume_mount</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_volume_mount             (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *window,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Tries to mount <parameter>volume</parameter>. Will return <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if either <parameter>volume</parameter>
+was already mounted previously to this method invokation or
+<parameter>volume</parameter> was successfully mounted now.
+</para>
+<para>
+If mounting <parameter>volume</parameter> requires some complex user interaction
+(basicly everything else than displaying an error dialog), it
+should popup a modal dialog on <parameter>window</parameter> (or on the default
+<link linkend="GdkScreen"><type>GdkScreen</type></link> if <parameter>window</parameter> is <link linkend="NULL:CAPS"><literal>NULL</literal></link>). But be aware, that if an
+implementation of <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> performs user interaction
+during a call to this method, it must implement this method
+in a reentrant fashion!</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>window</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GtkWindow"><type>GtkWindow</type></link> or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if the medium for <parameter>volume</parameter> was successfully
+              mounted or was already mounted previously, else
+              <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="thunar-vfs-volume-unmount" role="function">
+<title>thunar_vfs_volume_unmount ()</title>
+<indexterm zone="thunar-vfs-volume-unmount"><primary>thunar_vfs_volume_unmount</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            thunar_vfs_volume_unmount           (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *window,
+                                                         <link linkend="GError">GError</link> **error);</programlisting>
+<para>
+Tries to unmount <parameter>volume</parameter>. Will return <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if either <parameter>volume</parameter>
+was already unmounted previously to this method invokation or
+<parameter>volume</parameter> was successfully unmounted now.
+</para>
+<para>
+If unmounting <parameter>volume</parameter> requires some complex user interaction
+(basicly everything else than displaying an error dialog), it
+should popup a modal dialog on <parameter>window</parameter> (or on the default
+<link linkend="GdkScreen"><type>GdkScreen</type></link> if <parameter>window</parameter> is <link linkend="NULL:CAPS"><literal>NULL</literal></link>). But be aware, that if an
+implementation of <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> performs user interaction
+during a call to this method, it must implement this method
+in a reentrant fashion!</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>window</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GtkWindow"><type>GtkWindow</type></link> or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>error</parameter>&nbsp;:</term>
+<listitem><simpara> return location for errors or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if the medium for <parameter>volume</parameter> was successfully
+              unmounted or wasn't mounted previously, else
+              <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+<refsect1 id="ThunarVfsVolume.signal-details" role="signals">
+<title role="signals.title">Signal Details</title>
+<refsect2 id="ThunarVfsVolume-changed"><title>The <literal>&quot;changed&quot;</literal> signal</title>
+<indexterm zone="ThunarVfsVolume-changed"><primary>ThunarVfsVolume::changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume,
+                                                        <link linkend="gpointer">gpointer</link>         user_data)      : Run Last</programlisting>
+<para>
+Emitted whenever the state of <parameter>volume</parameter> changed.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2><refsect2 id="ThunarVfsVolume-mounted"><title>The <literal>&quot;mounted&quot;</literal> signal</title>
+<indexterm zone="ThunarVfsVolume-mounted"><primary>ThunarVfsVolume::mounted</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume,
+                                                        <link linkend="gpointer">gpointer</link>         user_data)      : Run Last</programlisting>
+<para>
+Emitted by <parameter>volume</parameter> after a successfull mount
+operation.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2><refsect2 id="ThunarVfsVolume-pre-unmount"><title>The <literal>&quot;pre-unmount&quot;</literal> signal</title>
+<indexterm zone="ThunarVfsVolume-pre-unmount"><primary>ThunarVfsVolume::pre-unmount</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume,
+                                                        <link linkend="gpointer">gpointer</link>         user_data)      : Run Last</programlisting>
+<para>
+Emitted by <parameter>volume</parameter> right before an attempt
+is made to unmount the <parameter>volume</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2><refsect2 id="ThunarVfsVolume-unmounted"><title>The <literal>&quot;unmounted&quot;</literal> signal</title>
+<indexterm zone="ThunarVfsVolume-unmounted"><primary>ThunarVfsVolume::unmounted</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="ThunarVfsVolume">ThunarVfsVolume</link> *volume,
+                                                        <link linkend="gpointer">gpointer</link>         user_data)      : Run Last</programlisting>
+<para>
+Emitted by <parameter>volume</parameter> right after the <parameter>volume</parameter>
+was successfully unmounted.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>volume</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="ThunarVfsVolume"><type>ThunarVfsVolume</type></link> instance.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+</refsect1>
+
+
+
+</refentry>
